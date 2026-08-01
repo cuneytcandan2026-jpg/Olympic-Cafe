@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact | Olympic Cafe, Waltham Cross</title>
+<meta name="description" content="Find Olympic Cafe at 257 High Street, Waltham Cross, Hertfordshire. Open 7 days a week for eat-in or takeaway. Call 01992 631 555 or send us a message." />
+<meta property="og:title" content="Contact | Olympic Cafe" />
+<meta property="og:description" content="Find us, call us, or send a message — Olympic Cafe, Waltham Cross." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/img/latte-art.jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Olympic Cafe",
+  "image": "assets/img/latte-art.jpeg",
+  "telephone": "+441992631555",
+  "servesCuisine": ["British", "Mediterranean"],
+  "priceRange": "££",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "257 High Street",
+    "addressLocality": "Waltham Cross",
+    "addressRegion": "Hertfordshire",
+    "postalCode": "EN8 7BE",
+    "addressCountry": "GB"
+  }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            burgundy: '#8A181A', burgundydark: '#6E1315', cream: '#F1DEC0', creamlight: '#FBF4E7',
+            terracotta: '#D9945E', freshgreen: '#41AD49', deepgreen: '#246B2E', gold: '#CC872E', ink: '#1F1F1F',
+          },
+        },
+        fontFamily: {
+          display: ['Fredoka', 'sans-serif'], body: ['Poppins', 'sans-serif'], accent: ['"Special Elite"', 'cursive'],
+        },
+        spacing: {
+          18: '4.5rem',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; color: #1F1F1F; background: #FBF4E7; line-height: 1.7; }
+  h1, h2, h3, .font-display { font-family: 'Fredoka', sans-serif; letter-spacing: -0.02em; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1.is-visible { transition-delay: 0.08s; }
+  .reveal-delay-2.is-visible { transition-delay: 0.16s; }
+  .reveal-delay-3.is-visible { transition-delay: 0.24s; }
+
+  .nav-link { position: relative; }
+  .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0; background: #8A181A; transition: width 0.3s cubic-bezier(0.65,0,0.35,1); }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link:focus-visible { outline: 2px solid #8A181A; outline-offset: 4px; border-radius: 2px; }
+
+  .btn-primary { background: #8A181A; color: #F1DEC0; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, background 0.25s ease; box-shadow: 0 8px 20px -6px rgba(138,24,26,0.5); }
+  .btn-primary:hover { transform: translateY(-2px) scale(1.02); background: #6E1315; }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
+  .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px #F1DEC0, 0 0 0 6px #8A181A; }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .btn-secondary { background: transparent; color: #8A181A; border: 2px solid #8A181A; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease, color 0.25s ease; }
+  .btn-secondary:hover { background: #8A181A; color: #F1DEC0; transform: translateY(-2px); }
+  .btn-secondary:active { transform: translateY(0) scale(0.98); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px #F1DEC0, 0 0 0 6px #8A181A; }
+
+  .base-shadow { box-shadow: 0 10px 24px -8px rgba(31,31,31,0.18); }
+  .elevated-shadow { box-shadow: 0 24px 48px -16px rgba(31,31,31,0.28); }
+
+  .mask-heading { position: relative; display: inline-block; overflow: hidden; }
+  .mask-heading .mask-block { position: absolute; inset: 0; background: #8A181A; transform-origin: right center; transform: scaleX(1); transition: transform 0.85s cubic-bezier(0.65,0,0.35,1); }
+  .mask-heading.is-visible .mask-block { transform: scaleX(0); }
+  .mask-heading .mask-text { opacity: 0; transition: opacity 0.3s ease 0.5s; }
+  .mask-heading.is-visible .mask-text { opacity: 1; }
+
+  .info-card { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease; }
+  .info-card:hover { transform: translateY(-4px); box-shadow: 0 20px 32px -10px rgba(31,31,31,0.2); }
+
+  .field-input { background: #FFFFFF; border: 2px solid rgba(138,24,26,0.15); transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+  .field-input:hover { border-color: rgba(138,24,26,0.3); }
+  .field-input:focus { outline: none; border-color: #8A181A; box-shadow: 0 0 0 4px rgba(138,24,26,0.12); }
+  .field-input.field-error { border-color: #8A181A; }
+
+  .form-success { display: none; opacity: 0; transform: translateY(-8px); transition: opacity 0.35s ease, transform 0.35s ease; }
+  .form-success.is-shown { display: block; opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .mask-heading .mask-block, .mask-heading .mask-text, .btn-primary, .btn-secondary,
+    .info-card, .field-input, .form-success { transition: none !important; }
+    .hero-reveal-item, .hero-reveal-word {
+      transition: none !important; opacity: 1 !important; filter: none !important; transform: none !important;
+    }
+  }
+
+  /* Hero text reveal: staggered blur-to-focus + fade-up (runs once on load) */
+  .hero-reveal-item, .hero-reveal-word {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .hero-reveal-word { display: inline-block; }
+  .hero-reveal-item.is-revealed, .hero-reveal-word.is-revealed { opacity: 1; filter: blur(0); transform: translateY(0); }
+  @media (max-width: 640px) {
+    .hero-reveal-item, .hero-reveal-word { transform: translateY(8px); }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-brand-creamlight/90 backdrop-blur-sm border-b border-brand-burgundy/10 transition-shadow">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 md:h-32">
+    <a href="index.html" class="flex items-center gap-2 shrink-0">
+      <img src="assets/img/logo.png" alt="Olympic Cafe logo" class="h-14 md:h-28 w-auto" />
+    </a>
+    <nav class="hidden md:flex items-center gap-9 font-body text-sm md:text-base font-medium" aria-label="Primary">
+      <a href="index.html" class="nav-link text-brand-ink">Home</a>
+      <a href="about.html" class="nav-link text-brand-ink">About</a>
+      <a href="menu.html" class="nav-link text-brand-ink">Menu</a>
+      <a href="gallery.html" class="nav-link text-brand-ink">Gallery</a>
+      <a href="contact.html" class="nav-link active text-brand-ink">Contact</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-4">
+      <a href="tel:01992631555" class="text-sm md:text-base font-semibold text-brand-burgundy">01992 631 555</a>
+      <a href="menu.html" class="btn-primary rounded-full px-6 py-3 md:px-8 md:py-4 text-sm md:text-base font-semibold">View Menu</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 -mr-2 text-brand-burgundy" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-nav" class="md:hidden hidden flex-col bg-brand-creamlight border-t border-brand-burgundy/10 px-6 py-4 gap-1">
+    <a href="index.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Home</a>
+    <a href="about.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">About</a>
+    <a href="menu.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Menu</a>
+    <a href="gallery.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Gallery</a>
+    <a href="contact.html" class="py-3 font-medium text-brand-burgundy min-h-[44px] flex items-center">Contact</a>
+    <a href="tel:01992631555" class="py-3 font-semibold text-brand-burgundy min-h-[44px] flex items-center">01992 631 555</a>
+    <a href="menu.html" class="btn-primary rounded-full px-6 py-3 text-center font-semibold mt-2">View Menu</a>
+  </div>
+</header>
+
+<main class="pt-24 md:pt-36">
+  <!-- HERO -->
+  <section class="px-6 lg:px-10 pt-16 pb-14 bg-brand-creamlight text-center" data-hero-reveal>
+    <p data-hero-reveal-label class="font-accent text-brand-terracotta text-sm mb-4">/ GET IN TOUCH</p>
+    <h1 data-hero-reveal-heading class="text-4xl md:text-6xl font-semibold text-brand-burgundy leading-tight max-w-3xl mx-auto mb-6">
+      Come say hello
+    </h1>
+    <p data-hero-reveal-para class="text-lg text-brand-ink/80 max-w-2xl mx-auto">
+      Open 7 days a week, eat-in or takeaway. Find us on Waltham Cross High Street, call ahead, or drop us a message below.
+    </p>
+  </section>
+
+  <!-- INFO CARDS -->
+  <section class="px-6 lg:px-10 pb-4">
+    <div class="max-w-6xl mx-auto grid sm:grid-cols-3 gap-6">
+      <div class="info-card reveal reveal-delay-1 bg-white rounded-2xl p-8 base-shadow">
+        <svg class="mb-4" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3 class="font-display font-semibold text-lg text-brand-burgundy mb-2">Address</h3>
+        <p class="text-sm text-brand-ink/70">257 High Street<br/>Waltham Cross, Hertfordshire<br/>EN8 7BE</p>
+      </div>
+      <div class="info-card reveal reveal-delay-2 bg-white rounded-2xl p-8 base-shadow">
+        <svg class="mb-4" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <h3 class="font-display font-semibold text-lg text-brand-burgundy mb-2">Phone</h3>
+        <p class="text-sm text-brand-ink/70 mb-1">Call ahead for takeaway or to check availability.</p>
+        <a href="tel:01992631555" class="text-sm font-semibold text-brand-terracotta">01992 631 555</a>
+      </div>
+      <div class="info-card reveal reveal-delay-3 bg-white rounded-2xl p-8 base-shadow">
+        <svg class="mb-4" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3 class="font-display font-semibold text-lg text-brand-burgundy mb-2">Hours</h3>
+        <p class="text-sm text-brand-ink/70">Open 7 days a week<br/>Eat-in or takeaway</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP + FORM -->
+  <section class="px-6 lg:px-10 py-20">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+      <!-- MAP -->
+      <div class="reveal rounded-[1.75rem] overflow-hidden elevated-shadow order-2 lg:order-1">
+        <iframe
+          title="Map showing Olympic Cafe at 257 High Street, Waltham Cross"
+          src="https://maps.google.com/maps?q=257%20High%20Street%2C%20Waltham%20Cross%2C%20Hertfordshire%2C%20EN8%207BE&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="440" style="border:0; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <!-- FORM -->
+      <div class="reveal reveal-delay-1 bg-white rounded-[1.75rem] p-8 md:p-10 base-shadow order-1 lg:order-2">
+        <p class="font-accent text-brand-terracotta text-sm mb-2">/ SEND A MESSAGE</p>
+        <h2 class="text-2xl md:text-3xl font-semibold text-brand-burgundy mb-6">We'd love to hear from you</h2>
+
+        <div id="form-success" class="form-success bg-brand-deepgreen/10 border border-brand-deepgreen/30 text-brand-deepgreen text-sm rounded-xl px-4 py-3 mb-6" role="status" aria-live="polite">
+          Thanks! Your email app should now be open with your message ready to send.
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="mb-5">
+            <label for="name" class="block text-sm font-semibold text-brand-ink mb-2">Name</label>
+            <input type="text" id="name" name="name" required
+              class="field-input w-full rounded-xl px-4 py-3 text-sm min-h-[44px]" placeholder="Your name" />
+            <p class="field-error-msg hidden text-xs text-brand-burgundy mt-1.5">Please enter your name.</p>
+          </div>
+          <div class="mb-5">
+            <label for="email" class="block text-sm font-semibold text-brand-ink mb-2">Email</label>
+            <input type="email" id="email" name="email" required
+              class="field-input w-full rounded-xl px-4 py-3 text-sm min-h-[44px]" placeholder="you@example.com" />
+            <p class="field-error-msg hidden text-xs text-brand-burgundy mt-1.5">Please enter a valid email address.</p>
+          </div>
+          <div class="mb-6">
+            <label for="message" class="block text-sm font-semibold text-brand-ink mb-2">Message</label>
+            <textarea id="message" name="message" required rows="5"
+              class="field-input w-full rounded-xl px-4 py-3 text-sm resize-none" placeholder="How can we help?"></textarea>
+            <p class="field-error-msg hidden text-xs text-brand-burgundy mt-1.5">Please enter a message.</p>
+          </div>
+          <button type="submit" class="btn-primary rounded-full px-8 py-4 font-semibold w-full sm:w-auto min-h-[44px]">
+            Send Message
+          </button>
+          <p class="text-xs text-brand-ink/50 mt-3">This opens your email app with your message pre-filled &mdash; we don't store anything you submit here.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-brand-ink text-brand-creamlight px-6 lg:px-10 py-16">
+  <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <img src="assets/img/logo.png" alt="Olympic Cafe logo" class="h-20 w-auto mb-4 opacity-95" loading="lazy" />
+      <p class="text-sm text-brand-creamlight/60">Breakfast &middot; Brunch &middot; Lunch &middot; Dinner</p>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Visit Us</h3>
+      <p class="text-sm text-brand-creamlight/70 leading-relaxed">257 High Street<br/>Waltham Cross, Hertfordshire<br/>EN8 7BE</p>
+      <a href="tel:01992631555" class="text-sm text-brand-terracotta font-semibold mt-2 inline-block">01992 631 555</a>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Explore</h3>
+      <ul class="space-y-2 text-sm text-brand-creamlight/70">
+        <li><a href="about.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">About</a></li>
+        <li><a href="menu.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Menu</a></li>
+        <li><a href="gallery.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Gallery</a></li>
+        <li><a href="contact.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Hours</h3>
+      <p class="text-sm text-brand-creamlight/70">Open 7 days a week<br/>Eat-in or takeaway</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-brand-creamlight/10 mt-12 pt-6 text-xs text-brand-creamlight/50">
+    &copy; 2026 Olympic Cafe. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = !mobileNav.classList.contains('hidden');
+    mobileNav.classList.toggle('hidden');
+    mobileNav.classList.toggle('flex');
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Hero text reveal: staggered blur-to-focus + fade-up (runs once on load)
+  (function () {
+    const hero = document.querySelector('[data-hero-reveal]');
+    if (!hero) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function wrapWords(el) {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      const textNodes = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.textContent.trim() !== '') textNodes.push(node);
+      }
+      textNodes.forEach((textNode) => {
+        const frag = document.createDocumentFragment();
+        textNode.textContent.split(/(\s+)/).forEach((part) => {
+          if (part === '') return;
+          if (/^\s+$/.test(part)) {
+            frag.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'hero-reveal-word';
+            span.textContent = part;
+            frag.appendChild(span);
+          }
+        });
+        textNode.parentNode.replaceChild(frag, textNode);
+      });
+    }
+
+    const label = hero.querySelector('[data-hero-reveal-label]');
+    const heading = hero.querySelector('[data-hero-reveal-heading]');
+    const para = hero.querySelector('[data-hero-reveal-para]');
+    const cta = hero.querySelector('[data-hero-reveal-cta]');
+
+    if (heading) wrapWords(heading);
+    const words = heading ? Array.from(heading.querySelectorAll('.hero-reveal-word')) : [];
+
+    if (reduceMotion) {
+      [label, ...words, para, cta].filter(Boolean).forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+
+    if (label) label.classList.add('hero-reveal-item');
+    if (para) para.classList.add('hero-reveal-item');
+    if (cta) cta.classList.add('hero-reveal-item');
+
+    let delay = 100;
+    if (label) setTimeout(() => label.classList.add('is-revealed'), delay);
+    delay += label ? 300 : 0;
+
+    words.forEach((word) => {
+      setTimeout(() => word.classList.add('is-revealed'), delay);
+      delay += 70;
+    });
+
+    if (para) {
+      delay += 150;
+      setTimeout(() => para.classList.add('is-revealed'), delay);
+      delay += 300;
+    }
+
+    if (cta) {
+      delay += 150;
+      setTimeout(() => cta.classList.add('is-revealed'), delay);
+    }
+  })();
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 8);
+  }, { passive: true });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal:not(.is-visible), .mask-heading:not(.is-visible)').forEach((el) => revealObserver.observe(el));
+
+  // Contact form validation + mailto fallback
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setFieldValidity(input, isValid) {
+    const wrapper = input.closest('div');
+    const errorMsg = wrapper.querySelector('.field-error-msg');
+    input.classList.toggle('field-error', !isValid);
+    if (errorMsg) errorMsg.classList.toggle('hidden', isValid);
+    input.setAttribute('aria-invalid', String(!isValid));
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    successMsg.classList.remove('is-shown');
+
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const messageEl = document.getElementById('message');
+
+    const nameValid = nameEl.value.trim().length > 0;
+    const emailValid = emailRe.test(emailEl.value.trim());
+    const messageValid = messageEl.value.trim().length > 0;
+
+    setFieldValidity(nameEl, nameValid);
+    setFieldValidity(emailEl, emailValid);
+    setFieldValidity(messageEl, messageValid);
+
+    if (!nameValid || !emailValid || !messageValid) {
+      (nameValid ? (emailValid ? messageEl : emailEl) : nameEl).focus();
+      return;
+    }
+
+    const subject = encodeURIComponent(`Message from ${nameEl.value.trim()} via Olympic Cafe website`);
+    const body = encodeURIComponent(`${messageEl.value.trim()}\n\n— ${nameEl.value.trim()} (${emailEl.value.trim()})`);
+    window.location.href = `mailto:hello@olympiccafe.co.uk?subject=${subject}&body=${body}`;
+
+    successMsg.classList.add('is-shown');
+    form.reset();
+  });
+</script>
+</body>
+</html>

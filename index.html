@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Olympic Cafe | Breakfast, Brunch, Lunch &amp; Dinner in Waltham Cross</title>
+<meta name="description" content="A warm neighbourhood cafe on Waltham Cross High Street serving generous British classics and Mediterranean-inspired breakfasts, all day, seven days a week." />
+<meta property="og:title" content="Olympic Cafe | Waltham Cross" />
+<meta property="og:description" content="Proper food. A warm welcome. All day. Eat in or take away, seven days a week." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/img/table-spread-overhead-1.jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Olympic Cafe",
+  "image": "assets/img/table-spread-overhead-1.jpeg",
+  "telephone": "+441992631555",
+  "servesCuisine": ["British", "Mediterranean"],
+  "priceRange": "££",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "257 High Street",
+    "addressLocality": "Waltham Cross",
+    "addressRegion": "Hertfordshire",
+    "postalCode": "EN8 7BE",
+    "addressCountry": "GB"
+  }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            burgundy: '#8A181A',
+            burgundydark: '#6E1315',
+            cream: '#F1DEC0',
+            creamlight: '#FBF4E7',
+            terracotta: '#D9945E',
+            freshgreen: '#41AD49',
+            deepgreen: '#246B2E',
+            gold: '#CC872E',
+            ink: '#1F1F1F',
+          },
+        },
+        fontFamily: {
+          display: ['Fredoka', 'sans-serif'],
+          body: ['Poppins', 'sans-serif'],
+          accent: ['"Special Elite"', 'cursive'],
+        },
+        spacing: {
+          18: '4.5rem',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; color: #1F1F1F; background: #FBF4E7; line-height: 1.7; }
+  h1, h2, h3, .font-display { font-family: 'Fredoka', sans-serif; letter-spacing: -0.02em; }
+
+  .paper-texture {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(217,148,94,0.10), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(138,24,26,0.06), transparent 55%);
+  }
+
+  /* Reveal-on-scroll for cards / text blocks */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1.is-visible { transition-delay: 0.08s; }
+  .reveal-delay-2.is-visible { transition-delay: 0.16s; }
+  .reveal-delay-3.is-visible { transition-delay: 0.24s; }
+  .reveal-delay-4.is-visible { transition-delay: 0.32s; }
+
+  /* Mask-reveal headings: a burgundy block wipes off the heading text */
+  .mask-heading { position: relative; display: inline-block; overflow: hidden; }
+  .mask-heading .mask-block {
+    position: absolute; inset: 0;
+    background: #8A181A;
+    transform-origin: right center;
+    transform: scaleX(1);
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .mask-heading.is-visible .mask-block { transform: scaleX(0); }
+  .mask-heading .mask-text { opacity: 0; transition: opacity 0.3s ease 0.5s; }
+  .mask-heading.is-visible .mask-text { opacity: 1; }
+
+  /* Floating card depth */
+  .float-card { box-shadow: 0 20px 40px -12px rgba(138,24,26,0.35), 0 8px 16px -8px rgba(31,31,31,0.25); }
+  .base-shadow { box-shadow: 0 10px 24px -8px rgba(31,31,31,0.18); }
+
+  /* Card-flip accent on the "Cooked fresh, every plate" cards (matches Gavè reference: cards stay
+     put in their corners and periodically do a synchronized 3D mirror-flip in place) */
+  .card-flip-wrapper { perspective: 1600px; }
+  .flip-card {
+    backface-visibility: visible;
+    will-change: transform;
+    animation: card-flip 3s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .card-flip-wrapper.in-view .flip-card { animation-play-state: running; }
+  @keyframes card-flip {
+    0%, 76% { transform: rotateY(0deg); }
+    88%     { transform: rotateY(180deg); }
+    100%    { transform: rotateY(360deg); }
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: #8A181A; color: #F1DEC0;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 8px 20px -6px rgba(138,24,26,0.5);
+  }
+  .btn-primary:hover { transform: translateY(-2px) scale(1.02); background: #6E1315; }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
+  .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px #F1DEC0, 0 0 0 6px #8A181A; }
+
+  .btn-secondary {
+    background: transparent; color: #8A181A; border: 2px solid #8A181A;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease, color 0.25s ease;
+  }
+  .btn-secondary:hover { background: #8A181A; color: #F1DEC0; transform: translateY(-2px); }
+  .btn-secondary:active { transform: translateY(0) scale(0.98); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px #F1DEC0, 0 0 0 6px #8A181A; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
+    background: #8A181A; transition: width 0.3s cubic-bezier(0.65,0,0.35,1);
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link:focus-visible { outline: 2px solid #8A181A; outline-offset: 4px; border-radius: 2px; }
+
+  .dish-card { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease; }
+  .dish-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -12px rgba(31,31,31,0.25); }
+
+  /* Pinned scroll story section */
+  #story-pin { height: 200vh; }
+  #story-sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+  .story-frame { position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s ease; }
+  .story-frame.active { opacity: 1; }
+  .story-thumb { opacity: 0.45; transform: scale(0.92); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .story-thumb.active { opacity: 1; transform: scale(1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .mask-heading .mask-block, .mask-heading .mask-text, .story-frame, .story-thumb, .dish-card, .btn-primary, .btn-secondary {
+      transition: none !important;
+    }
+    .hero-reveal-item, .hero-reveal-word {
+      transition: none !important; opacity: 1 !important; filter: none !important; transform: none !important;
+    }
+    .flip-card { animation: none !important; will-change: auto; transform: none !important; }
+  }
+
+  /* Hero text reveal: staggered blur-to-focus + fade-up (runs once on load) */
+  .hero-reveal-item, .hero-reveal-word {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .hero-reveal-word { display: inline-block; }
+  .hero-reveal-item.is-revealed, .hero-reveal-word.is-revealed { opacity: 1; filter: blur(0); transform: translateY(0); }
+  @media (max-width: 640px) {
+    .hero-reveal-item, .hero-reveal-word { transform: translateY(8px); }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 bg-brand-creamlight/90 backdrop-blur-sm border-b border-brand-burgundy/10 transition-shadow">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 md:h-32">
+    <a href="index.html" class="flex items-center gap-2 shrink-0">
+      <img src="assets/img/logo.png" alt="Olympic Cafe logo" class="h-14 md:h-28 w-auto" />
+    </a>
+    <nav class="hidden md:flex items-center gap-9 font-body text-sm md:text-base font-medium text-brand-ink" aria-label="Primary">
+      <a href="index.html" class="nav-link active text-brand-ink">Home</a>
+      <a href="about.html" class="nav-link text-brand-ink">About</a>
+      <a href="menu.html" class="nav-link text-brand-ink">Menu</a>
+      <a href="gallery.html" class="nav-link text-brand-ink">Gallery</a>
+      <a href="contact.html" class="nav-link text-brand-ink">Contact</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-4">
+      <a href="tel:01992631555" class="text-sm md:text-base font-semibold text-brand-burgundy">01992 631 555</a>
+      <a href="menu.html" class="btn-primary rounded-full px-6 py-3 md:px-8 md:py-4 text-sm md:text-base font-semibold">View Menu</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 -mr-2 text-brand-burgundy" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-nav" class="md:hidden hidden flex-col bg-brand-creamlight border-t border-brand-burgundy/10 px-6 py-4 gap-1">
+    <a href="index.html" class="py-3 font-medium text-brand-burgundy min-h-[44px] flex items-center">Home</a>
+    <a href="about.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">About</a>
+    <a href="menu.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Menu</a>
+    <a href="gallery.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Gallery</a>
+    <a href="contact.html" class="py-3 font-medium text-brand-ink min-h-[44px] flex items-center">Contact</a>
+    <a href="tel:01992631555" class="py-3 font-semibold text-brand-burgundy min-h-[44px] flex items-center">01992 631 555</a>
+    <a href="menu.html" class="btn-primary rounded-full px-6 py-3 text-center font-semibold mt-2">View Menu</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="paper-texture pt-40 pb-20 md:pt-48 md:pb-28 px-6 lg:px-10 bg-brand-creamlight overflow-hidden" data-hero-reveal>
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p data-hero-reveal-label class="font-accent text-brand-terracotta text-sm tracking-wide mb-4">/ BREAKFAST &middot; BRUNCH &middot; LUNCH &middot; DINNER</p>
+        <h1 data-hero-reveal-heading class="text-4xl md:text-6xl font-semibold text-brand-burgundy leading-[1.05] mb-6">
+          Proper food.<br /> A warm welcome.<br /><span class="italic font-normal">All day.</span>
+        </h1>
+        <p data-hero-reveal-para class="text-base md:text-lg text-brand-ink/80 max-w-md mb-8">
+          From full breakfasts and brunch favourites to homemade lunches and Mediterranean specials, there's something for everyone at Olympic Cafe.
+        </p>
+        <div data-hero-reveal-cta class="flex flex-wrap gap-4">
+          <a href="menu.html" class="btn-primary rounded-full px-8 py-4 font-semibold">View Menu</a>
+          <a href="contact.html" class="btn-secondary rounded-full px-8 py-4 font-semibold">Find Us</a>
+        </div>
+      </div>
+      <div class="relative reveal reveal-delay-2 is-visible">
+        <div class="absolute -inset-4 md:-inset-8 bg-brand-terracotta/25 rounded-[2.5rem] -z-10"></div>
+        <img src="assets/img/table-spread-overhead-1.jpeg" alt="An overhead spread of Olympic Cafe breakfasts, sandwiches, coffee and juice on a wooden table" class="rounded-[2rem] w-full h-[420px] md:h-[520px] object-cover base-shadow" />
+        <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-brand-ink/30 via-transparent to-transparent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STRIP -->
+  <section class="bg-brand-burgundy py-20 px-6 lg:px-10">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="reveal mask-heading text-3xl md:text-4xl font-semibold text-brand-cream mb-4" data-reveal>
+        <span class="mask-text">Generous, dependable, unpretentious</span>
+        <span class="mask-block"></span>
+      </h2>
+      <p class="reveal text-brand-cream/75 max-w-xl mx-auto mb-14">Everything here is designed to feel like a real neighbourhood cafe &mdash; satisfying portions and no unnecessary fuss.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal reveal-delay-1 bg-brand-creamlight rounded-2xl p-8 base-shadow">
+          <div class="w-12 h-12 rounded-full bg-brand-terracotta/20 flex items-center justify-center mb-4 mx-auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.8"><path d="M4 8h13a3 3 0 0 1 0 6h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2M4 8l1-4h9l1 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2">Freshly Prepared</h3>
+          <p class="text-sm text-brand-ink/70">Cooked to order, never an afterthought.</p>
+        </div>
+        <div class="reveal reveal-delay-2 bg-brand-creamlight rounded-2xl p-8 base-shadow">
+          <div class="w-12 h-12 rounded-full bg-brand-terracotta/20 flex items-center justify-center mb-4 mx-auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2">Generous Portions</h3>
+          <p class="text-sm text-brand-ink/70">Come hungry, leave happy.</p>
+        </div>
+        <div class="reveal reveal-delay-3 bg-brand-creamlight rounded-2xl p-8 base-shadow">
+          <div class="w-12 h-12 rounded-full bg-brand-terracotta/20 flex items-center justify-center mb-4 mx-auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.8"><path d="M3 10l9-6 9 6-9 6-9-6z"/><path d="M7 12v5c0 1.1 2.24 2 5 2s5-.9 5-2v-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2">Eat In or Takeaway</h3>
+          <p class="text-sm text-brand-ink/70">Grab a table, or grab and go.</p>
+        </div>
+        <div class="reveal reveal-delay-4 bg-brand-creamlight rounded-2xl p-8 base-shadow">
+          <div class="w-12 h-12 rounded-full bg-brand-terracotta/20 flex items-center justify-center mb-4 mx-auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A181A" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2">Open 7 Days a Week</h3>
+          <p class="text-sm text-brand-ink/70">Early birds, night owls &mdash; here whenever you need us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DISHES -->
+  <section class="py-24 px-6 lg:px-10 bg-brand-creamlight">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal font-accent text-brand-terracotta text-sm mb-3">/ FAN FAVOURITES</p>
+        <h2 class="reveal mask-heading text-3xl md:text-4xl font-semibold text-brand-burgundy">
+          <span class="mask-text">Signature Plates</span>
+          <span class="mask-block"></span>
+        </h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="reveal reveal-delay-1 dish-card bg-white rounded-2xl overflow-hidden base-shadow">
+          <img src="assets/img/titan-breakfast.jpeg" alt="Titan Breakfast: poached eggs, halloumi, avocado, grilled tomato and smoked salmon with toast" class="w-full h-56 object-cover" loading="lazy" />
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <h3 class="font-display font-semibold text-xl">Titan Breakfast</h3>
+              <span class="font-semibold text-brand-burgundy whitespace-nowrap">£11.50</span>
+            </div>
+            <p class="text-sm text-brand-ink/70">2 poached eggs, halloumi, mushrooms, avocado, grilled tomato, smoked salmon. Served with 2 toast, tea or coffee.</p>
+          </div>
+        </article>
+        <article class="reveal reveal-delay-2 dish-card bg-white rounded-2xl overflow-hidden base-shadow">
+          <img src="assets/img/mediterranean-breakfast.jpeg" alt="Mediterranean Breakfast with halloumi, sucuk, feta, olives and poached eggs" class="w-full h-56 object-cover" loading="lazy" />
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <h3 class="font-display font-semibold text-xl">Mediterranean Breakfast</h3>
+              <span class="font-semibold text-brand-burgundy whitespace-nowrap">£11.50</span>
+            </div>
+            <p class="text-sm text-brand-ink/70">2 eggs, sucuk, mushrooms, halloumi, feta cheese, filo pastry, olive, tomato, cucumber, jam, honey.</p>
+          </div>
+        </article>
+        <article class="reveal reveal-delay-3 dish-card bg-white rounded-2xl overflow-hidden base-shadow">
+          <img src="assets/img/pancake-ring-special.jpeg" alt="Black Ring special with burger patty, black pudding, streaky bacon and cumberland sausage" class="w-full h-56 object-cover" loading="lazy" />
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <h3 class="font-display font-semibold text-xl">Black Ring</h3>
+              <span class="font-semibold text-brand-burgundy whitespace-nowrap">£12.50</span>
+            </div>
+            <p class="text-sm text-brand-ink/70">Burger patty, black pudding, streaky bacon, cumberland sausage, mushrooms, baked beans.</p>
+          </div>
+        </article>
+      </div>
+      <div class="text-center mt-12">
+        <a href="menu.html" class="btn-secondary rounded-full px-8 py-4 font-semibold inline-block">See the Full Menu &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING CARDS / COOKED FRESH -->
+  <section class="relative py-24 px-6 lg:px-10 bg-brand-cream overflow-hidden">
+    <svg class="absolute -left-32 -top-20 w-[520px] h-[520px] opacity-70 -z-0" viewBox="0 0 200 200" fill="#D9945E"><path d="M45.3,-58.4C58.6,-49.9,68.9,-35.6,72.6,-19.7C76.3,-3.8,73.4,13.7,65.1,27.9C56.8,42.1,43.1,53,27.5,60.9C11.9,68.8,-5.6,73.7,-21.6,69.9C-37.6,66.1,-52.1,53.6,-61.6,38.3C-71.1,23,-75.6,4.9,-72.4,-11.7C-69.2,-28.3,-58.3,-43.4,-44.4,-52C-30.5,-60.6,-15.3,-62.7,0.8,-63.8C16.8,-64.9,33.7,-66.9,45.3,-58.4Z" transform="translate(100 100)"/></svg>
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative">
+      <div class="reveal">
+        <p class="font-accent text-brand-terracotta text-sm mb-3">/ IN THE KITCHEN</p>
+        <h2 class="mask-heading text-3xl md:text-4xl font-semibold text-brand-burgundy mb-5">
+          <span class="mask-text">Cooked fresh, every plate</span>
+          <span class="mask-block"></span>
+        </h2>
+        <p class="text-brand-ink/75 max-w-md mb-6">Every cup pulled with care and every plate cooked to order &mdash; British classics and Mediterranean flavours, made properly.</p>
+        <a href="menu.html" class="btn-secondary rounded-full px-7 py-3.5 font-semibold inline-block">Explore the Menu</a>
+      </div>
+      <div class="relative h-[420px] reveal reveal-delay-2 card-flip-wrapper">
+        <img src="assets/img/full-english-hash-browns.jpeg" alt="Full English breakfast with hash browns, beans, sausage and toast" class="absolute inset-0 m-auto w-[300px] h-[320px] object-cover rounded-2xl float-card" loading="lazy" />
+        <div class="absolute left-0 top-4 w-40 rounded-xl overflow-hidden float-card bg-brand-burgundy flip-card">
+          <img src="assets/img/chocolate-milkshake.jpeg" alt="Chocolate crazy shake" class="w-full h-28 object-cover" loading="lazy" />
+          <p class="text-brand-cream text-xs font-semibold px-3 py-2">Crazy Shakes</p>
+        </div>
+        <div class="absolute right-0 bottom-4 w-40 rounded-xl overflow-hidden float-card bg-brand-burgundy flip-card">
+          <img src="assets/img/pancake-ring-special.jpeg" alt="Ring special breakfast with pancakes" class="w-full h-28 object-cover" loading="lazy" />
+          <p class="text-brand-cream text-xs font-semibold px-3 py-2">Ring Specials</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PINNED SCROLL STORY -->
+  <section id="story-pin">
+    <div id="story-sticky" class="paper-texture bg-brand-creamlight px-6 lg:px-10">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center w-full">
+        <div>
+          <div class="relative h-48 md:h-56">
+            <div class="story-frame active" data-frame="0">
+              <p class="font-accent text-brand-terracotta text-sm mb-3">/ OUR STORY</p>
+              <h2 class="text-3xl md:text-5xl font-semibold text-brand-burgundy leading-tight">A proper<br/>neighbourhood cafe</h2>
+            </div>
+            <div class="story-frame" data-frame="1">
+              <p class="font-accent text-brand-terracotta text-sm mb-3">/ OUR STORY</p>
+              <h2 class="text-3xl md:text-5xl font-semibold text-brand-burgundy leading-tight">British roots,<br/><span class="italic font-normal">Mediterranean</span> character</h2>
+            </div>
+            <div class="story-frame" data-frame="2">
+              <p class="font-accent text-brand-terracotta text-sm mb-3">/ OUR STORY</p>
+              <h2 class="text-3xl md:text-5xl font-semibold text-brand-burgundy leading-tight">Welcome to<br/>Olympic Cafe</h2>
+            </div>
+          </div>
+          <div class="mt-6">
+            <a href="about.html" class="btn-secondary rounded-full px-7 py-3.5 font-semibold inline-block">Read Our Story</a>
+          </div>
+        </div>
+        <div class="relative h-[380px]">
+          <img src="assets/img/bacon-roll.jpeg" alt="Bacon roll on a plate" class="story-frame active absolute inset-0 w-full h-full object-cover rounded-2xl base-shadow" data-frame="0" loading="lazy" />
+          <img src="assets/img/latte-art.jpeg" alt="Latte with leaf art" class="story-frame absolute inset-0 w-full h-full object-cover rounded-2xl base-shadow" data-frame="1" loading="lazy" />
+          <img src="assets/img/table-spread-overhead-2.jpeg" alt="Overhead spread of Olympic Cafe dishes" class="story-frame absolute inset-0 w-full h-full object-cover rounded-2xl base-shadow" data-frame="2" loading="lazy" />
+          <div class="absolute -bottom-6 left-6 right-6 flex gap-3 justify-center">
+            <button class="story-thumb active w-16 h-12 rounded-lg overflow-hidden base-shadow" data-thumb="0" aria-label="Show frame 1">
+              <img src="assets/img/bacon-roll.jpeg" alt="" class="w-full h-full object-cover" loading="lazy" />
+            </button>
+            <button class="story-thumb w-16 h-12 rounded-lg overflow-hidden base-shadow" data-thumb="1" aria-label="Show frame 2">
+              <img src="assets/img/latte-art.jpeg" alt="" class="w-full h-full object-cover" loading="lazy" />
+            </button>
+            <button class="story-thumb w-16 h-12 rounded-lg overflow-hidden base-shadow" data-thumb="2" aria-label="Show frame 3">
+              <img src="assets/img/table-spread-overhead-2.jpeg" alt="" class="w-full h-full object-cover" loading="lazy" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUNDAY ROAST PROMO -->
+  <section class="bg-brand-burgundy py-24 px-6 lg:px-10 mt-10">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="reveal font-accent text-brand-cream/70 text-sm mb-3">/ WEEKENDS AT OLYMPIC</p>
+      <h2 class="reveal mask-heading text-4xl md:text-5xl font-semibold text-brand-cream mb-5">
+        <span class="mask-text">Sunday Roast</span>
+        <span class="mask-block" style="background:#F1DEC0;"></span>
+      </h2>
+      <p class="reveal text-brand-cream/80 max-w-xl mx-auto mb-10">All served with mixed veg, roast potatoes, Yorkshire pudding and gravy.</p>
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div class="bg-brand-creamlight rounded-xl px-4 py-5">
+          <p class="font-display font-semibold">Lamb</p><p class="text-brand-burgundy font-semibold">£11.50</p>
+        </div>
+        <div class="bg-brand-creamlight rounded-xl px-4 py-5">
+          <p class="font-display font-semibold">Beef</p><p class="text-brand-burgundy font-semibold">£11.50</p>
+        </div>
+        <div class="bg-brand-creamlight rounded-xl px-4 py-5">
+          <p class="font-display font-semibold">Chicken</p><p class="text-brand-burgundy font-semibold">£11.00</p>
+        </div>
+        <div class="bg-brand-creamlight rounded-xl px-4 py-5">
+          <p class="font-display font-semibold">Pork</p><p class="text-brand-burgundy font-semibold">£11.00</p>
+        </div>
+      </div>
+      <a href="menu.html" class="reveal btn-primary rounded-full px-8 py-4 font-semibold inline-block" style="background:#F1DEC0;color:#8A181A;box-shadow:none;">See Full Menu</a>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-brand-ink text-brand-creamlight px-6 lg:px-10 py-16">
+  <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <img src="assets/img/logo.png" alt="Olympic Cafe logo" class="h-20 w-auto mb-4 opacity-95" loading="lazy" />
+      <p class="text-sm text-brand-creamlight/60">Breakfast &middot; Brunch &middot; Lunch &middot; Dinner</p>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Visit Us</h3>
+      <p class="text-sm text-brand-creamlight/70 leading-relaxed">257 High Street<br/>Waltham Cross, Hertfordshire<br/>EN8 7BE</p>
+      <a href="tel:01992631555" class="text-sm text-brand-terracotta font-semibold mt-2 inline-block">01992 631 555</a>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Explore</h3>
+      <ul class="space-y-2 text-sm text-brand-creamlight/70">
+        <li><a href="about.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">About</a></li>
+        <li><a href="menu.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Menu</a></li>
+        <li><a href="gallery.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Gallery</a></li>
+        <li><a href="contact.html" class="hover:text-brand-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-terracotta rounded">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-display font-semibold mb-4 text-brand-cream">Hours</h3>
+      <p class="text-sm text-brand-creamlight/70">Open 7 days a week<br/>Eat-in or takeaway</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-brand-creamlight/10 mt-12 pt-6 text-xs text-brand-creamlight/50">
+    &copy; 2026 Olympic Cafe. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = !mobileNav.classList.contains('hidden');
+    mobileNav.classList.toggle('hidden');
+    mobileNav.classList.toggle('flex');
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Sticky header shadow on scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-md', window.scrollY > 8);
+  }, { passive: true });
+
+  // Hero text reveal: staggered blur-to-focus + fade-up (runs once on load)
+  (function () {
+    const hero = document.querySelector('[data-hero-reveal]');
+    if (!hero) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function wrapWords(el) {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      const textNodes = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.textContent.trim() !== '') textNodes.push(node);
+      }
+      textNodes.forEach((textNode) => {
+        const frag = document.createDocumentFragment();
+        textNode.textContent.split(/(\s+)/).forEach((part) => {
+          if (part === '') return;
+          if (/^\s+$/.test(part)) {
+            frag.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'hero-reveal-word';
+            span.textContent = part;
+            frag.appendChild(span);
+          }
+        });
+        textNode.parentNode.replaceChild(frag, textNode);
+      });
+    }
+
+    const label = hero.querySelector('[data-hero-reveal-label]');
+    const heading = hero.querySelector('[data-hero-reveal-heading]');
+    const para = hero.querySelector('[data-hero-reveal-para]');
+    const cta = hero.querySelector('[data-hero-reveal-cta]');
+
+    if (heading) wrapWords(heading);
+    const words = heading ? Array.from(heading.querySelectorAll('.hero-reveal-word')) : [];
+
+    if (reduceMotion) {
+      [label, ...words, para, cta].filter(Boolean).forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+
+    if (label) label.classList.add('hero-reveal-item');
+    if (para) para.classList.add('hero-reveal-item');
+    if (cta) cta.classList.add('hero-reveal-item');
+
+    let delay = 100;
+    if (label) setTimeout(() => label.classList.add('is-revealed'), delay);
+    delay += label ? 300 : 0;
+
+    words.forEach((word) => {
+      setTimeout(() => word.classList.add('is-revealed'), delay);
+      delay += 70;
+    });
+
+    if (para) {
+      delay += 150;
+      setTimeout(() => para.classList.add('is-revealed'), delay);
+      delay += 300;
+    }
+
+    if (cta) {
+      delay += 150;
+      setTimeout(() => cta.classList.add('is-revealed'), delay);
+    }
+  })();
+
+  // Reveal-on-scroll (fade/translate + mask headings)
+  const revealTargets = document.querySelectorAll('.reveal:not(.is-visible), .mask-heading');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  revealTargets.forEach((el) => revealObserver.observe(el));
+
+  // Card-flip cards only spin while their section is on screen
+  const flipWrapper = document.querySelector('.card-flip-wrapper');
+  if (flipWrapper) {
+    const flipObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        flipWrapper.classList.toggle('in-view', entry.isIntersecting);
+      });
+    }, { threshold: 0.2 });
+    flipObserver.observe(flipWrapper);
+  }
+
+  // Pinned scroll-scrubbed story section
+  const storyPin = document.getElementById('story-pin');
+  const storyFrames = document.querySelectorAll('.story-frame');
+  const storyThumbs = document.querySelectorAll('.story-thumb');
+  const frameCount = 3;
+
+  function setActiveFrame(index) {
+    storyFrames.forEach((f) => f.classList.toggle('active', Number(f.dataset.frame) === index));
+    storyThumbs.forEach((t) => t.classList.toggle('active', Number(t.dataset.thumb) === index));
+  }
+
+  function updateStoryScroll() {
+    const rect = storyPin.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    const progress = Math.min(Math.max(-rect.top / total, 0), 0.999);
+    const index = Math.floor(progress * frameCount);
+    setActiveFrame(index);
+  }
+  window.addEventListener('scroll', updateStoryScroll, { passive: true });
+  updateStoryScroll();
+
+  storyThumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const index = Number(thumb.dataset.thumb);
+      const rect = storyPin.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const targetProgress = (index + 0.5) / frameCount;
+      const targetScroll = window.scrollY + rect.top + targetProgress * total;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
