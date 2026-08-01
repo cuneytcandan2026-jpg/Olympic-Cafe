@@ -20,6 +20,20 @@
   "telephone": "+441992631555",
   "servesCuisine": ["British", "Mediterranean"],
   "priceRange": "££",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "05:30",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "06:00",
+      "closes": "16:00"
+    }
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "257 High Street",
@@ -450,7 +464,7 @@
     </div>
     <div>
       <h3 class="font-display font-semibold mb-4 text-brand-cream">Hours</h3>
-      <p class="text-sm text-brand-creamlight/70">Open 7 days a week<br/>Eat-in or takeaway</p>
+      <p class="text-sm text-brand-creamlight/70">Mon&ndash;Sat: 5:30am&ndash;5pm<br/>Sun: 6am&ndash;4pm<br/>Eat-in or takeaway</p>
     </div>
   </div>
   <div class="max-w-7xl mx-auto border-t border-brand-creamlight/10 mt-12 pt-6 text-xs text-brand-creamlight/50">

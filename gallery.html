@@ -20,6 +20,20 @@
   "telephone": "+441992631555",
   "servesCuisine": ["British", "Mediterranean"],
   "priceRange": "££",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "05:30",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "06:00",
+      "closes": "16:00"
+    }
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "257 High Street",
@@ -129,6 +143,31 @@
     }
   }
 
+  /* Scroll-driven 3D showcase: sticky viewport, columns tilt flat + parallax as the tall track scrolls by */
+  .scroll-gallery-track { position: relative; height: 300vh; }
+  .scroll-gallery-sticky {
+    position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden;
+    perspective: 1400px; perspective-origin: center top;
+  }
+  .scroll-gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: 100%; max-width: 1400px;
+    margin: 0 auto; padding: 0 1.25rem; transform-style: preserve-3d; will-change: transform;
+  }
+  .scroll-gallery-col { display: flex; flex-direction: column; gap: 0.6rem; will-change: transform; }
+  .scroll-gallery-col img {
+    width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; display: block;
+    box-shadow: 0 16px 32px -12px rgba(31,31,31,0.35), 0 4px 10px -4px rgba(138,24,26,0.15);
+  }
+  @media (min-width: 768px) {
+    .scroll-gallery-grid { gap: 1.25rem; }
+    .scroll-gallery-col { gap: 1.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-gallery-track { height: auto; }
+    .scroll-gallery-sticky { position: static; height: auto; perspective: none; padding: 2rem 0; }
+    .scroll-gallery-grid, .scroll-gallery-col { transform: none !important; }
+  }
+
   /* Hero text reveal: staggered blur-to-focus + fade-up (runs once on load) */
   .hero-reveal-item, .hero-reveal-word {
     opacity: 0;
@@ -188,6 +227,40 @@
     </p>
   </section>
 
+  <!-- SCROLL SHOWCASE: 3D tilt-in gallery driven by scroll position -->
+  <section class="relative bg-brand-creamlight" aria-label="Scrolling photo showcase">
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[60vh] overflow-hidden" style="background: radial-gradient(circle at 30% 15%, rgba(217,148,94,0.35), transparent 60%), radial-gradient(circle at 70% 5%, rgba(138,24,26,0.22), transparent 55%); filter: blur(60px);"></div>
+    <div class="reveal relative z-10 max-w-3xl mx-auto text-center px-6 pt-6 pb-4">
+      <p class="font-accent text-brand-terracotta text-sm mb-3">/ FRESH FROM THE KITCHEN</p>
+      <h2 class="text-3xl md:text-5xl font-semibold text-brand-burgundy leading-tight">Straight off the grill,<br class="hidden md:block" /> onto your table</h2>
+    </div>
+
+    <div class="scroll-gallery-track" id="scroll-gallery-track">
+      <div class="scroll-gallery-sticky">
+        <div class="scroll-gallery-grid" id="scroll-gallery-grid">
+          <div class="scroll-gallery-col" data-yrange="-10,2">
+            <img src="assets/img/titan-breakfast.jpeg" alt="Titan Breakfast at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/chicken-burger.jpeg" alt="Chicken burger at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/latte-art.jpeg" alt="Fresh latte art at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/egg-royal-salad.jpeg" alt="Egg Royal with side salad at Olympic Cafe" loading="lazy" />
+          </div>
+          <div class="scroll-gallery-col" data-yrange="15,5" style="margin-top: -50%;">
+            <img src="assets/img/full-english-hash-browns.jpeg" alt="Full English with hash browns at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/matcha-latte.jpeg" alt="Matcha latte at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/cheeseburger.jpeg" alt="Cheeseburger and fries at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/table-spread-overhead-1.jpeg" alt="Full table spread at Olympic Cafe" loading="lazy" />
+          </div>
+          <div class="scroll-gallery-col" data-yrange="-10,2">
+            <img src="assets/img/pancake-ring-special.jpeg" alt="Pancake ring special at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/avocado-toast-poached-egg-fries.jpeg" alt="Avocado toast with poached egg at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/chocolate-milkshake.jpeg" alt="Chocolate milkshake at Olympic Cafe" loading="lazy" />
+            <img src="assets/img/french-toast-fruit.jpeg" alt="French toast with fresh fruit at Olympic Cafe" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- MASONRY GALLERY -->
   <section class="px-6 lg:px-10 pb-24">
     <div class="max-w-7xl mx-auto masonry" id="masonry-grid">
@@ -235,7 +308,7 @@
     </div>
     <div>
       <h3 class="font-display font-semibold mb-4 text-brand-cream">Hours</h3>
-      <p class="text-sm text-brand-creamlight/70">Open 7 days a week<br/>Eat-in or takeaway</p>
+      <p class="text-sm text-brand-creamlight/70">Mon&ndash;Sat: 5:30am&ndash;5pm<br/>Sun: 6am&ndash;4pm<br/>Eat-in or takeaway</p>
     </div>
   </div>
   <div class="max-w-7xl mx-auto border-t border-brand-creamlight/10 mt-12 pt-6 text-xs text-brand-creamlight/50">
@@ -319,6 +392,54 @@
       delay += 150;
       setTimeout(() => cta.classList.add('is-revealed'), delay);
     }
+  })();
+
+  // Scroll showcase: rotateX/scale on the grid + per-column parallax, driven by
+  // how far the tall track has scrolled through the sticky viewport (mirrors a
+  // scroll-linked motion effect, done here with a plain scroll listener + rAF).
+  (function () {
+    const track = document.getElementById('scroll-gallery-track');
+    const grid = document.getElementById('scroll-gallery-grid');
+    if (!track || !grid) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const cols = Array.from(grid.querySelectorAll('.scroll-gallery-col')).map((col) => ({
+      el: col,
+      yRange: col.dataset.yrange.split(',').map(Number),
+    }));
+
+    function mapRange(value, inMin, inMax, outMin, outMax) {
+      const t = Math.min(1, Math.max(0, (value - inMin) / (inMax - inMin)));
+      return outMin + t * (outMax - outMin);
+    }
+
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const rect = track.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const progress = mapRange(scrolled, 0, track.offsetHeight - window.innerHeight, 0, 1);
+
+      const rotateX = mapRange(progress, 0, 0.5, 75, 0);
+      const scale = mapRange(progress, 0.5, 0.9, 1.2, 1);
+      grid.style.transform = `rotateX(${rotateX}deg) scale(${scale})`;
+
+      cols.forEach(({ el, yRange }) => {
+        const y = mapRange(progress, 0.5, 1, yRange[0], yRange[1]);
+        el.style.transform = `translateY(${y}%)`;
+      });
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   })();
 
   const header = document.getElementById('site-header');

@@ -41,7 +41,7 @@ This audit therefore does **not** recommend a redesign. It found a small number 
 |---|---|---|---|
 | 1 | Contact form real delivery address | The business's actual monitored email | `contact.html`'s mailto target (`hello@olympiccafe.co.uk`) is an unverified placeholder from the original build. Per user instruction this pass, left as-is and re-flagged rather than guessed. |
 | 2 | Canonical URLs, `og:url`, `sitemap.xml` | A live domain | Site has no deployed domain yet, so absolute URLs would be fabricated. Add these once the domain is known. |
-| 3 | `openingHours` in the JSON-LD schema | Specific daily open/close times | Footer only says "Open 7 days a week" — no times are recorded anywhere in the project, and schema.org's `openingHours` requires specific hours. Omitted rather than invented. |
+| 3 | ~~`openingHours` in the JSON-LD schema~~ | ~~Specific daily open/close times~~ | **Resolved 2026-08-01**: user supplied verified hours (Mon–Sat 5:30am–5pm, Sun 6am–4pm). Added to `openingHoursSpecification` in all 5 pages' JSON-LD, the footer on all 5 pages, and the Hours info-card on `contact.html`. |
 | 4 | Vegetarian tags on the menu | Business confirmation | Already flagged in project memory as the assistant's own inference from ingredients, not verified — out of scope for this pass, not re-litigated. |
 | 5 | Shared CSS/JS build step | A decision to change `CLAUDE.md`'s single-file-page architecture | Current duplication (nav/footer/buttons/reveal CSS/hero-reveal JS repeated per page) is a deliberate project convention, not a bug — flagged only in case priorities change. |
 
