@@ -57,5 +57,17 @@
 - **Depth:** Base → elevated → floating layering system — surfaces don't all sit at the same z-plane.
 - **Scroll reveals:** `IntersectionObserver` on `opacity` + `translateY`. Never trigger on page load.
 
+## Pre-Launch Checklist (run before any go-live or domain change)
+Current live base URL: `https://cuneytcandan2026-jpg.github.io/Olympic-Cafe/` — this is a staging URL, **not** the client's domain. When the real domain is confirmed, replace this base everywhere in one pass (`grep -rn "github.io" --include=*.html --include=*.xml --include=*.txt .`) and update the line above.
+- [ ] `<link rel="canonical">` and `og:url` on every page use the **production** domain, absolute, page-specific (home = domain root `/`, not `/index.html`)
+- [ ] `og:image`, `twitter:image` and JSON-LD `image` are **absolute** URLs (`https://…`), never relative — relative paths give no preview on WhatsApp/Facebook/iMessage
+- [ ] Every share-image URL points to a file that exists and is committed. Use **JPEG/PNG** for `og:image` (WebP isn't reliably supported by social crawlers); ~1200×630+ and under 300KB
+- [ ] `og:image:width` / `og:image:height` match the real image
+- [ ] `sitemap.xml` `<loc>` entries and `robots.txt` `Sitemap:` line use the production domain
+- [ ] No leftover `github.io` / `localhost` URLs: `grep -rnE "github\.io|localhost" --include=*.html --include=*.xml --include=*.txt .` returns nothing
+- [ ] JSON-LD blocks parse as valid JSON
+- [ ] Contact mailto (`hello@olympiccafe.co.uk`) and vegetarian menu tags confirmed by the business
+- [ ] After deploy: test a share preview (e.g. Facebook Sharing Debugger / paste the link into WhatsApp)
+
 ## Accessibility
 - WCAG AA contrast. Semantic HTML (`<nav>`, `<main>`, `<button>` — never `<div>` for clicks). Descriptive `alt` on all images. Visible focus rings (`focus-visible:ring-2`). 44×44px minimum touch targets on mobile.
