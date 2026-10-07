@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3002;
 const ROOT = __dirname;
+// Loopback only: on shared Wi-Fi anyone on the network could otherwise read
+// the project files. For phone testing over the LAN: HOST=0.0.0.0 node serve.mjs
+const HOST = process.env.HOST || '127.0.0.1';
 
 const mime = {
   '.html': 'text/html',
@@ -29,8 +32,21 @@ const mime = {
 };
 
 http.createServer((req, res) => {
-  const urlPath = decodeURIComponent(req.url.split('?')[0]);
+  let urlPath;
+  try {
+    urlPath = decodeURIComponent(req.url.split('?')[0]);
+  } catch {
+    res.writeHead(400);
+    res.end('400 Bad Request');
+    return;
+  }
   let filePath = path.join(ROOT, urlPath === '/' ? 'index.html' : urlPath);
+  // path.join resolves "..", so never serve anything outside the project.
+  if (!filePath.startsWith(ROOT + path.sep)) {
+    res.writeHead(403);
+    res.end('403 Forbidden');
+    return;
+  }
   const ext = path.extname(filePath).toLowerCase();
 
   function serveFile(fp) {
@@ -53,4 +69,4 @@ http.createServer((req, res) => {
       serveFile(path.join(ROOT, 'index.html'));
     }
   });
-}).listen(PORT, () => console.log(`Server running at http://localhost:${PORT}/`));
+}).listen(PORT, HOST, () => console.log(`Server running at http://localhost:${PORT}/`));
