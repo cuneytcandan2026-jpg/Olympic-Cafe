@@ -58,7 +58,7 @@
 - **Scroll reveals:** `IntersectionObserver` on `opacity` + `translateY`. Never trigger on page load.
 
 ## Pre-Launch Checklist (run before any go-live or domain change)
-Current live base URL: `https://cuneytcandan2026-jpg.github.io/Olympic-Cafe/` — this is a staging URL, **not** the client's domain. When the real domain is confirmed, replace this base everywhere in one pass (`grep -rn "github.io" --include=*.html --include=*.xml --include=*.txt .`) and update the line above.
+Current live base URL: `https://olympiccafe.co.uk/` (client's production domain, apex/non-www). The old GitHub Pages staging URL has been fully replaced. If the domain ever changes, replace this base everywhere in one pass (`grep -rn "olympiccafe.co.uk" --include=*.html --include=*.xml --include=*.txt .`) and update the line above.
 - [ ] `<link rel="canonical">` and `og:url` on every page use the **production** domain, absolute, page-specific (home = domain root `/`, not `/index.html`)
 - [ ] `og:image`, `twitter:image` and JSON-LD `image` are **absolute** URLs (`https://…`), never relative — relative paths give no preview on WhatsApp/Facebook/iMessage
 - [ ] Every share-image URL points to a file that exists and is committed. Use **JPEG/PNG** for `og:image` (WebP isn't reliably supported by social crawlers); ~1200×630+ and under 300KB

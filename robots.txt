@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cuneytcandan2026-jpg.github.io/Olympic-Cafe/sitemap.xml
+Sitemap: https://olympiccafe.co.uk/sitemap.xml
