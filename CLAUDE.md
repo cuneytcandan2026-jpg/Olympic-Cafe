@@ -5,7 +5,7 @@
 
 ## GitHub & Deployment
 - **NEVER push to GitHub unless the user explicitly asks.** Commit changes locally but do not push.
-- When the user says to push, run `git push origin main` from the repo root (`c:\Users\cuney\OneDrive\Desktop\Claude\Olympic Cafe`).
+- When the user says to push, run `git push origin master` from the repo root (`c:\Users\cuney\OneDrive\Desktop\Claude\Olympic Cafe`).
 
 ## Dev Server
 - Serve at `http://localhost:3000` via `node serve.mjs` (background). Never screenshot `file:///`.
@@ -66,7 +66,7 @@ Current live base URL: `https://olympiccafe.co.uk/` (client's production domain,
 - [ ] `sitemap.xml` `<loc>` entries and `robots.txt` `Sitemap:` line use the production domain
 - [ ] No leftover `github.io` / `localhost` URLs: `grep -rnE "github\.io|localhost" --include=*.html --include=*.xml --include=*.txt .` returns nothing
 - [ ] JSON-LD blocks parse as valid JSON
-- [ ] Contact mailto (`hello@olympiccafe.co.uk`) and vegetarian menu tags confirmed by the business
+- [ ] Contact mailto (`info@olympiccafe.co.uk`) and vegetarian menu tags confirmed by the business
 - [ ] After deploy: test a share preview (e.g. Facebook Sharing Debugger / paste the link into WhatsApp)
 
 ## Accessibility

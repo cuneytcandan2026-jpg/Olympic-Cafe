@@ -245,7 +245,7 @@
         <h2 class="text-2xl md:text-3xl font-semibold text-brand-burgundy mb-6">We'd love to hear from you</h2>
 
         <div id="form-success" class="form-success bg-brand-deepgreen/10 border border-brand-deepgreen/30 text-brand-deepgreen text-sm rounded-xl px-4 py-3 mb-6" role="status" aria-live="polite">
-          Thanks! Your email app should now be open with your message ready to send. If nothing opened, email us directly at <a href="mailto:hello@olympiccafe.co.uk" class="font-semibold underline">hello@olympiccafe.co.uk</a> or call <a href="tel:01992631555" class="font-semibold underline">01992 631 555</a>.
+          Thanks! Your email app should now be open with your message ready to send. If nothing opened, email us directly at <a href="mailto:info@olympiccafe.co.uk" class="font-semibold underline">info@olympiccafe.co.uk</a> or call <a href="tel:01992631555" class="font-semibold underline">01992 631 555</a>.
         </div>
 
         <form id="contact-form" novalidate>
@@ -436,7 +436,7 @@
 
     const subject = encodeURIComponent(`Message from ${nameEl.value.trim()} via Olympic Cafe website`);
     const body = encodeURIComponent(`${messageEl.value.trim()}\n\n— ${nameEl.value.trim()} (${emailEl.value.trim()})`);
-    window.location.href = `mailto:hello@olympiccafe.co.uk?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@olympiccafe.co.uk?subject=${subject}&body=${body}`;
 
     successMsg.classList.add('is-shown');
     form.reset();
