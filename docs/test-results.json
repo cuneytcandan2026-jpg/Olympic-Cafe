@@ -1,6 +1,6 @@
 {
- "date": "2026-10-30T20:15:13.656Z",
- "total": 418,
+ "date": "2026-10-30T21:23:20.254Z",
+ "total": 528,
  "failed": 0,
  "results": [
   {
@@ -25,7 +25,7 @@
    "group": "SEO home",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "122333233333233322332222"
+   "detail": "1233333333322333233333233322332222"
   },
   {
    "group": "SEO home",
@@ -217,7 +217,7 @@
    "group": "SEO menu",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "122333333333333233323333332333332333333333233333333233333333333333323333333233332333333333333233332333333332333333333323333333333333333333333323333333333233333333332333333332333323333333333323333333233333333333333332333333333333333333333333333333222"
+   "detail": "12233333333333323332333333233333233333333323333333323333333333333332333333323333233333333333323333233333333233333333332333333333333333333333332333333333323333333333233333333233332333333333332333333323333333333333333233333333333333333333333333333323222"
   },
   {
    "group": "SEO menu",
@@ -545,7 +545,7 @@
   },
   {
    "group": "Links",
-   "name": "all 155 internal URLs return 200",
+   "name": "all 151 internal URLs return 200",
    "pass": true,
    "detail": ""
   },
@@ -553,7 +553,7 @@
    "group": "Links",
    "name": "every logo part exists in logo.svg",
    "pass": true,
-   "detail": "letters,handle,shade,flame,line,letters,handle,shade,flame,line"
+   "detail": "letters,handle,shade,flame,line"
   },
   {
    "group": "Links",
@@ -655,7 +655,7 @@
    "group": "Creative",
    "name": "printed menu drops page furniture and photos but keeps every dish",
    "pass": true,
-   "detail": "{\"header\":\"none\",\"thumb\":\"none\",\"bar\":\"none\",\"items\":222}"
+   "detail": "{\"header\":\"none\",\"strip\":\"none\",\"bar\":\"none\",\"items\":222}"
   },
   {
    "group": "Creative",
@@ -799,13 +799,13 @@
    "group": "Menu",
    "name": "category heading is visible below the sticky bars",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":335}"
   },
   {
    "group": "Menu",
    "name": "choosing a category does not jump to the top of the page",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":335}"
   },
   {
    "group": "Menu",
@@ -881,7 +881,31 @@
   },
   {
    "group": "Menu",
+   "name": "dish list has no photos",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "category row has no scrollbar and starts with only the next arrow",
+   "pass": true,
+   "detail": "{\"scrollbar\":0,\"overflows\":true,\"back\":true,\"next\":false}"
+  },
+  {
+   "group": "Menu",
+   "name": "next arrow moves the category row, not the page",
+   "pass": true,
+   "detail": "{\"left\":846,\"back\":false,\"page\":0}"
+  },
+  {
+   "group": "Menu",
    "name": "desktop chip marks itself as current",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "chosen category chip scrolls into view",
    "pass": true,
    "detail": ""
   },
@@ -1909,7 +1933,7 @@
    "group": "Layout",
    "name": "home mobile: headline and buttons are above the fold",
    "pass": true,
-   "detail": "{\"stickySections\":0,\"ctaBottom\":512.765625,\"h1Top\":335.375,\"fold\":784}"
+   "detail": "{\"stickySections\":0,\"ctaBottom\":556.765625,\"h1Top\":335.375,\"fold\":784}"
   },
   {
    "group": "Touch",
@@ -1945,7 +1969,7 @@
    "group": "Touch",
    "name": "menu: inputs are 16px or larger",
    "pass": true,
-   "detail": "16,16"
+   "detail": "16,16,16"
   },
   {
    "group": "Touch",
@@ -2323,11 +2347,11 @@
    "group": "Motion",
    "name": "scroll reveals all complete",
    "pass": true,
-   "detail": "6 -> 0"
+   "detail": "7 -> 0"
   },
   {
    "group": "Images",
-   "name": "home: no missing images (22)",
+   "name": "home: no missing images (25)",
    "pass": true,
    "detail": ""
   },
@@ -2335,7 +2359,7 @@
    "group": "Images",
    "name": "home: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":22,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2363,7 +2387,7 @@
   },
   {
    "group": "Images",
-   "name": "menu: no missing images (21)",
+   "name": "menu: no missing images (6)",
    "pass": true,
    "detail": ""
   },
@@ -2371,13 +2395,13 @@
    "group": "Images",
    "name": "menu: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":21,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":6,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.0010496343125888734}"
   },
   {
    "group": "Images",
    "name": "menu: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0000"
+   "detail": "0.0010"
   },
   {
    "group": "Images",
@@ -2508,6 +2532,642 @@
   {
    "group": "Axe",
    "name": "mobile nav open",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "Wednesday before opening",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 5:30am today.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Wednesday at opening",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Up early? We're already cooking.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "just before brunch",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Up early? We're already cooking.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "brunch",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Good time for brunch.\",\"panel\":\"brunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "lunch",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "exactly an hour left",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "final hour",
+   "pass": true,
+   "detail": "{\"status\":\"Closing at 5pm, 40 minutes left.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "final hour rounds down",
+   "pass": true,
+   "detail": "{\"status\":\"Closing at 5pm, 39 minutes left.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "one minute left",
+   "pass": true,
+   "detail": "{\"status\":\"Closing at 5pm, 1 minute left.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "under a minute left",
+   "pass": true,
+   "detail": "{\"status\":\"Closing at 5pm, under a minute left.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "just closed",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 5:30am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Saturday night, Sunday opens later",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 6am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Sunday before the roast",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 4pm.\",\"state\":\"open\",\"heading\":\"Good time for brunch.\",\"panel\":\"brunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Sunday roast",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 4pm.\",\"state\":\"open\",\"heading\":\"It's Sunday, so the roast is on.\",\"panel\":\"roast\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Sunday final hour",
+   "pass": true,
+   "detail": "{\"status\":\"Closing at 4pm, 30 minutes left.\",\"state\":\"open\",\"heading\":\"It's Sunday, so the roast is on.\",\"panel\":\"roast\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "Sunday closed, Monday next",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 5:30am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "bank holiday",
+   "pass": true,
+   "detail": "{\"status\":\"It's a bank holiday, so hours may differ. Please call 01992 631 555\",\"state\":\"unknown\",\"heading\":\"A few good places to start.\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "real Boxing Day, not on the gov.uk substitute list",
+   "pass": true,
+   "detail": "{\"status\":\"It's a bank holiday, so hours may differ. Please call 01992 631 555\",\"state\":\"unknown\",\"heading\":\"A few good places to start.\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "evening before a bank holiday",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Hours may differ tomorrow, so please call first.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "bank holiday list has run out",
+   "pass": true,
+   "detail": "{\"status\":\"Our usual hours today: 5:30am to 5pm.\",\"state\":\"unknown\",\"heading\":\"A few good places to start.\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "BST: 04:30 UTC is 05:30 in the UK",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Up early? We're already cooking.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "clocks back: 05:00 UTC is 05:00 in the UK",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 6am today.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "clocks forward: 05:00 UTC is 06:00 in the UK",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 4pm.\",\"state\":\"open\",\"heading\":\"Up early? We're already cooking.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "a visitor in another timezone still sees UK time",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 5pm.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "closed exception beats the usual hours",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 8am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "exception hours before they start",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 8am today.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "exception hours are used while open",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 2pm.\",\"state\":\"open\",\"heading\":\"Ready for lunch?\",\"panel\":\"lunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "closing time comes from the exception",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 5:30am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "owner hours replace the bank holiday message",
+   "pass": true,
+   "detail": "{\"status\":\"Open now until 2pm.\",\"state\":\"open\",\"heading\":\"Good time for brunch.\",\"panel\":\"brunch\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "closed bank holidays are skipped to the next opening",
+   "pass": true,
+   "detail": "{\"status\":\"Closed now. Back at 10am tomorrow.\",\"state\":\"closed\",\"heading\":\"For your next visit.\",\"panel\":\"early\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "every pick has a checked photo and a real dish link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "without JS: a default panel and no live claim",
+   "pass": true,
+   "detail": "{\"status\":\"none\",\"text\":\"\",\"panel\":\"early\",\"heading\":\"A few good places to start.\"}"
+  },
+  {
+   "group": "Right now",
+   "name": "weekday: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Right now",
+   "name": "Sunday roast: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Right now",
+   "name": "closed: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Axe",
+   "name": "homepage open state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "open: no overflow at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "homepage roast state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "roast: no overflow at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "homepage bank holiday state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "bank holiday: no overflow at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Right now",
+   "name": "longest status has no overflow at 320px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "every dish has a unique id",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "no add buttons in the HTML, so print and no-JS stay clean",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "every add-on price is in the printed note",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "bar is hidden until something is added",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "every dish and size has an add button",
+   "pass": true,
+   "detail": "268 vs 268"
+  },
+  {
+   "group": "Order pad",
+   "name": "add buttons are at least 44x44",
+   "pass": true,
+   "detail": "0"
+  },
+  {
+   "group": "Order pad",
+   "name": "add buttons cause no overflow at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "totals add up across dishes and sizes",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £19.00 · View\",\"total\":\"£19.00\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "adding is announced",
+   "pass": true,
+   "detail": "Added Bacon, Baguette. 3 items, £19.00."
+  },
+  {
+   "group": "Order pad",
+   "name": "the button shows how many are on the pad",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "the same name in another category is a separate line",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "bar sits above the mobile action bar",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "bar steps aside while typing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "filtering the menu keeps the pad",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "opens as a modal with focus inside",
+   "pass": true,
+   "detail": "{\"modal\":true,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "plus raises the line total",
+   "pass": true,
+   "detail": "{\"bar\":\"5 items · £23.40 · View\",\"total\":\"£23.40\",\"lines\":3}"
+  },
+  {
+   "group": "Order pad",
+   "name": "focus stays on the plus button after redrawing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "minus at one removes the line",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £19.00 · View\",\"total\":\"£19.00\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "focus moves to a neighbour after removing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "split rounds up so shares cover the total",
+   "pass": true,
+   "detail": "About £6.34 each"
+  },
+  {
+   "group": "Order pad",
+   "name": "counter view shows the order full screen",
+   "pass": true,
+   "detail": "{\"text\":\"/ OLYMPIC CAFE ORDER\\n\\n2 × Set 1\\n\\nSet Breakfast\\n\\n1 × Bacon\\n\\nSandwiches, Baguette\\n\\nEstimate\\n£19.00\\n\\nBack to my pad\",\"focus\":\"pad-counter-back\",\"head\":true,\"width\":390}"
+  },
+  {
+   "group": "Order pad",
+   "name": "back from the counter view restores focus",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "pad survives a reload",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "clear empties the pad and offers undo",
+   "pass": true,
+   "detail": "{\"bar\":\"\",\"total\":\"£0.00\",\"lines\":0}"
+  },
+  {
+   "group": "Order pad",
+   "name": "undo restores the order",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £19.00 · View\",\"total\":\"£19.00\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "Escape closes and focus returns to the bar",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "sourdough is not offered on a dish already on sourdough",
+   "pass": true,
+   "detail": "sourdough,halloumi / halloumi"
+  },
+  {
+   "group": "Order pad",
+   "name": "add-ons apply to each one on the line",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £32.50 · View\",\"total\":\"£32.50\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "focus stays on the add-on after redrawing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "the same dish without the add-on is a new line",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "lines join up when they become the same",
+   "pass": true,
+   "detail": "{\"bar\":\"4 items · £34.00 · View\",\"total\":\"£34.00\",\"lines\":2}"
+  },
+  {
+   "group": "Axe",
+   "name": "order pad open",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "order pad counter view",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "pad and buttons are left out of the printed menu",
+   "pass": true,
+   "detail": "none,none,none,none"
+  },
+  {
+   "group": "Order pad",
+   "name": "share copies a link",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html?pad=brunch--egg-benedict*3,brunch--sicily-coast*1"
+  },
+  {
+   "group": "Order pad",
+   "name": "shared link holds no prices",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html?pad=brunch--egg-benedict*3,brunch--sicily-coast*1"
+  },
+  {
+   "group": "Order pad",
+   "name": "with no clipboard it shows the link to copy",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html?pad=brunch--egg-benedict*3,brunch--sicily-coast*1"
+  },
+  {
+   "group": "Order pad",
+   "name": "a link fills an empty pad and opens it",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £18.40 · View\",\"total\":\"£18.40\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "the link is removed from the address bar",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html"
+  },
+  {
+   "group": "Order pad",
+   "name": "a link asks before replacing an existing pad",
+   "pass": true,
+   "detail": "{\"asked\":{\"shared\":true,\"body\":true,\"text\":\"3 items, estimated £18.40.\"},\"state\":{\"bar\":\"1 item · £8.50 · View\",\"total\":\"£8.50\",\"lines\":1}}"
+  },
+  {
+   "group": "Order pad",
+   "name": "the category in a shared link still works",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html#burgers"
+  },
+  {
+   "group": "Axe",
+   "name": "order pad shared-link choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "\"Keep mine\" keeps the existing pad",
+   "pass": true,
+   "detail": "{\"bar\":\"1 item · £8.50 · View\",\"total\":\"£8.50\",\"lines\":1}"
+  },
+  {
+   "group": "Order pad",
+   "name": "\"Replace my pad\" uses the shared order",
+   "pass": true,
+   "detail": "{\"bar\":\"3 items · £18.40 · View\",\"total\":\"£18.40\",\"lines\":2}"
+  },
+  {
+   "group": "Order pad",
+   "name": "a tampered link is limited to 20 of a real dish at the real price",
+   "pass": true,
+   "detail": "{\"badState\":{\"text\":\"Set 1£150.00Set Breakfast−20+\",\"note\":\"7 items on that link couldn't be found on our menu, so they were left out.\",\"images\":0,\"qty\":\"20\"},\"state\":{\"bar\":\"20 items · £150.00 · View\",\"total\":\"£150.00\",\"lines\":1}}"
+  },
+  {
+   "group": "Order pad",
+   "name": "bad entries are dropped with a message and never drawn",
+   "pass": true,
+   "detail": "{\"text\":\"Set 1£150.00Set Breakfast−20+\",\"note\":\"7 items on that link couldn't be found on our menu, so they were left out.\",\"images\":0,\"qty\":\"20\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "a link with nothing usable shows a message and opens nothing",
+   "pass": true,
+   "detail": "{\"open\":false,\"toast\":\"We couldn't find anything from that link on our menu.\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "a pad older than 7 days is cleared",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "a pad under 7 days old is kept",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "corrupt storage is ignored",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "works with storage blocked",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Order pad",
+   "name": "320x640: bar clears the page end and action bar",
+   "pass": true,
+   "detail": "{\"footer\":516.1875,\"barTop\":520,\"scrollY\":21575,\"maxScroll\":21575,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+  },
+  {
+   "group": "Order pad",
+   "name": "320x640: the sheet fits the screen",
+   "pass": true,
+   "detail": "{\"inside\":true,\"wide\":false,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "375x667: bar clears the page end and action bar",
+   "pass": true,
+   "detail": "{\"footer\":543.1875,\"barTop\":547,\"scrollY\":19072,\"maxScroll\":19072,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+  },
+  {
+   "group": "Order pad",
+   "name": "375x667: the sheet fits the screen",
+   "pass": true,
+   "detail": "{\"inside\":true,\"wide\":false,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "768x1024: bar clears the page end and action bar",
+   "pass": true,
+   "detail": "{\"footer\":959.75,\"barTop\":964,\"scrollY\":11145,\"maxScroll\":11145,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+  },
+  {
+   "group": "Order pad",
+   "name": "768x1024: the sheet fits the screen",
+   "pass": true,
+   "detail": "{\"inside\":true,\"wide\":false,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "1440x900: bar clears the page end and action bar",
+   "pass": true,
+   "detail": "{\"footer\":835.75,\"barTop\":840,\"scrollY\":10396,\"maxScroll\":10396,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+  },
+  {
+   "group": "Order pad",
+   "name": "1440x900: the sheet fits the screen",
+   "pass": true,
+   "detail": "{\"inside\":true,\"wide\":false,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "844x390: bar clears the page end and action bar",
+   "pass": true,
+   "detail": "{\"footer\":326.25,\"barTop\":330,\"scrollY\":11622,\"maxScroll\":11622,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+  },
+  {
+   "group": "Order pad",
+   "name": "844x390: the sheet fits the screen",
+   "pass": true,
+   "detail": "{\"inside\":true,\"wide\":false,\"focus\":\"pad-close\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "a dish link lands on the dish below the sticky bars",
+   "pass": true,
+   "detail": "{\"visible\":true,\"top\":208.5625,\"bar\":193,\"height\":844,\"highlighted\":\"rgb(246, 230, 211)\"}"
+  },
+  {
+   "group": "Order pad",
+   "name": "the linked dish is highlighted",
+   "pass": true,
+   "detail": "rgb(246, 230, 211)"
+  },
+  {
+   "group": "Order pad",
+   "name": "a dish link clears filters that would hide it",
    "pass": true,
    "detail": ""
   }

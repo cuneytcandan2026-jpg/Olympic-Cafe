@@ -24,6 +24,20 @@ export const BUSINESS = {
   descriptor: 'Breakfast · Brunch · Lunch',
 };
 
+// Dates when the usual hours don't apply, as 'YYYY-MM-DD': { closed: true } or { opens: '08:00', closes: '14:00' }.
+// These always win over the bank holiday list below. The homepage reads them for its open and closed status.
+export const HOURS_EXCEPTIONS = {};
+
+// England and Wales, from gov.uk/bank-holidays.json, plus the real Christmas and Boxing Day dates in years when gov.uk
+// lists a substitute day instead. With no exception set, the homepage says hours may differ rather than "Open".
+export const BANK_HOLIDAYS = [
+  '2026-12-25', '2026-12-26', '2026-12-28',
+  '2027-01-01', '2027-03-26', '2027-03-29', '2027-05-03', '2027-05-31', '2027-08-30',
+  '2027-12-25', '2027-12-26', '2027-12-27', '2027-12-28',
+];
+// After this date the list has run out, so the homepage shows the usual hours and makes no live claim until it is extended.
+export const BANK_HOLIDAYS_UNTIL = '2027-12-31';
+
 // One short temporary message shown on every page, such as Christmas or bank holiday hours. Leave empty for none.
 export const NOTICE = process.env.SITE_NOTICE || '';
 

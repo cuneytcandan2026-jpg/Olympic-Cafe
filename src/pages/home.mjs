@@ -1,9 +1,59 @@
-import { BUSINESS as B, REVIEWS } from '../data/business.mjs';
-import { EXPLORE } from '../data/explore.mjs';
-import { findDish, MENU } from '../data/menu.mjs';
-import { addressLines, cropped, diptych, esc, formatPrice, hoursRows, icon, imagePreload, photo, torchDivider } from '../templates/layout.mjs';
+import { BANK_HOLIDAYS, BANK_HOLIDAYS_UNTIL, BUSINESS as B, HOURS_EXCEPTIONS, REVIEWS } from '../data/business.mjs';
+import { DISH_PHOTOS, EXPLORE } from '../data/explore.mjs';
+import { dishId, findDish, MENU, priceLabel } from '../data/menu.mjs';
+import { DEFAULT_HEADING, MOMENTS, NEXT_VISIT_HEADING, ROAST_FROM, ROAST_HEADING } from '../data/moments.mjs';
+import { addressLines, cropped, diptych, esc, formatPrice, hoursRows, icon, imagePreload, jsonScript, photo, torchDivider } from '../templates/layout.mjs';
 
 const HERO_SIZES = '(min-width: 1024px) 58vw, 100vw';
+
+function pickCard({ cat, name, label, desc }) {
+  const dish = findDish(cat, name);
+  const title = label || dish.name;
+  return `<li class="flex gap-4">
+            ${cropped({ name: DISH_PHOTOS[`${cat}/${name}`], alt: `${title} at Olympic Cafe`, sizes: '112px', cls: 'plate-frame h-26 w-26 shrink-0' })}
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">${esc(title)}</h3>
+              <p class="font-semibold text-brand-burgundy">${priceLabel(dish)}</p>
+              <p class="mt-1 text-sm">${esc(desc || dish.desc)}</p>
+              <a href="/menu.html#${dishId(cat, name)}" class="text-link text-sm">See it on the menu<span class="sr-only">: ${esc(title)}</span></a>
+            </div>
+          </li>`;
+}
+
+const roastCategory = MENU.find((c) => c.id === 'sunday-roast');
+
+// The first panel is the default, for visitors without JavaScript. home.js shows the right one for the UK time.
+const momentPanels = MOMENTS.map((m, i) => `<ul class="now-panel" data-moment="${m.id}"${i ? ' hidden' : ''}>
+          ${m.picks.map(pickCard).join('\n          ')}
+        </ul>`).join('\n        ');
+
+const roastPanel = `<div class="now-roast" data-moment="roast" hidden>
+          <ul class="min-w-0 flex-1">
+            ${roastCategory.items.map((i) => `<li class="flex items-baseline gap-3 py-1.5">
+              <span class="font-display text-2xl font-semibold">${esc(i.name)}</span>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="whitespace-nowrap text-lg font-semibold text-brand-burgundy">${formatPrice(i.price)}</span>
+            </li>`).join('\n            ')}
+          </ul>
+          <div class="md:max-w-xs">
+            <p class="mb-3 text-sm">All served with mixed veg, roast potatoes, Yorkshire pudding and gravy.</p>
+            <a href="/menu.html#sunday-roast" class="btn btn-primary w-full sm:w-auto">See the Sunday Roast</a>
+          </div>
+        </div>`;
+
+const nowData = {
+  hours: B.hours.map(({ days, opens, closes }) => ({ days, opens, closes })),
+  exceptions: HOURS_EXCEPTIONS,
+  bankHolidays: BANK_HOLIDAYS,
+  until: BANK_HOLIDAYS_UNTIL,
+  moments: MOMENTS.map(({ id, until, heading }) => ({ id, until, heading })),
+  roastFrom: ROAST_FROM,
+  roastHeading: ROAST_HEADING,
+  defaultHeading: DEFAULT_HEADING,
+  nextVisitHeading: NEXT_VISIT_HEADING,
+  phoneHref: B.phoneHref,
+  phoneDisplay: B.phoneDisplay,
+};
 
 const tiles = EXPLORE.map((t) => `<li>
           <a class="table-tile" href="/menu.html#${t.cat}">
@@ -72,6 +122,7 @@ export default {
   ogTitle: 'Olympic Cafe | Waltham Cross',
   ogDescription: 'Proper food and a warm welcome on Waltham Cross High Street. Eat in or take away, 7 days a week.',
   ogImage: 'home',
+  scripts: ['home'],
   preloads: imagePreload('table-spread-overhead-1', HERO_SIZES),
   body: `  <section class="hero paper-texture bg-brand-creamlight">
     <div class="hero-photo">
@@ -84,6 +135,7 @@ export default {
     <div class="hero-copy">
       <p class="kicker mb-2">/ BREAKFAST &middot; BRUNCH &middot; LUNCH</p>
       <h1 class="mb-4 text-4xl leading-[1.05] text-brand-burgundy sm:text-5xl xl:text-6xl"><span class="block">Proper food.</span> <span class="block">A warm welcome.</span> <span class="block">All day.</span></h1>
+      <p id="now-status" class="now-status js-only mb-4"></p>
       <div class="mb-4 flex flex-wrap gap-3 lg:order-1 lg:mb-0">
         <a href="/menu.html" class="btn btn-primary flex-1 whitespace-nowrap sm:flex-none">View Menu</a>
         <a href="${B.directionsUrl}" rel="noopener" class="btn btn-secondary flex-1 whitespace-nowrap sm:flex-none">Get Directions</a>
@@ -91,6 +143,17 @@ export default {
       <p class="max-w-xl text-base md:text-lg lg:mb-6">Olympic Cafe is a neighbourhood cafe on Waltham Cross High Street, serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Eat in or take away, seven days a week.</p>
       <p class="mt-3 flex items-start gap-2 text-sm font-semibold text-brand-burgundy lg:order-2 lg:mt-4">${icon('pin', 18, 'mt-1 shrink-0')}${B.address.street}, ${B.address.town}, ${B.address.postcode}</p>
     </div>
+  </section>
+
+  <section class="pt-10 md:pt-16" aria-labelledby="now-heading">
+    <div class="container-page">
+      <p class="kicker mb-1">/ RIGHT NOW</p>
+      <h2 id="now-heading" class="mb-1 text-3xl text-brand-burgundy md:text-4xl">${esc(DEFAULT_HEADING)}</h2>
+      <p class="mb-6 max-w-2xl">Just a few ideas. <a href="/menu.html" class="font-semibold text-brand-burgundy underline underline-offset-4">The full menu</a> has plenty more.</p>
+      ${momentPanels}
+      ${roastPanel}
+    </div>
+    ${jsonScript('now-data', nowData)}
   </section>
 
   <section class="pb-0 pt-10 md:pt-16" aria-labelledby="explore-heading" data-reveal>

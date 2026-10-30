@@ -128,7 +128,6 @@ function footer() {
       <p class="kicker mt-4 text-center">Thank you. See you soon.</p>
     </div>
   </div>
-  <div class="footer-wordmark" aria-hidden="true">${logo('w-full h-auto')}</div>
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
@@ -231,3 +230,6 @@ export function imagePreload(img, sizes) {
 }
 
 export const formatPrice = (p) => `£${p}`;
+
+// Data for a page script. "<" is escaped so a value can never close the script tag.
+export const jsonScript = (id, data) => `<script type="application/json" id="${id}">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;

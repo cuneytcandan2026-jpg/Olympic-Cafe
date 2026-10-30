@@ -45,7 +45,7 @@ function buildCss() {
 
 async function buildJs() {
   const js = {};
-  for (const name of ['site', 'menu', 'gallery', 'contact']) {
+  for (const name of ['site', 'home', 'menu', 'order', 'gallery', 'contact']) {
     const source = fs.readFileSync(path.join(ROOT, `src/js/${name}.js`), 'utf8');
     const { code } = await esbuild.transform(source, { minify: true, target: 'es2019' });
     js[name] = writeHashed('assets/js', name, 'js', code);

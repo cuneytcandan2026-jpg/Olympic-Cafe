@@ -14,6 +14,9 @@
   const emptyReset = document.getElementById('menu-empty-reset');
   const vegNote = document.getElementById('menu-veg-note');
   const chips = Array.from(document.querySelectorAll('[data-chip]'));
+  const chipScroll = document.getElementById('menu-chips');
+  const chipsBack = document.getElementById('chips-back');
+  const chipsNext = document.getElementById('chips-next');
   const sections = Array.from(document.querySelectorAll('[data-category]'));
   const total = document.querySelectorAll('[data-search]').length;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -34,6 +37,24 @@
     const offset = parseFloat(styles.scrollPaddingTop) || 0;
     const top = results.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: smooth && !reducedMotion.matches ? 'smooth' : 'auto' });
+  }
+
+  const scrollMotion = () => (reducedMotion.matches ? 'auto' : 'smooth');
+
+  // Each arrow only shows while there are more categories that way.
+  function updateChipArrows() {
+    const max = chipScroll.scrollWidth - chipScroll.clientWidth;
+    chipsBack.disabled = chipScroll.scrollLeft <= 1;
+    chipsNext.disabled = chipScroll.scrollLeft >= max - 1;
+  }
+
+  // Scrolls only the chip row, never the page. A chip already in clear view stays where it is.
+  function revealChip(chip) {
+    const rail = chipScroll.getBoundingClientRect();
+    const box = chip.getBoundingClientRect();
+    const edge = chipsNext.offsetWidth;
+    if (box.left >= rail.left + edge && box.right <= rail.right - edge) return;
+    chipScroll.scrollBy({ left: box.left + box.width / 2 - (rail.left + rail.width / 2), behavior: scrollMotion() });
   }
 
   function isPastResults() {
@@ -87,8 +108,7 @@
       const active = chip.dataset.chip === category;
       if (active) {
         chip.setAttribute('aria-current', 'true');
-        // Scrolls only the chip row, never the page.
-        if (chip.offsetParent) chip.parentElement.scrollLeft = chip.offsetLeft - chip.parentElement.offsetLeft - 16;
+        if (chip.offsetParent) revealChip(chip);
       } else {
         chip.removeAttribute('aria-current');
       }
@@ -128,6 +148,13 @@
   });
   select.addEventListener('change', () => chooseCategory(select.value));
 
+  [[chipsBack, -1], [chipsNext, 1]].forEach(([arrow, direction]) => {
+    arrow.addEventListener('click', () => {
+      chipScroll.scrollBy({ left: direction * chipScroll.clientWidth * 0.7, behavior: scrollMotion() });
+    });
+  });
+  chipScroll.addEventListener('scroll', updateChipArrows, { passive: true });
+
   // Search always covers the whole menu. The category control shows that by going back to "All categories".
   search.addEventListener('input', () => {
     if (category) {
@@ -156,13 +183,26 @@
     } else if (!id || id === 'menu-results') {
       category = '';
       apply();
+    } else {
+      // A link to one dish, which must not stay hidden behind an earlier search or filter.
+      const dish = document.getElementById(id);
+      if (!dish || !dish.matches('[data-search]')) return;
+      category = '';
+      search.value = '';
+      veg.checked = false;
+      apply();
+      dish.scrollIntoView({ block: 'start', behavior: 'auto' });
     }
   }
   window.addEventListener('hashchange', fromHash);
 
   if ('ResizeObserver' in window) new ResizeObserver(measureControls).observe(controls);
   window.addEventListener('resize', measureControls);
+  window.addEventListener('resize', updateChipArrows);
+  // The chips change width when the web font arrives.
+  if (document.fonts) document.fonts.ready.then(updateChipArrows);
 
   // A browser may restore a typed search on reload, so read it before the first render.
   fromHash();
+  updateChipArrows();
 })();

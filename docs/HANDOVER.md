@@ -1,6 +1,6 @@
 # Olympic Cafe website: handover
 
-Status: the audit work below (`site-audit-improvements`) is live on `master`. The creative refresh is on the local branch `creative-long-table` and is **not published**. Production only changes when that branch is merged to `master` and pushed.
+Status: the audit work and the creative refresh below are live on `master`. Production changes whenever `master` is pushed.
 
 To review: run `npm install`, then `npm run preview`, then open http://localhost:3000. Screenshots are in `docs/preview/`.
 
@@ -9,7 +9,7 @@ To review: run `npm install`, then `npm run preview`, then open http://localhost
 The design idea comes from the photography: all 25 photos were shot on one golden wooden table, so the table carries the whole site.
 
 - **Homepage:** full-bleed table hero with a paper hours ticket; six edge-to-edge category tiles; a large signature dish with two supporting dishes; the five Rings; food and drink pairings; a type-only Sunday Roast board; a British and Mediterranean story pair; and a visit ticket on the table.
-- **Menu:** photo shortcuts, grouped dropdown, 15 dish thumbnails, and a print button with a clean print layout. Search, filters, prices and shareable links are unchanged.
+- **Menu:** photo shortcuts, grouped dropdown, a text-only dish list (photos were only available for some dishes), and a print button with a clean print layout. Search, filters, prices and shareable links are unchanged.
 - **Gallery:** grouped by meal, feature tiles, and a "See it on the menu" link and swipe in the viewer.
 - **About:** the two text panels and separate photos became one British and Mediterranean pair.
 - **Shared:** today's hours marked in UK time, and an optional site-wide notice (`NOTICE` in `src/data/business.mjs`, currently empty).
@@ -34,7 +34,31 @@ The header, buttons, logo and footer were redesigned around the cafe front. The 
 - **Mobile menu:** a burgundy sheet set like the printed menu, with dotted leaders and short handwritten notes. The bottom action bar now makes Menu the cream ticket.
 - **Buttons:** tear-off order tickets with a perforated stub holding an arrow. Burgundy is primary, cream paper is secondary. Every existing button picks this up from `.btn` in `src/css/site.css`.
 - **Logo:** the torch now stands in for the i of Olympic, and the lettering sits on one line. It is vector (`src/brand/logo.svg`), traced from the master artwork, and the lettering follows the text colour. The flame flickers on hover. The master files in `brand_assets/` are unchanged.
-- **Footer:** large links, the address with two buttons, a paper receipt with the hours, the name set across the full width, and a legal strip with "Website designed by Laara Digital" linking to https://laaradigital.co.uk/.
+- **Footer:** large links, the address with two buttons, a paper receipt with the hours, and a legal strip with "Website designed by Laara Digital" linking to https://laaradigital.co.uk/.
+
+### Customer features: Right Now and Order Pad
+
+Both run in the visitor's browser, with no accounts, payments or server. Nothing is sent to the cafe. Without JavaScript the site and full menu work as before.
+
+- **Right Now (homepage):** the status under the headline says if the cafe is open, in UK time wherever the visitor is, such as "Closing at 5pm, 40 minutes left" or "Closed now. Back at 5:30am tomorrow". A new section after the hero suggests dishes for the time of day, and the roast on Sundays.
+- **Order Pad (menu):** a + on every dish builds a running order with a total, priced add-ons and an equal split. Customers can show it full screen at the counter, call, or share it by link. It stays on their phone for 7 days.
+
+**Keeping them up to date**
+- **Special hours:** add dates to `HOURS_EXCEPTIONS` in `src/data/business.mjs` and rebuild. This is separate from `NOTICE`, which only shows a message.
+- **Bank holidays:** `BANK_HOLIDAYS` runs to the end of 2027, from gov.uk plus the real Christmas and Boxing Day dates. After that the status shows the usual hours and makes no open or closed claim until the list is extended.
+- **Picks and add-ons:** Right Now picks are in `src/data/moments.mjs` and add-ons in `src/data/menu.mjs`. Prices always come from the menu data.
+
+Lighthouse, local, mobile, median of 3, compared with the table above: Home stays at performance 95 and LCP 2.8s, at 709 KB. Menu goes from 97 to 95, LCP from 2.1s to 2.5s, at 204 KB, with layout shift of 0.039, mostly from adding the size buttons. Accessibility, best practices and SEO stay at 100.
+
+**Owner to confirm for these features**
+- [ ] **Bank holiday and Christmas hours.** Until supplied, those days say hours may differ and show the phone number. Other one-off closures, such as holidays or staff shortages, will show as open unless added to `HOURS_EXCEPTIONS`, so this needs someone to keep it current.
+- [ ] Is food served right up to closing? If not, the final-hour wording needs a last-orders time.
+- [ ] Are phone or takeaway orders welcome? The button says "Call us" and promises nothing. If they are, it can say "Call in your order".
+- [ ] Is the Sunday Roast still offered, and from what time? The roast panel assumes 11am (`ROAST_FROM`).
+- [ ] Do staff know customers may show a phone with an estimated total? Totals use the menu prices and say the till has the final price, so out-of-date prices will show as a difference at the till.
+- [ ] Do the add-ons apply as shown? Sourdough is left off dishes already on sourdough, and an extra shot is left off teas, hot chocolate, chai and matcha. Those exclusions are my reading of the printed menu.
+- [ ] Please review the Right Now picks, which are my own selection for each time of day.
+- [ ] Allergens are not covered by either feature. The Order Pad tells customers to tell staff.
 
 **Owner to confirm for this refresh**
 - [ ] **New logo:** this goes against section 03 of the brand guidelines, which says not to redraw the logo, change the torch proportions or use a substitute treatment. The lettering is the original traced artwork, but the arrangement is new and the torch is smaller and simplified. The owner needs to approve it. It also drops the "Dinner" tagline, which settles the Dinner point below on the website only. Menus, signage and the favicon still use the old artwork, and the guidelines would need updating if it is adopted.
@@ -43,7 +67,7 @@ The header, buttons, logo and footer were redesigned around the cafe front. The 
 - [ ] Is the featured Mediterranean Breakfast, with Full Olympic and Avo Breeze, the right selection?
 - [ ] Is the Milkshake photo a Crazy Shake? It has a chocolate piece on top. The pairing says "from" the Milkshake price so it is correct either way.
 - [ ] Are the three breakfast photos Set 2, Set 3 and Set 6? They look like it. Captions stay generic until confirmed.
-- [ ] "Today" on the hours ignores bank holidays. Use the notice for those, and supply exceptional hours before any "Open now" badge is added.
+- [ ] The "Today" tag on the hours lists ignores bank holidays, though the homepage status doesn't. Use the notice as well on those days.
 - [ ] "From" prices on the category tiles use the lowest priced item in that category, such as Granola for Breakfast.
 
 **Photography that would help most:** the shopfront, the interior, the team, a Sunday roast, and a dessert.
@@ -127,7 +151,7 @@ Limitations:
 
 ## 3. Test results
 
-`npm test` passes **411 of 411** checks in real Chrome (`docs/test-results.json`).
+`npm test` passes **524 of 524** checks in real Chrome (`docs/test-results.json`).
 
 | Area | Covered |
 | --- | --- |
@@ -187,7 +211,7 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 | Long-cache headers | File names are versioned for CSS and JS, but GitHub Pages fixes the cache at 10 minutes | Optional: Cloudflare cache rule for `/assets/*`, 1 year for `assets/css`, `assets/js` and `assets/fonts`. Lighthouse flags this until then |
 | Privacy | The form and Google Map involve personal data and third-party cookies. The site has no privacy notice | Add a privacy page before enabling the form, and consider a click-to-load map |
 
-**Deploying (when you decide to):** merge `site-audit-improvements` into `master` and push. GitHub Pages then publishes it, along with the unpushed email card commit already on local `master`. Afterwards:
+**Deploying:** push `master`, and GitHub Pages publishes it. Afterwards:
 1. Open each page and check https://olympiccafe.co.uk/CLAUDE.md now returns a 404.
 2. Test share previews with the Facebook Sharing Debugger or by pasting a link into WhatsApp.
 3. Re-run Lighthouse on the live site.

@@ -8,8 +8,10 @@ import { fileURLToPath } from 'url';
 import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import worker from '../workers/contact/worker.js';
-import { MENU, dishCount } from '../src/data/menu.mjs';
+import { MENU, dishCount, dishId } from '../src/data/menu.mjs';
 import { BUSINESS } from '../src/data/business.mjs';
+import { MOMENTS } from '../src/data/moments.mjs';
+import { DISH_PHOTOS } from '../src/data/explore.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PREVIEW = path.join(ROOT, '.preview');
@@ -166,8 +168,8 @@ check('Links', 'directions link targets the cafe address', read('index.html').in
   await menu.click('#menu-print');
   check('Creative', 'print button opens the print dialog', await menu.evaluate(() => window.__printed));
   await menu.emulateMediaType('print');
-  const printed = await menu.evaluate(() => ({ header: getComputedStyle(document.querySelector('.site-header')).display, thumb: getComputedStyle(document.querySelector('.dish-thumb')).display, bar: getComputedStyle(document.querySelector('.action-bar')).display, items: [...document.querySelectorAll('[data-search]')].filter((el) => el.offsetParent !== null).length }));
-  check('Creative', 'printed menu drops page furniture and photos but keeps every dish', printed.header === 'none' && printed.thumb === 'none' && printed.bar === 'none' && printed.items === dishCount, JSON.stringify(printed));
+  const printed = await menu.evaluate(() => ({ header: getComputedStyle(document.querySelector('.site-header')).display, strip: getComputedStyle(document.querySelector('.menu-strip')).display, bar: getComputedStyle(document.querySelector('.action-bar')).display, items: [...document.querySelectorAll('[data-search]')].filter((el) => el.offsetParent !== null).length }));
+  check('Creative', 'printed menu drops page furniture and photos but keeps every dish', printed.header === 'none' && printed.strip === 'none' && printed.bar === 'none' && printed.items === dishCount, JSON.stringify(printed));
   await menu.close();
   const strip = await open(`${SITE}/menu.html`, { width: 390, height: 844, mobile: true, reduced: true });
   await strip.click('.menu-strip a[href="#burgers"]');
@@ -274,9 +276,29 @@ const statusText = (page) => page.$eval('#menu-status', (el) => el.textContent);
   await shared.close();
 
   const desktop = await open(`${SITE}/menu.html`);
+  check('Menu', 'dish list has no photos', (await desktop.$$eval('#menu-results img', (els) => els.length)) === 0);
+  const rail = await desktop.evaluate(() => {
+    const row = document.getElementById('menu-chips');
+    return { scrollbar: row.offsetHeight - row.clientHeight, overflows: row.scrollWidth > row.clientWidth, back: document.getElementById('chips-back').disabled, next: document.getElementById('chips-next').disabled };
+  });
+  check('Menu', 'category row has no scrollbar and starts with only the next arrow', rail.scrollbar === 0 && rail.back && rail.overflows === !rail.next, JSON.stringify(rail));
+  if (rail.overflows) {
+    await desktop.click('#chips-next');
+    await wait(700);
+    const moved = await desktop.evaluate(() => ({ left: document.getElementById('menu-chips').scrollLeft, back: document.getElementById('chips-back').disabled, page: window.scrollY }));
+    check('Menu', 'next arrow moves the category row, not the page', moved.left > 0 && !moved.back && moved.page === 0, JSON.stringify(moved));
+    await desktop.click('#chips-back');
+    await wait(700);
+  }
   await desktop.click('[data-chip="burgers"]');
   await wait(700);
   check('Menu', 'desktop chip marks itself as current', (await desktop.$eval('[data-chip="burgers"]', (el) => el.getAttribute('aria-current'))) === 'true');
+  const shown = await desktop.evaluate(() => {
+    const box = document.querySelector('[data-chip="burgers"]').getBoundingClientRect();
+    const row = document.getElementById('menu-chips').getBoundingClientRect();
+    return box.left >= row.left && box.right <= row.right;
+  });
+  check('Menu', 'chosen category chip scrolls into view', shown);
   check('Menu', 'only one chip is current', (await desktop.$$eval('[data-chip][aria-current]', (els) => els.length)) === 1);
   check('Menu', 'no leftover ARIA tabs', (await desktop.$$eval('[role=tab],[role=tablist]', (els) => els.length)) === 0);
   await desktop.goBack();
@@ -636,7 +658,8 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
   });
   await wait(500);
   const data = await page.evaluate(() => {
-    const imgs = [...document.querySelectorAll('main img, footer img, header img')].filter((i) => i.id !== 'lightbox-img');
+    // Panels hidden at this time of day never load their lazy photos. The link check covers those files.
+    const imgs = [...document.querySelectorAll('main img, footer img, header img')].filter((i) => i.id !== 'lightbox-img' && !i.closest('[hidden]'));
     return {
       total: imgs.length,
       broken: imgs.filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
@@ -691,6 +714,405 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
   await nav.click('#menu-toggle');
   await axe(nav, 'mobile nav open');
   await nav.close();
+}
+
+// ---------- Right now: live status in UK time ----------
+// Opens a page with the browser's clock fixed. Times in these tests are UTC, with the UK time noted where it differs.
+async function openAt(url, iso, { width = 1440, height = 900, reduced = true, timezone, rewrite } = {}) {
+  const page = await browser.newPage();
+  await page.setViewport({ width, height, deviceScaleFactor: 1 });
+  if (reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+  if (timezone) await page.emulateTimezone(timezone);
+  await page.evaluateOnNewDocument((time) => {
+    const fixed = new Date(time).getTime();
+    const Real = Date;
+    window.Date = class extends Real {
+      constructor(...args) { if (args.length) super(...args); else super(fixed); }
+      static now() { return fixed; }
+    };
+  }, iso);
+  if (rewrite) {
+    await page.setRequestInterception(true);
+    page.on('request', async (request) => {
+      if (request.resourceType() !== 'document') { request.continue(); return; }
+      const response = await fetch(request.url());
+      request.respond({ status: 200, contentType: 'text/html', body: rewrite(await response.text()) });
+    });
+  }
+  await page.goto(url, { waitUntil: 'load' });
+  return page;
+}
+const nowState = (page) => page.evaluate(() => ({
+  status: document.getElementById('now-status').textContent.trim(),
+  state: document.getElementById('now-status').dataset.state,
+  heading: document.getElementById('now-heading').textContent,
+  panel: [...document.querySelectorAll('[data-moment]')].filter((el) => !el.hidden).map((el) => el.dataset.moment).join(),
+}));
+{
+  const cases = [
+    ['Wednesday before opening', '2026-11-04T05:00:00Z', 'Closed now. Back at 5:30am today.', 'early', 'For your next visit.'],
+    ['Wednesday at opening', '2026-11-04T05:30:00Z', 'Open now until 5pm.', 'early', "Up early? We're already cooking."],
+    ['just before brunch', '2026-11-04T10:29:59Z', 'Open now until 5pm.', 'early', "Up early? We're already cooking."],
+    ['brunch', '2026-11-04T10:30:00Z', 'Open now until 5pm.', 'brunch', 'Good time for brunch.'],
+    ['lunch', '2026-11-04T12:00:00Z', 'Open now until 5pm.', 'lunch', 'Ready for lunch?'],
+    ['exactly an hour left', '2026-11-04T16:00:00Z', 'Open now until 5pm.', 'lunch', 'Ready for lunch?'],
+    ['final hour', '2026-11-04T16:20:00Z', 'Closing at 5pm, 40 minutes left.', 'lunch', 'Ready for lunch?'],
+    ['final hour rounds down', '2026-11-04T16:20:30Z', 'Closing at 5pm, 39 minutes left.', 'lunch', 'Ready for lunch?'],
+    ['one minute left', '2026-11-04T16:59:00Z', 'Closing at 5pm, 1 minute left.', 'lunch', 'Ready for lunch?'],
+    ['under a minute left', '2026-11-04T16:59:30Z', 'Closing at 5pm, under a minute left.', 'lunch', 'Ready for lunch?'],
+    ['just closed', '2026-11-04T17:00:00Z', 'Closed now. Back at 5:30am tomorrow.', 'early', 'For your next visit.'],
+    ['Saturday night, Sunday opens later', '2026-11-07T18:00:00Z', 'Closed now. Back at 6am tomorrow.', 'early', 'For your next visit.'],
+    ['Sunday before the roast', '2026-11-08T10:59:00Z', 'Open now until 4pm.', 'brunch', 'Good time for brunch.'],
+    ['Sunday roast', '2026-11-08T11:00:00Z', 'Open now until 4pm.', 'roast', "It's Sunday, so the roast is on."],
+    ['Sunday final hour', '2026-11-08T15:30:00Z', 'Closing at 4pm, 30 minutes left.', 'roast', "It's Sunday, so the roast is on."],
+    ['Sunday closed, Monday next', '2026-11-08T16:00:00Z', 'Closed now. Back at 5:30am tomorrow.', 'early', 'For your next visit.'],
+    ['bank holiday', '2026-12-25T12:00:00Z', "It's a bank holiday, so hours may differ. Please call 01992 631 555", 'lunch', 'A few good places to start.'],
+    ['real Boxing Day, not on the gov.uk substitute list', '2026-12-26T12:00:00Z', "It's a bank holiday, so hours may differ. Please call 01992 631 555", 'lunch', 'A few good places to start.'],
+    ['evening before a bank holiday', '2026-12-24T18:00:00Z', 'Closed now. Hours may differ tomorrow, so please call first.', 'early', 'For your next visit.'],
+    ['bank holiday list has run out', '2028-02-02T12:00:00Z', 'Our usual hours today: 5:30am to 5pm.', 'lunch', 'A few good places to start.'],
+    ['BST: 04:30 UTC is 05:30 in the UK', '2026-10-24T04:30:00Z', 'Open now until 5pm.', 'early', "Up early? We're already cooking."],
+    ['clocks back: 05:00 UTC is 05:00 in the UK', '2026-10-25T05:00:00Z', 'Closed now. Back at 6am today.', 'early', 'For your next visit.'],
+    ['clocks forward: 05:00 UTC is 06:00 in the UK', '2027-03-28T05:00:00Z', 'Open now until 4pm.', 'early', "Up early? We're already cooking."],
+  ];
+  for (const [name, iso, status, panel, heading] of cases) {
+    const page = await openAt(`${SITE}/`, iso);
+    const now = await nowState(page);
+    check('Right now', name, now.status === status && now.panel === panel && now.heading === heading, JSON.stringify(now));
+    await page.close();
+  }
+  const tokyo = await openAt(`${SITE}/`, '2026-11-04T12:00:00Z', { timezone: 'Asia/Tokyo' });
+  check('Right now', 'a visitor in another timezone still sees UK time', (await nowState(tokyo)).panel === 'lunch', JSON.stringify(await nowState(tokyo)));
+  await tokyo.close();
+
+  const withExceptions = (html) => html.replace('"exceptions":{}', '"exceptions":{"2026-11-04":{"closed":true},"2026-11-05":{"opens":"08:00","closes":"14:00"},"2026-12-25":{"closed":true},"2026-12-26":{"opens":"10:00","closes":"14:00"},"2026-12-28":{"closed":true}}');
+  const exceptionCases = [
+    ['closed exception beats the usual hours', '2026-11-04T12:00:00Z', 'Closed now. Back at 8am tomorrow.', 'closed'],
+    ['exception hours before they start', '2026-11-05T07:00:00Z', 'Closed now. Back at 8am today.', 'closed'],
+    ['exception hours are used while open', '2026-11-05T12:00:00Z', 'Open now until 2pm.', 'open'],
+    ['closing time comes from the exception', '2026-11-05T14:00:00Z', 'Closed now. Back at 5:30am tomorrow.', 'closed'],
+    ['owner hours replace the bank holiday message', '2026-12-26T11:00:00Z', 'Open now until 2pm.', 'open'],
+    ['closed bank holidays are skipped to the next opening', '2026-12-25T12:00:00Z', 'Closed now. Back at 10am tomorrow.', 'closed'],
+  ];
+  for (const [name, iso, status, state] of exceptionCases) {
+    const page = await openAt(`${SITE}/`, iso, { rewrite: withExceptions });
+    const now = await nowState(page);
+    check('Right now', name, now.status === status && now.state === state, JSON.stringify(now));
+    await page.close();
+  }
+
+  const home = read('index.html');
+  check('Right now', 'every pick has a checked photo and a real dish link', MOMENTS.every((m) => m.picks.every((p) => DISH_PHOTOS[`${p.cat}/${p.name}`] && menuHtml.includes(`id="${dishId(p.cat, p.name)}"`) && home.includes(`/menu.html#${dishId(p.cat, p.name)}`))));
+  const noJs = await open(`${SITE}/`, { js: false, width: 390, height: 844 });
+  const noJsState = await noJs.evaluate(() => ({
+    status: getComputedStyle(document.getElementById('now-status')).display,
+    text: document.getElementById('now-status').textContent,
+    panel: [...document.querySelectorAll('[data-moment]')].filter((el) => el.offsetParent !== null).map((el) => el.dataset.moment).join(),
+    heading: document.getElementById('now-heading').textContent,
+  }));
+  check('Right now', 'without JS: a default panel and no live claim', noJsState.status === 'none' && noJsState.text === '' && noJsState.panel === 'early' && noJsState.heading === 'A few good places to start.', JSON.stringify(noJsState));
+  await noJs.close();
+
+  for (const [name, iso] of [['weekday', '2026-11-04T12:00:00Z'], ['Sunday roast', '2026-11-08T12:00:00Z'], ['closed', '2026-11-04T20:00:00Z']]) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 390, height: 844 });
+    await page.evaluateOnNewDocument((time) => {
+      const fixed = new Date(time).getTime();
+      const Real = Date;
+      window.Date = class extends Real {
+        constructor(...args) { if (args.length) super(...args); else super(fixed); }
+        static now() { return fixed; }
+      };
+      window.__cls = 0;
+      new PerformanceObserver((list) => { for (const e of list.getEntries()) if (!e.hadRecentInput) window.__cls += e.value; }).observe({ type: 'layout-shift', buffered: true });
+    }, iso);
+    await page.goto(`${SITE}/`, { waitUntil: 'networkidle0' });
+    await wait(300);
+    const cls = await page.evaluate(() => window.__cls);
+    check('Right now', `${name}: layout shift under 0.1`, cls < 0.1, cls.toFixed(4));
+    await page.close();
+  }
+  for (const [name, iso] of [['open', '2026-11-04T12:00:00Z'], ['roast', '2026-11-08T12:00:00Z'], ['bank holiday', '2026-12-25T12:00:00Z']]) {
+    const page = await openAt(`${SITE}/`, iso, { width: 390, height: 844 });
+    await axe(page, `homepage ${name} state`);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    check('Right now', `${name}: no overflow at 390px`, !overflow);
+    await page.close();
+  }
+  const shot = await openAt(`${SITE}/`, '2026-11-04T12:00:00Z');
+  await shot.evaluate(() => document.querySelector('[aria-labelledby=now-heading]').scrollIntoView({ block: 'start' }));
+  await wait(200);
+  await shot.screenshot({ path: path.join(SHOTS, 'home-right-now-desktop.png') });
+  await shot.close();
+  const small = await openAt(`${SITE}/`, '2026-12-25T12:00:00Z', { width: 320, height: 640 });
+  check('Right now', 'longest status has no overflow at 320px', await small.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth));
+  await small.close();
+}
+
+// ---------- Order pad ----------
+{
+  const ids = MENU.flatMap((c) => c.items.map((i) => dishId(c.id, i.name)));
+  check('Order pad', 'every dish has a unique id', new Set(ids).size === ids.length && ids.every((id) => menuHtml.includes(`id="${id}"`)));
+  check('Order pad', 'no add buttons in the HTML, so print and no-JS stay clean', !menuHtml.includes('data-add='));
+  check('Order pad', 'every add-on price is in the printed note', MENU.every((c) => (c.addons || []).every((a) => {
+    const pence = Math.round(Number(a.price) * 100);
+    return c.note.includes(`£${a.price}`) || c.note.includes(`${pence}p`);
+  })), '');
+
+  // Every tab shares one browser's storage, so each scenario starts from an empty pad.
+  const wipe = async () => {
+    const blank = await open(`${SITE}/robots.txt`);
+    await blank.evaluate(() => localStorage.clear());
+    await blank.close();
+  };
+  const fresh = async (options = {}) => {
+    await wipe();
+    return open(`${SITE}/menu.html`, { reduced: true, ...options });
+  };
+  const add = (page, id, size) => page.evaluate((i, s) => document.querySelector(`[data-add="${i}"]${s ? `[data-size="${s}"]` : ''}`).click(), id, size);
+  const pad = (page) => page.evaluate(() => ({
+    bar: document.getElementById('pad-bar').hidden ? '' : document.getElementById('pad-bar').textContent,
+    total: document.getElementById('pad-total').textContent,
+    lines: [...document.querySelectorAll('.pad-line')].length,
+  }));
+  const set1 = dishId('set-breakfast', 'Set 1');
+  const benedict = dishId('brunch', 'Egg Benedict');
+  const sicily = dishId('brunch', 'Sicily Coast');
+  const bacon = dishId('sandwiches', 'Bacon');
+  const extraBacon = dishId('extras', 'Bacon');
+
+  const page = await fresh({ width: 390, height: 844, mobile: true });
+  check('Order pad', 'bar is hidden until something is added', (await pad(page)).bar === '');
+  const buttons = await page.$$eval('[data-add]', (els) => els.length);
+  const sized = MENU.flatMap((c) => c.items).reduce((n, i) => n + (i.prices ? Object.keys(i.prices).length : 1), 0);
+  check('Order pad', 'every dish and size has an add button', buttons === sized, `${buttons} vs ${sized}`);
+  const small = await page.evaluate(() => [...document.querySelectorAll('[data-add]')].filter((el) => { const r = el.getBoundingClientRect(); return r.width < 44 || r.height < 44; }).length);
+  check('Order pad', 'add buttons are at least 44x44', small === 0, String(small));
+  const addOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  check('Order pad', 'add buttons cause no overflow at 390px', !addOverflow);
+
+  await add(page, set1);
+  await add(page, set1);
+  await add(page, bacon, 'Baguette');
+  let state = await pad(page);
+  check('Order pad', 'totals add up across dishes and sizes', state.bar === '3 items · £19.00 · View' && state.total === '£19.00', JSON.stringify(state));
+  check('Order pad', 'adding is announced', /Added Bacon, Baguette\. 3 items, £19\.00\./.test(await page.$eval('#pad-toast', (el) => el.textContent)), await page.$eval('#pad-toast', (el) => el.textContent));
+  check('Order pad', 'the button shows how many are on the pad', (await page.$eval(`[data-add="${set1}"]`, (el) => [el.textContent, el.getAttribute('aria-label')].join('|'))) === '2|Add another Set 1. 2 on your order.');
+  await add(page, extraBacon);
+  check('Order pad', 'the same name in another category is a separate line', (await pad(page)).lines === 3);
+
+  const clear = await page.evaluate(() => {
+    const bar = document.getElementById('pad-bar').getBoundingClientRect();
+    const action = document.querySelector('.action-bar').getBoundingClientRect();
+    return bar.bottom <= action.top && bar.left >= 0 && bar.right <= innerWidth;
+  });
+  check('Order pad', 'bar sits above the mobile action bar', clear);
+  await page.type('#menu-search', 'ch');
+  await wait(50);
+  check('Order pad', 'bar steps aside while typing', (await page.$eval('#pad-bar', (el) => getComputedStyle(el).visibility)) === 'hidden');
+  await page.$eval('#menu-search', (el) => { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); el.blur(); });
+  await page.select('#menu-category', 'burgers');
+  await wait(50);
+  check('Order pad', 'filtering the menu keeps the pad', (await pad(page)).lines === 3);
+  await page.select('#menu-category', '');
+
+  await page.click('#pad-bar');
+  await wait(50);
+  const opened = await page.evaluate(() => ({ modal: document.getElementById('pad').matches(':modal'), focus: document.activeElement.id }));
+  check('Order pad', 'opens as a modal with focus inside', opened.modal && opened.focus === 'pad-close', JSON.stringify(opened));
+  await page.click(`[data-act="inc"][data-key^="${extraBacon}"]`);
+  state = await pad(page);
+  check('Order pad', 'plus raises the line total', state.total === '£23.40', JSON.stringify(state));
+  check('Order pad', 'focus stays on the plus button after redrawing', (await page.evaluate(() => document.activeElement.dataset.act)) === 'inc');
+  await page.click(`[data-act="dec"][data-key^="${extraBacon}"]`);
+  await page.click(`[data-act="dec"][data-key^="${extraBacon}"]`);
+  state = await pad(page);
+  check('Order pad', 'minus at one removes the line', state.lines === 2 && state.total === '£19.00', JSON.stringify(state));
+  check('Order pad', 'focus moves to a neighbour after removing', (await page.evaluate(() => document.activeElement.dataset.act)) === 'dec');
+
+  await page.click('#pad-split-up');
+  await page.click('#pad-split-up');
+  const each = await page.$eval('#pad-split-each', (el) => el.textContent);
+  check('Order pad', 'split rounds up so shares cover the total', each === 'About £6.34 each', each);
+  await page.click('#pad-show');
+  await wait(50);
+  const counter = await page.evaluate(() => ({ text: document.getElementById('pad-counter').innerText, focus: document.activeElement.id, head: document.querySelector('.pad-head').hidden, width: document.getElementById('pad').getBoundingClientRect().width }));
+  check('Order pad', 'counter view shows the order full screen', /2 × Set 1/.test(counter.text) && /1 × Bacon/.test(counter.text) && /Baguette/.test(counter.text) && /£19\.00/.test(counter.text) && counter.head && counter.width === 390 && counter.focus === 'pad-counter-back', JSON.stringify(counter));
+  await page.screenshot({ path: path.join(SHOTS, 'menu-pad-counter-mobile.png') });
+  await page.click('#pad-counter-back');
+  check('Order pad', 'back from the counter view restores focus', (await page.evaluate(() => document.activeElement.id)) === 'pad-show');
+  await page.screenshot({ path: path.join(SHOTS, 'menu-pad-mobile.png') });
+
+  await page.reload({ waitUntil: 'load' });
+  check('Order pad', 'pad survives a reload', (await pad(page)).total === '£19.00');
+  await page.click('#pad-bar');
+  await wait(30);
+  await page.click('#pad-clear');
+  state = await pad(page);
+  check('Order pad', 'clear empties the pad and offers undo', state.lines === 0 && state.bar === '' && (await page.evaluate(() => document.activeElement.id)) === 'pad-undo', JSON.stringify(state));
+  await page.click('#pad-undo');
+  state = await pad(page);
+  check('Order pad', 'undo restores the order', state.total === '£19.00' && state.lines === 2, JSON.stringify(state));
+  await page.keyboard.press('Escape');
+  await wait(30);
+  check('Order pad', 'Escape closes and focus returns to the bar', (await page.evaluate(() => document.activeElement.id)) === 'pad-bar');
+  await page.close();
+
+  // Add-ons: joined up when they make two lines the same, and only offered where the printed note applies.
+  const addons = await fresh();
+  await add(addons, benedict);
+  await add(addons, benedict);
+  await add(addons, sicily);
+  await addons.click('#pad-bar');
+  await wait(30);
+  const offered = await addons.evaluate(() => [...document.querySelectorAll('.pad-line')].map((li) => [...li.querySelectorAll('.pad-addon input')].map((b) => b.dataset.addon).join()));
+  check('Order pad', 'sourdough is not offered on a dish already on sourdough', offered[0] === 'sourdough,halloumi' && offered[1] === 'halloumi', offered.join(' / '));
+  await addons.click(`[data-addon="halloumi"][data-key^="${benedict}"]`);
+  state = await pad(addons);
+  check('Order pad', 'add-ons apply to each one on the line', state.total === '£32.50', JSON.stringify(state));
+  check('Order pad', 'focus stays on the add-on after redrawing', (await addons.evaluate(() => document.activeElement.dataset.addon)) === 'halloumi');
+  await add(addons, benedict);
+  check('Order pad', 'the same dish without the add-on is a new line', (await pad(addons)).lines === 3);
+  await addons.click(`[data-addon="halloumi"][data-key^="${benedict}"]`);
+  state = await pad(addons);
+  check('Order pad', 'lines join up when they become the same', state.lines === 2 && state.total === '£34.00', JSON.stringify(state));
+  await axe(addons, 'order pad open');
+  await addons.click('#pad-show');
+  await axe(addons, 'order pad counter view');
+  await addons.click('#pad-counter-back');
+  await addons.emulateMediaType('print');
+  const printed = await addons.evaluate(() => ['#pad', '#pad-bar', '#pad-toast', '[data-add]'].map((s) => getComputedStyle(document.querySelector(s)).display).join());
+  check('Order pad', 'pad and buttons are left out of the printed menu', printed === 'none,none,none,none', printed);
+  await addons.emulateMediaType('screen');
+
+  // Sharing: the clipboard is the fallback when the browser has no share sheet.
+  const context = browser.defaultBrowserContext();
+  await context.overridePermissions(SITE, ['clipboard-read', 'clipboard-write', 'clipboard-sanitized-write']);
+  await addons.evaluate(() => { Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); });
+  await addons.bringToFront();
+  await addons.click('#pad-share');
+  await wait(100);
+  const copied = await addons.evaluate(() => navigator.clipboard.readText());
+  check('Order pad', 'share copies a link', copied.includes('?pad=') && copied.includes(`${benedict}*3`) && copied.includes(`${sicily}*1`), copied);
+  check('Order pad', 'shared link holds no prices', !/£|\d+\.\d\d/.test(copied.split('?pad=')[1]), copied);
+  await addons.evaluate(() => { Object.defineProperty(navigator.clipboard, 'writeText', { value: () => Promise.reject(new Error('blocked')), configurable: true }); });
+  await addons.click('#pad-share');
+  await wait(100);
+  const fallback = await addons.$eval('#pad-link-box', (el) => !el.hidden && el.querySelector('input').value);
+  check('Order pad', 'with no clipboard it shows the link to copy', typeof fallback === 'string' && fallback.includes('?pad='), String(fallback));
+  await addons.close();
+
+  // Opening shared links.
+  const link = `${SITE}/menu.html?pad=${set1}*2,${bacon}~Roll.toasted*1`;
+  await wipe();
+  const receiver = await open(link, { reduced: true });
+  await wait(50);
+  state = await pad(receiver);
+  check('Order pad', 'a link fills an empty pad and opens it', state.total === '£18.40' && (await receiver.$eval('#pad', (el) => el.open)), JSON.stringify(state));
+  check('Order pad', 'the link is removed from the address bar', !receiver.url().includes('pad='), receiver.url());
+  await receiver.close();
+
+  const mine = await fresh();
+  await add(mine, sicily);
+  await mine.goto(`${link}#burgers`, { waitUntil: 'load' });
+  await wait(50);
+  const asked = await mine.evaluate(() => ({ shared: !document.getElementById('pad-shared').hidden, body: document.getElementById('pad-body').hidden, text: document.getElementById('pad-shared-text').textContent }));
+  state = await pad(mine);
+  check('Order pad', 'a link asks before replacing an existing pad', asked.shared && asked.body && state.total === '£8.50' && /3 items, estimated £18\.40/.test(asked.text), JSON.stringify({ asked, state }));
+  check('Order pad', 'the category in a shared link still works', mine.url().endsWith('#burgers') && !mine.url().includes('pad='), mine.url());
+  await axe(mine, 'order pad shared-link choice');
+  await mine.click('#pad-shared-keep');
+  state = await pad(mine);
+  check('Order pad', '"Keep mine" keeps the existing pad', state.total === '£8.50', JSON.stringify(state));
+  await mine.goto(link, { waitUntil: 'load' });
+  await wait(50);
+  await mine.click('#pad-shared-replace');
+  state = await pad(mine);
+  check('Order pad', '"Replace my pad" uses the shared order', state.total === '£18.40', JSON.stringify(state));
+  await mine.close();
+
+  const tampered = `${SITE}/menu.html?pad=${encodeURIComponent(`${set1}*999,not-a-dish*2,${set1}.fake-addon*1,${bacon}*1,${bacon}~Mega*1,${set1}~Roll*1,<img src=x onerror=alert(1)>*1,${benedict}*0,${benedict}*-1`)}`;
+  await wipe();
+  const bad = await open(tampered, { reduced: true });
+  await wait(50);
+  const badState = await bad.evaluate(() => ({ text: document.getElementById('pad-lines').textContent, note: document.getElementById('pad-note').textContent, images: document.querySelectorAll('#pad img').length, qty: document.querySelector('.pad-qty').textContent }));
+  state = await pad(bad);
+  check('Order pad', 'a tampered link is limited to 20 of a real dish at the real price', state.lines === 1 && badState.qty === '20' && state.total === '£150.00', JSON.stringify({ badState, state }));
+  check('Order pad', 'bad entries are dropped with a message and never drawn', /left out/.test(badState.note) && badState.images === 0 && !/img|onerror/.test(badState.text), JSON.stringify(badState));
+  await bad.close();
+
+  await wipe();
+  const allBad = await open(`${SITE}/menu.html?pad=nonsense`, { reduced: true });
+  await wait(50);
+  const allBadState = await allBad.evaluate(() => ({ open: document.getElementById('pad').open, toast: document.getElementById('pad-toast').textContent }));
+  check('Order pad', 'a link with nothing usable shows a message and opens nothing', !allBadState.open && /couldn't find/.test(allBadState.toast), JSON.stringify(allBadState));
+  await allBad.close();
+
+  // Storage: old pads expire, bad data is ignored and blocked storage must not break anything.
+  const stored = await fresh();
+  await stored.evaluate((id) => localStorage.setItem('olympic-order-pad', JSON.stringify({ at: Date.now() - 8 * 24 * 60 * 60 * 1000, lines: [{ id, addons: [], qty: 1 }] })), set1);
+  await stored.reload({ waitUntil: 'load' });
+  check('Order pad', 'a pad older than 7 days is cleared', (await pad(stored)).bar === '' && (await stored.evaluate(() => localStorage.getItem('olympic-order-pad'))) === null);
+  await stored.evaluate((id) => localStorage.setItem('olympic-order-pad', JSON.stringify({ at: Date.now() - 6 * 24 * 60 * 60 * 1000, lines: [{ id, addons: [], qty: 1 }] })), set1);
+  await stored.reload({ waitUntil: 'load' });
+  check('Order pad', 'a pad under 7 days old is kept', (await pad(stored)).total === '£7.50');
+  await stored.evaluate(() => localStorage.setItem('olympic-order-pad', '{not json'));
+  await stored.reload({ waitUntil: 'load' });
+  check('Order pad', 'corrupt storage is ignored', (await pad(stored)).bar === '');
+  await stored.evaluate(() => localStorage.clear());
+  await stored.close();
+
+  const blocked = await browser.newPage();
+  const blockedErrors = [];
+  blocked.on('pageerror', (e) => blockedErrors.push(e.message));
+  await blocked.evaluateOnNewDocument(() => {
+    Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } });
+  });
+  await blocked.goto(`${SITE}/menu.html`, { waitUntil: 'load' });
+  await add(blocked, set1);
+  check('Order pad', 'works with storage blocked', (await pad(blocked)).total === '£7.50' && blockedErrors.length === 0, blockedErrors.join());
+  await blocked.close();
+
+  for (const [width, height] of [[320, 640], [375, 667], [768, 1024], [1440, 900], [844, 390]]) {
+    const sized2 = await fresh({ width, height });
+    await add(sized2, set1);
+    // Reduced motion leaves a very short transition on every property, including the padding that makes room for
+    // the bar, so the page isn't its final height straight away. Measured at up to 30ms here.
+    await wait(150);
+    await sized2.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    await wait(30);
+    const fit = await sized2.evaluate(() => {
+      const bar = document.getElementById('pad-bar').getBoundingClientRect();
+      const footer = document.querySelector('footer').getBoundingClientRect();
+      const action = document.querySelector('.action-bar');
+      const limit = getComputedStyle(action).display === 'none' ? innerHeight : action.getBoundingClientRect().top;
+      return { footer: footer.bottom, barTop: bar.top, scrollY, maxScroll: document.documentElement.scrollHeight - innerHeight, footerClear: footer.bottom <= bar.top + 1, barClear: bar.bottom <= limit, inside: bar.left >= 0 && bar.right <= innerWidth, wide: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+    });
+    check('Order pad', `${width}x${height}: bar clears the page end and action bar`, Math.abs(fit.maxScroll - fit.scrollY) <= 1 && fit.footerClear && fit.barClear && fit.inside && !fit.wide, JSON.stringify(fit));
+    await sized2.click('#pad-bar');
+    await wait(30);
+    const sheet = await sized2.evaluate(() => {
+      const r = document.getElementById('pad').getBoundingClientRect();
+      return { inside: r.left >= 0 && r.right <= innerWidth + 1 && r.top >= 0 && r.bottom <= innerHeight + 1, wide: document.getElementById('pad').scrollWidth > document.getElementById('pad').clientWidth, focus: document.activeElement.id };
+    });
+    check('Order pad', `${width}x${height}: the sheet fits the screen`, sheet.inside && !sheet.wide && sheet.focus === 'pad-close', JSON.stringify(sheet));
+    await sized2.close();
+  }
+
+  // A link to one dish must reveal it, even from a filtered menu.
+  await wipe();
+  const target = await open(`${SITE}/menu.html#${sicily}`, { width: 390, height: 844, reduced: true });
+  await wait(100);
+  const place = await target.evaluate((id) => {
+    const r = document.getElementById(id).getBoundingClientRect();
+    return { visible: document.getElementById(id).offsetParent !== null, top: r.top, bar: document.getElementById('menu-controls').getBoundingClientRect().bottom, height: innerHeight, highlighted: getComputedStyle(document.getElementById(id)).backgroundColor };
+  }, sicily);
+  check('Order pad', 'a dish link lands on the dish below the sticky bars', place.visible && place.top >= place.bar - 1 && place.top < place.height, JSON.stringify(place));
+  check('Order pad', 'the linked dish is highlighted', place.highlighted === 'rgb(246, 230, 211)', place.highlighted);
+  await target.evaluate(() => { document.getElementById('menu-veg').click(); });
+  await target.evaluate((id) => { location.hash = id; location.hash = `#${id}`; }, benedict);
+  await wait(100);
+  check('Order pad', 'a dish link clears filters that would hide it', await target.evaluate((id) => document.getElementById(id).offsetParent !== null && !document.getElementById('menu-veg').checked, benedict));
+  await target.close();
 }
 
 // ---------- Preview screenshots ----------

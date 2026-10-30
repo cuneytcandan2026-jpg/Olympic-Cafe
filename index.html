@@ -30,9 +30,10 @@
 <link rel="preload" href="/assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/fonts/fredoka-600.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/r/table-spread-overhead-1-480.webp 480w, /assets/img/r/table-spread-overhead-1-800.webp 800w, /assets/img/r/table-spread-overhead-1-1200.webp 1200w" imagesizes="(min-width: 1024px) 58vw, 100vw" fetchpriority="high" />
-<link rel="stylesheet" href="/assets/css/site.da09e617bb.css" />
+<link rel="stylesheet" href="/assets/css/site.350e2ebed2.css" />
 
 <script src="/assets/js/site.f84a444309.js" defer></script>
+<script src="/assets/js/home.227e514f86.js" defer></script>
 </head>
 <body>
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
@@ -81,6 +82,7 @@
     <div class="hero-copy">
       <p class="kicker mb-2">/ BREAKFAST &middot; BRUNCH &middot; LUNCH</p>
       <h1 class="mb-4 text-4xl leading-[1.05] text-brand-burgundy sm:text-5xl xl:text-6xl"><span class="block">Proper food.</span> <span class="block">A warm welcome.</span> <span class="block">All day.</span></h1>
+      <p id="now-status" class="now-status js-only mb-4"></p>
       <div class="mb-4 flex flex-wrap gap-3 lg:order-1 lg:mb-0">
         <a href="/menu.html" class="btn btn-primary flex-1 whitespace-nowrap sm:flex-none">View Menu</a>
         <a href="https://www.google.com/maps/dir/?api=1&destination=257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE" rel="noopener" class="btn btn-secondary flex-1 whitespace-nowrap sm:flex-none">Get Directions</a>
@@ -88,6 +90,130 @@
       <p class="max-w-xl text-base md:text-lg lg:mb-6">Olympic Cafe is a neighbourhood cafe on Waltham Cross High Street, serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Eat in or take away, seven days a week.</p>
       <p class="mt-3 flex items-start gap-2 text-sm font-semibold text-brand-burgundy lg:order-2 lg:mt-4"><svg aria-hidden="true" focusable="false" class="mt-1 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>257 High Street, Waltham Cross, EN8 7BE</p>
     </div>
+  </section>
+
+  <section class="pt-10 md:pt-16" aria-labelledby="now-heading">
+    <div class="container-page">
+      <p class="kicker mb-1">/ RIGHT NOW</p>
+      <h2 id="now-heading" class="mb-1 text-3xl text-brand-burgundy md:text-4xl">A few good places to start.</h2>
+      <p class="mb-6 max-w-2xl">Just a few ideas. <a href="/menu.html" class="font-semibold text-brand-burgundy underline underline-offset-4">The full menu</a> has plenty more.</p>
+      <ul class="now-panel" data-moment="early">
+          <li class="flex gap-4">
+            <img src="/assets/img/c/titan-breakfast-320.webp" srcset="/assets/img/c/titan-breakfast-160.webp 160w, /assets/img/c/titan-breakfast-320.webp 320w, /assets/img/c/titan-breakfast-640.webp 640w" sizes="112px" width="660" height="660" alt="Titan Breakfast at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Titan Breakfast</h3>
+              <p class="font-semibold text-brand-burgundy">£11.50</p>
+              <p class="mt-1 text-sm">2 poached eggs, halloumi, mushrooms, avocado, grilled tomato, smoked salmon. Served with 2 toast, tea or coffee</p>
+              <a href="/menu.html#set-breakfast--titan-breakfast" class="text-link text-sm">See it on the menu<span class="sr-only">: Titan Breakfast</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/bacon-roll-320.webp" srcset="/assets/img/c/bacon-roll-160.webp 160w, /assets/img/c/bacon-roll-320.webp 320w, /assets/img/c/bacon-roll-640.webp 640w" sizes="112px" width="780" height="780" alt="Bacon Roll at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Bacon Roll</h3>
+              <p class="font-semibold text-brand-burgundy">from £3.20</p>
+              <p class="mt-1 text-sm">In a roll, sandwich or baguette</p>
+              <a href="/menu.html#sandwiches--bacon" class="text-link text-sm">See it on the menu<span class="sr-only">: Bacon Roll</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/pancake-ring-special-320.webp" srcset="/assets/img/c/pancake-ring-special-160.webp 160w, /assets/img/c/pancake-ring-special-320.webp 320w, /assets/img/c/pancake-ring-special-640.webp 640w" sizes="112px" width="810" height="810" alt="Red Ring at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Red Ring</h3>
+              <p class="font-semibold text-brand-burgundy">£12.50</p>
+              <p class="mt-1 text-sm">2 eggs, streaky bacon, cumberland sausage, grilled tomato, baked beans</p>
+              <a href="/menu.html#sweet-savoury--red-ring" class="text-link text-sm">See it on the menu<span class="sr-only">: Red Ring</span></a>
+            </div>
+          </li>
+        </ul>
+        <ul class="now-panel" data-moment="brunch" hidden>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/avocado-toast-brie-fries-320.webp" srcset="/assets/img/c/avocado-toast-brie-fries-160.webp 160w, /assets/img/c/avocado-toast-brie-fries-320.webp 320w, /assets/img/c/avocado-toast-brie-fries-640.webp 640w" sizes="112px" width="810" height="810" alt="Sicily Coast at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Sicily Coast</h3>
+              <p class="font-semibold text-brand-burgundy">£8.50</p>
+              <p class="mt-1 text-sm">Crushed avocado on sourdough, mushrooms, sun-dried tomato and feta cheese on top with pesto. Served with chips or salad</p>
+              <a href="/menu.html#brunch--sicily-coast" class="text-link text-sm">See it on the menu<span class="sr-only">: Sicily Coast</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/egg-royal-salad-320.webp" srcset="/assets/img/c/egg-royal-salad-160.webp 160w, /assets/img/c/egg-royal-salad-320.webp 320w, /assets/img/c/egg-royal-salad-640.webp 640w" sizes="112px" width="810" height="810" alt="Egg Benedict at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Egg Benedict</h3>
+              <p class="font-semibold text-brand-burgundy">£8.50</p>
+              <p class="mt-1 text-sm">Poached egg and hollandaise sauce on English muffin with ham or bacon. Served with chips or salad</p>
+              <a href="/menu.html#brunch--egg-benedict" class="text-link text-sm">See it on the menu<span class="sr-only">: Egg Benedict</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/french-toast-fruit-320.webp" srcset="/assets/img/c/french-toast-fruit-160.webp 160w, /assets/img/c/french-toast-fruit-320.webp 320w, /assets/img/c/french-toast-fruit-640.webp 640w" sizes="112px" width="810" height="810" alt="Blue Ring at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Blue Ring</h3>
+              <p class="font-semibold text-brand-burgundy">£12.50</p>
+              <p class="mt-1 text-sm">2 poached eggs, halloumi, sucuk, avocado</p>
+              <a href="/menu.html#sweet-savoury--blue-ring" class="text-link text-sm">See it on the menu<span class="sr-only">: Blue Ring</span></a>
+            </div>
+          </li>
+        </ul>
+        <ul class="now-panel" data-moment="lunch" hidden>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/grilled-chicken-rice-plate-320.webp" srcset="/assets/img/c/grilled-chicken-rice-plate-160.webp 160w, /assets/img/c/grilled-chicken-rice-plate-320.webp 320w, /assets/img/c/grilled-chicken-rice-plate-640.webp 640w" sizes="112px" width="810" height="810" alt="Grilled Chicken at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Grilled Chicken</h3>
+              <p class="font-semibold text-brand-burgundy">£10.50</p>
+              <p class="mt-1 text-sm">Rice or chips, salad &amp; pitta bread</p>
+              <a href="/menu.html#lunch--grilled-chicken" class="text-link text-sm">See it on the menu<span class="sr-only">: Grilled Chicken</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/chicken-burger-320.webp" srcset="/assets/img/c/chicken-burger-160.webp 160w, /assets/img/c/chicken-burger-320.webp 320w, /assets/img/c/chicken-burger-640.webp 640w" sizes="112px" width="760" height="760" alt="Chicken Burger at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Chicken Burger</h3>
+              <p class="font-semibold text-brand-burgundy">£4.90</p>
+              <p class="mt-1 text-sm">With lettuce, mayo</p>
+              <a href="/menu.html#burgers--chicken-burger" class="text-link text-sm">See it on the menu<span class="sr-only">: Chicken Burger</span></a>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <img src="/assets/img/c/jacket-potato-tuna-320.webp" srcset="/assets/img/c/jacket-potato-tuna-160.webp 160w, /assets/img/c/jacket-potato-tuna-320.webp 320w, /assets/img/c/jacket-potato-tuna-640.webp 640w" sizes="112px" width="810" height="810" alt="Tuna Mayo Jacket at Olympic Cafe" class="plate-frame h-26 w-26 shrink-0" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="text-xl leading-snug">Tuna Mayo Jacket</h3>
+              <p class="font-semibold text-brand-burgundy">£7.00</p>
+              <p class="mt-1 text-sm">Jacket potato served with salad</p>
+              <a href="/menu.html#jacket-potato--tuna-mayo" class="text-link text-sm">See it on the menu<span class="sr-only">: Tuna Mayo Jacket</span></a>
+            </div>
+          </li>
+        </ul>
+      <div class="now-roast" data-moment="roast" hidden>
+          <ul class="min-w-0 flex-1">
+            <li class="flex items-baseline gap-3 py-1.5">
+              <span class="font-display text-2xl font-semibold">Lamb</span>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="whitespace-nowrap text-lg font-semibold text-brand-burgundy">£11.50</span>
+            </li>
+            <li class="flex items-baseline gap-3 py-1.5">
+              <span class="font-display text-2xl font-semibold">Beef</span>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="whitespace-nowrap text-lg font-semibold text-brand-burgundy">£11.50</span>
+            </li>
+            <li class="flex items-baseline gap-3 py-1.5">
+              <span class="font-display text-2xl font-semibold">Chicken</span>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="whitespace-nowrap text-lg font-semibold text-brand-burgundy">£11.00</span>
+            </li>
+            <li class="flex items-baseline gap-3 py-1.5">
+              <span class="font-display text-2xl font-semibold">Pork</span>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="whitespace-nowrap text-lg font-semibold text-brand-burgundy">£11.00</span>
+            </li>
+          </ul>
+          <div class="md:max-w-xs">
+            <p class="mb-3 text-sm">All served with mixed veg, roast potatoes, Yorkshire pudding and gravy.</p>
+            <a href="/menu.html#sunday-roast" class="btn btn-primary w-full sm:w-auto">See the Sunday Roast</a>
+          </div>
+        </div>
+    </div>
+    <script type="application/json" id="now-data">{"hours":[{"days":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"05:30","closes":"17:00"},{"days":["Sunday"],"opens":"06:00","closes":"16:00"}],"exceptions":{},"bankHolidays":["2026-12-25","2026-12-26","2026-12-28","2027-01-01","2027-03-26","2027-03-29","2027-05-03","2027-05-31","2027-08-30","2027-12-25","2027-12-26","2027-12-27","2027-12-28"],"until":"2027-12-31","moments":[{"id":"early","until":"10:30","heading":"Up early? We're already cooking."},{"id":"brunch","until":"12:00","heading":"Good time for brunch."},{"id":"lunch","until":"24:00","heading":"Ready for lunch?"}],"roastFrom":"11:00","roastHeading":"It's Sunday, so the roast is on.","defaultHeading":"A few good places to start.","nextVisitHeading":"For your next visit.","phoneHref":"tel:+441992631555","phoneDisplay":"01992 631 555"}</script>
   </section>
 
   <section class="pb-0 pt-10 md:pt-16" aria-labelledby="explore-heading" data-reveal>
@@ -408,7 +534,6 @@
       <p class="kicker mt-4 text-center">Thank you. See you soon.</p>
     </div>
   </div>
-  <div class="footer-wordmark" aria-hidden="true"><svg class="logo w-full h-auto" aria-hidden="true" focusable="false" viewBox="0 0 4312 1000" width="215" height="50"><use href="/assets/img/logo.svg#letters" class="logo-letters" /><use href="/assets/img/logo.svg#handle" class="logo-handle" /><use href="/assets/img/logo.svg#shade" class="logo-shade" /><g class="logo-fire"><use href="/assets/img/logo.svg#flame" class="logo-flame" /><use href="/assets/img/logo.svg#line" class="logo-line" /></g></svg></div>
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>

@@ -21,6 +21,26 @@ const lowestPrice = (id) => {
 
 export const EXPLORE = TILES.map((t) => ({ ...t, from: lowestPrice(t.cat) }));
 
+// Dishes whose photo was checked against the printed description. Everything else stays text only,
+// so the page stays fast and no plate is shown for a dish it doesn't match.
+export const DISH_PHOTOS = {
+  'set-breakfast/Full Olympic': 'full-english-fries',
+  'set-breakfast/Mediterranean Breakfast': 'mediterranean-breakfast',
+  'set-breakfast/Titan Breakfast': 'titan-breakfast',
+  'brunch/Egg Benedict': 'egg-royal-salad',
+  'brunch/Sicily Coast': 'avocado-toast-brie-fries',
+  'brunch/Avo Breeze': 'avocado-toast-poached-egg-fries',
+  'sweet-savoury/Red Ring': 'pancake-ring-special',
+  'sweet-savoury/Blue Ring': 'french-toast-fruit',
+  'lunch/Grilled Chicken': 'grilled-chicken-rice-plate',
+  'burgers/Chicken Burger': 'chicken-burger',
+  'jacket-potato/Tuna Mayo': 'jacket-potato-tuna',
+  'sandwiches/Bacon': 'bacon-roll',
+  'cold-drinks/Iced Coffee': 'iced-coffee',
+  'hot-drinks/Matcha Latte': 'matcha-latte',
+  'freshly-squeezed/Orange Juice': 'orange-juice',
+};
+
 // Groups for the category dropdown, following the menu organisation in the brand guidelines.
 export const MENU_GROUPS = [
   { label: 'Breakfast', ids: ['set-breakfast', 'veggie-breakfast', 'omelettes', 'on-toast'] },

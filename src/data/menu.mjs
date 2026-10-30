@@ -4,6 +4,8 @@
 // veg: true          The printed menu itself calls the dish "veggie". Shown on the site with a Vegetarian label.
 // vegCandidate: true Looks vegetarian from its ingredients but the printed menu does not say so. NOT shown on the
 //                    site. Once the owner confirms a dish, change vegCandidate to veg and rebuild.
+// addons             Priced options from the category's printed note, for the order pad. "except" lists dishes they
+//                    don't apply to, such as sourdough on a dish already served on sourdough.
 export const MENU = [
   {
     id: 'set-breakfast',
@@ -36,6 +38,10 @@ export const MENU = [
     id: 'brunch',
     name: "Brunch",
     note: "Change to sourdough for £1.00 extra. Add grilled halloumi for £3.50.",
+    addons: [
+      {id: 'sourdough', label: "Change to sourdough", price: "1.00", except: ["Scrambled Egg Royal", "Sicily Coast", "Avo Breeze"]},
+      {id: 'halloumi', label: "Add grilled halloumi", price: "3.50"},
+    ],
     items: [
       {name: "Egg Benedict",price: "8.50",desc: "Poached egg and hollandaise sauce on English muffin with ham or bacon. Served with chips or salad"},
       {name: "Egg Royal",price: "9.00",desc: "Poached egg and salmon on English muffin with hollandaise sauce. Served with chips or salad"},
@@ -49,6 +55,7 @@ export const MENU = [
     id: 'sweet-savoury',
     name: "Sweet & Savoury",
     note: "All served with a side of seasonal fruit, fresh cream and maple syrup. Choose from either 2 layers of pancakes or French toast. Tea or coffee included. Change to Nutella for £1.00.",
+    addons: [{id: 'nutella', label: "Change to Nutella", price: "1.00"}],
     items: [
       {name: "Red Ring",price: "12.50",desc: "2 eggs, streaky bacon, cumberland sausage, grilled tomato, baked beans"},
       {name: "Black Ring",price: "12.50",desc: "Burger patty, black pudding, streaky bacon, cumberland sausage, mushrooms, baked beans"},
@@ -136,6 +143,7 @@ export const MENU = [
     id: 'burgers',
     name: "Burgers",
     note: "Add extra chips for £2.00.",
+    addons: [{id: 'chips', label: "Add extra chips", price: "2.00"}],
     items: [
       {name: "Beef Burger",price: "2.80",desc: "With onion"},
       {name: "Cheese Burger",price: "3.00",desc: "With onion"},
@@ -197,6 +205,10 @@ export const MENU = [
     id: 'sandwiches',
     name: "Sandwiches",
     note: "Prices shown for a roll, sandwich or baguette. Toasted +20p. Crusty bread +20p.",
+    addons: [
+      {id: 'toasted', label: "Toasted", price: "0.20"},
+      {id: 'crusty', label: "Crusty bread", price: "0.20"},
+    ],
     items: [
       {name: "Fried Egg",prices: {Roll: "3.00",Sandwich: "3.00",Baguette: "3.50"},vegCandidate: true},
       {name: "Bacon",prices: {Roll: "3.20",Sandwich: "3.20",Baguette: "4.00"}},
@@ -316,6 +328,7 @@ export const MENU = [
     id: 'hot-drinks',
     name: "Hot Drinks",
     note: "Extra shot 50p.",
+    addons: [{id: 'shot', label: "Extra shot", price: "0.50", except: ["Tea", "Hot Chocolate", "Chai Latte", "Matcha Latte", "Lemon Tea", "Herbal Tea", "Extra Syrup", "Alternative Milks"]}],
     items: [
       {name: "Tea",price: "1.40",vegCandidate: true},
       {name: "Coffee",price: "2.40",vegCandidate: true},
@@ -375,6 +388,13 @@ export const MENU = [
 ];
 
 export const dishCount = MENU.reduce((total, category) => total + category.items.length, 0);
+
+// A stable id for one dish. The category is part of it because names repeat, such as Bacon in Sandwiches and Extras.
+export const dishId = (categoryId, name) => `${categoryId}--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+
+// "£8.50", or "from £3.20" for a dish priced by size.
+export const priceLabel = (item) => (item.prices ? `from £${lowestPrice(item)}` : `£${item.price}`);
+export const lowestPrice = (item) => (item.prices ? Math.min(...Object.values(item.prices).map(Number)).toFixed(2) : item.price);
 
 export function findDish(categoryId, name) {
   const category = MENU.find((c) => c.id === categoryId);
