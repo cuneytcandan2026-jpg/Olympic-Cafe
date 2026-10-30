@@ -24,16 +24,10 @@
 - Do not improve or add to the design. Minimum 2 comparison rounds — stop only when no visible differences remain.
 
 ## Output Defaults
-- Single `index.html`, all styles inline, mobile-first responsive
-- Tailwind via CDN with a config block for custom tokens — no arbitrary values when a token works:
-  ```html
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: { brand: {} }, fontFamily: { display: [], body: [] }, spacing: {} } }
-    }
-  </script>
-  ```
+- **The HTML, CSS and JS at the repo root are generated. Edit `src/`, then run `npm run build`.** Business facts live in `src/data/business.mjs`, dishes and prices in `src/data/menu.mjs`.
+- Tailwind is compiled at build time from `tailwind.config.cjs`, with custom tokens there. Never add the Tailwind CDN or Google Fonts back. No arbitrary values when a token works.
+- Run `npm test` before committing. It rebuilds the site and refreshes `docs/preview/`.
+- Mobile-first responsive. Handover notes and owner actions: `docs/HANDOVER.md`.
 - Placeholder images: `https://placehold.co/WIDTHxHEIGHT`
 - Required `<head>` tags every page:
   ```html

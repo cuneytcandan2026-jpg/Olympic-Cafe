@@ -43,7 +43,7 @@ await page.evaluate(async () => {
       window.scrollBy(0, distance);
       if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
         clearInterval(timer);
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'instant' });
         resolve();
       }
     }, delay);

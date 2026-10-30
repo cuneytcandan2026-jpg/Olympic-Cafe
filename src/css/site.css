@@ -1,0 +1,182 @@
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/poppins-400.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('/assets/fonts/poppins-600.woff2') format('woff2'); }
+@font-face { font-family: 'Fredoka'; font-style: normal; font-weight: 600; font-display: swap; src: url('/assets/fonts/fredoka-600.woff2') format('woff2'); }
+@font-face { font-family: 'Special Elite'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/special-elite-400.woff2') format('woff2'); }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* One source for everything that has to clear the sticky header. */
+    --header-h: 68px;
+    --action-bar-h: 0px;
+    --sticky-h: 0px;
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @media (min-width: 768px) { :root { --header-h: 76px; } }
+  @media (max-width: 767.98px) { :root { --action-bar-h: 60px; } }
+
+  html {
+    scroll-padding-top: calc(var(--header-h) + var(--sticky-h) + 16px);
+    scroll-padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom, 0px) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    @apply font-body bg-brand-creamlight text-brand-ink;
+    line-height: 1.7;
+    padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom, 0px));
+    overflow-wrap: break-word;
+  }
+  h1, h2, h3 { @apply font-display font-semibold; letter-spacing: -0.02em; }
+  h1 { letter-spacing: -0.03em; }
+
+  a, button, input, select, textarea, summary { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 3px solid #8A181A; outline-offset: 2px; border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: #F1DEC0; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-10; }
+  .kicker { @apply font-accent text-sm text-brand-terracottadark; }
+  .on-dark .kicker { @apply text-brand-cream; }
+
+  /* Header */
+  .site-header { position: sticky; top: 0; z-index: 50; height: var(--header-h); }
+  .site-header-inner { height: var(--header-h); }
+  .site-logo { height: 60px; width: auto; }
+  .nav-link { @apply relative inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-brand-ink; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px;
+    background: #8A181A; transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .nav-link:hover::after, .nav-link[aria-current='page']::after { transform: scaleX(1); }
+  .nav-link:active { @apply text-brand-burgundy; }
+  .mobile-nav {
+    position: absolute; top: 100%; left: 0; right: 0;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+  }
+  .mobile-nav a[aria-current='page'] { @apply text-brand-burgundy underline underline-offset-4; }
+
+  /* Buttons: 48px high, as the brand guidelines ask */
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-center text-base font-semibold;
+    transition: transform 0.25s var(--ease-spring), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible { outline-offset: 3px; }
+  .btn-primary { @apply bg-brand-burgundy text-brand-cream; box-shadow: 0 8px 20px -6px rgba(138, 24, 26, 0.5); }
+  .btn-primary:hover { @apply bg-brand-burgundydark; transform: translateY(-2px); }
+  .btn-secondary { @apply border-2 border-brand-burgundy text-brand-burgundy; }
+  .btn-secondary:hover { @apply bg-brand-burgundy text-brand-cream; transform: translateY(-2px); }
+  .btn-on-dark { @apply bg-brand-cream text-brand-burgundy; }
+  .btn-on-dark:hover { @apply bg-white; transform: translateY(-2px); }
+  .btn-outline-on-dark { @apply border-2 border-brand-cream text-brand-cream; }
+  .btn-outline-on-dark:hover { @apply bg-brand-cream text-brand-burgundy; transform: translateY(-2px); }
+
+  /* Inline text links */
+  .text-link { @apply inline-flex min-h-11 items-center font-semibold text-brand-burgundy underline underline-offset-4; }
+  .text-link:hover { @apply text-brand-burgundydark; text-decoration-thickness: 2px; }
+  .text-link:active { @apply opacity-70; }
+  .on-dark .text-link { @apply text-brand-cream; }
+  .on-dark .text-link:hover { @apply text-white; }
+
+  /* Mobile action bar */
+  .action-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transition: transform 0.2s ease;
+  }
+  .action-bar a { @apply flex flex-1 items-center justify-center gap-2 font-semibold text-brand-cream; height: var(--action-bar-h); }
+  .action-bar a:hover { @apply bg-brand-burgundydark; }
+  .action-bar a:active { @apply bg-brand-ink; }
+  .action-bar a:focus-visible { outline: 3px solid #F1DEC0; outline-offset: -5px; }
+  /* Lifted out of the way while typing so it can't cover a field or sit on the on-screen keyboard. */
+  .typing .action-bar { transform: translateY(110%); visibility: hidden; }
+
+  .paper-texture {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(217, 148, 94, 0.1), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(138, 24, 26, 0.06), transparent 55%);
+  }
+  .card { @apply rounded-2xl bg-white shadow-base; }
+  .dish-card { transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease; }
+  .dish-card:hover { @apply shadow-lifted; transform: translateY(-4px); }
+
+  /* Menu */
+  .menu-controls { @apply z-30 border-b border-brand-burgundy/10 bg-brand-creamlight; }
+  .js .menu-controls { position: sticky; top: var(--header-h); }
+  .chip {
+    @apply inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-brand-burgundy/40 px-4 text-sm font-semibold text-brand-burgundy;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .chip:hover { @apply bg-brand-burgundy/10; }
+  .chip:active { @apply bg-brand-burgundy/20; }
+  .chip[aria-current='true'] { @apply border-brand-burgundy bg-brand-burgundy text-brand-cream; }
+  .field-control {
+    @apply min-h-12 w-full rounded-xl border-2 border-brand-burgundy/50 bg-white px-4 text-base text-brand-ink;
+    transition: border-color 0.2s ease;
+  }
+  .field-control::placeholder { color: #5C5C5C; opacity: 1; }
+  .field-control:hover { @apply border-brand-burgundy; }
+  .field-control:focus { outline: 3px solid #8A181A; outline-offset: 1px; }
+  .field-control[aria-invalid='true'] { @apply border-brand-burgundy; border-width: 3px; }
+  .veg-toggle { @apply inline-flex min-h-12 cursor-pointer select-none items-center gap-2 whitespace-nowrap rounded-full border-2 border-brand-deepgreen px-4 text-sm font-semibold text-brand-deepgreen; }
+  .veg-toggle:hover { @apply bg-brand-deepgreen/10; }
+  .veg-toggle:active { @apply bg-brand-deepgreen/20; }
+  .veg-toggle:has(input:checked) { @apply bg-brand-deepgreen text-white; }
+  .veg-toggle:has(input:focus-visible) { outline: 3px solid #246B2E; outline-offset: 2px; }
+  .veg-toggle input { width: 20px; height: 20px; accent-color: #246B2E; }
+  .veg-label { @apply inline-flex items-center gap-1 text-sm font-semibold text-brand-deepgreen; }
+
+  /* Gallery */
+  .gallery-link { @apply block overflow-hidden rounded-2xl shadow-base; }
+  .gallery-link img { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .gallery-link:hover img { transform: scale(1.04); }
+  .gallery-link:active img { transform: scale(1.01); }
+  .lightbox { @apply m-auto max-h-none max-w-none bg-transparent p-0; width: 100%; height: 100%; }
+  .lightbox::backdrop { background: rgba(31, 31, 31, 0.94); }
+  .lightbox-btn { @apply absolute z-10 inline-flex h-12 w-12 items-center justify-center rounded-full text-brand-creamlight; background: rgba(251, 244, 231, 0.16); transition: transform 0.2s var(--ease-spring), background-color 0.2s ease; }
+  .lightbox-btn:hover { background: rgba(251, 244, 231, 0.3); transform: scale(1.06); }
+  .lightbox-btn:active { transform: scale(0.94); }
+  .lightbox-btn:focus-visible { outline: 3px solid #F1DEC0; outline-offset: 2px; }
+
+  /* Scroll reveal. JS adds .reveal-pending only to off-screen sections, so nothing can stay hidden without it. */
+  .reveal-pending { opacity: 0; transform: translateY(20px); }
+  .reveal-in { transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+}
+
+/* Short screens: landscape phones and 200% zoom. Sticky bars would take most of the view, so they scroll away. */
+@media (max-height: 560px) {
+  .site-header, .js .menu-controls { position: static; }
+  :root { --header-h: 64px; }
+  html { scroll-padding-top: 16px; }
+}
+@media (max-height: 560px) and (max-width: 767.98px) {
+  :root { --action-bar-h: 48px; }
+}
+
+/* Without JS the toggle can't work, so the links are simply listed. */
+html:not(.js) .js-only { display: none !important; }
+html:not(.js) .site-header { position: static; height: auto; }
+@media (max-width: 1099.98px) {
+  html:not(.js) .mobile-nav { position: static; display: flex !important; max-height: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .reveal-pending { opacity: 1; transform: none; }
+  .btn:hover, .dish-card:hover, .gallery-link:hover img, .lightbox-btn:hover { transform: none; }
+}
+
+@media print {
+  .site-header, .action-bar, .menu-controls { position: static; }
+  .action-bar, .js-only { display: none !important; }
+}

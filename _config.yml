@@ -1,0 +1,15 @@
+# GitHub Pages builds this repo with Jekyll. Everything below stays in the repo but isn't published to the website.
+exclude:
+  - "*.md"
+  - package.json
+  - package-lock.json
+  - tailwind.config.cjs
+  - serve.mjs
+  - screenshot.mjs
+  - scripts
+  - src
+  - tests
+  - docs
+  - workers
+  - brand_assets
+  - node_modules

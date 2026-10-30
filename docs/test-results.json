@@ -1,0 +1,2395 @@
+{
+ "date": "2026-10-30T15:39:36.993Z",
+ "total": 398,
+ "failed": 0,
+ "results": [
+  {
+   "group": "SEO home",
+   "name": "unique title",
+   "pass": true,
+   "detail": "Olympic Cafe | Breakfast, Brunch &amp; Lunch in Waltham Cross"
+  },
+  {
+   "group": "SEO home",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "160"
+  },
+  {
+   "group": "SEO home",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "12222333222222"
+  },
+  {
+   "group": "SEO home",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/"
+  },
+  {
+   "group": "SEO home",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/home.jpg"
+  },
+  {
+   "group": "SEO home",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "unique title",
+   "pass": true,
+   "detail": "About | Olympic Cafe, Waltham Cross"
+  },
+  {
+   "group": "SEO about",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "162"
+  },
+  {
+   "group": "SEO about",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "12223332222"
+  },
+  {
+   "group": "SEO about",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/about.html"
+  },
+  {
+   "group": "SEO about",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/about.jpg"
+  },
+  {
+   "group": "SEO about",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "unique title",
+   "pass": true,
+   "detail": "Menu | Olympic Cafe, Waltham Cross"
+  },
+  {
+   "group": "SEO menu",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "162"
+  },
+  {
+   "group": "SEO menu",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "122333333333333233323333332333332333333333233333333233333333333333323333333233332333333333333233332333333332333333333323333333333333333333333323333333333233333333332333333332333323333333333323333333233333333333333332333333333333333333333333333333222"
+  },
+  {
+   "group": "SEO menu",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/menu.html"
+  },
+  {
+   "group": "SEO menu",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/menu.jpg"
+  },
+  {
+   "group": "SEO menu",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "unique title",
+   "pass": true,
+   "detail": "Gallery | Olympic Cafe, Waltham Cross"
+  },
+  {
+   "group": "SEO gallery",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "121"
+  },
+  {
+   "group": "SEO gallery",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "1222"
+  },
+  {
+   "group": "SEO gallery",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/gallery.html"
+  },
+  {
+   "group": "SEO gallery",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/gallery.jpg"
+  },
+  {
+   "group": "SEO gallery",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "unique title",
+   "pass": true,
+   "detail": "Contact | Olympic Cafe, Waltham Cross"
+  },
+  {
+   "group": "SEO contact",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "150"
+  },
+  {
+   "group": "SEO contact",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "122222222"
+  },
+  {
+   "group": "SEO contact",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/contact.html"
+  },
+  {
+   "group": "SEO contact",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/contact.jpg"
+  },
+  {
+   "group": "SEO contact",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "sitemap lists the 5 pages with / as home",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "robots.txt points at the sitemap",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "404 page is noindex",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu HTML",
+   "name": "all 222 dishes are in the initial HTML",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu HTML",
+   "name": "all categories have a section and anchor",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu HTML",
+   "name": "all prices are in the initial HTML",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu HTML",
+   "name": "only verified dishes get a Vegetarian label",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu HTML",
+   "name": "no veg label on the sausage kids meal",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "telephone link is correct everywhere",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "directions link targets the cafe address",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "all 90 internal URLs return 200",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "unknown URLs return a real 404",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "/index.html forwards to / (client-side, GitHub Pages has no 301)",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/?x=1#y"
+  },
+  {
+   "group": "No JS",
+   "name": "home: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "home: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "No JS",
+   "name": "about: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "about: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "No JS",
+   "name": "menu: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "menu: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "No JS",
+   "name": "menu: all 222 items readable",
+   "pass": true,
+   "detail": "222"
+  },
+  {
+   "group": "No JS",
+   "name": "menu: all categories readable",
+   "pass": true,
+   "detail": "22"
+  },
+  {
+   "group": "No JS",
+   "name": "menu: search controls that cannot work are hidden",
+   "pass": true,
+   "detail": "none"
+  },
+  {
+   "group": "No JS",
+   "name": "menu: anchor link jumps to the category",
+   "pass": true,
+   "detail": "83.625"
+  },
+  {
+   "group": "No JS",
+   "name": "gallery: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "gallery: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "No JS",
+   "name": "contact: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "contact: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "Menu",
+   "name": "all categories shown by default",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "search works across categories",
+   "pass": true,
+   "detail": "omelettes,lunch,homemade-specials,sunday-roast,burgers,wraps,salads,jacket-potato,sandwiches,paninis,appetisers,kids-meal,extras"
+  },
+  {
+   "group": "Menu",
+   "name": "status describes the search scope",
+   "pass": true,
+   "detail": "24 items matching \"chicken\" in all categories."
+  },
+  {
+   "group": "Menu",
+   "name": "choosing a category shows only that category",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "choosing a category clears the search",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "category is shareable in the URL",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html#brunch"
+  },
+  {
+   "group": "Menu",
+   "name": "category heading is visible below the sticky bars",
+   "pass": true,
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":164}"
+  },
+  {
+   "group": "Menu",
+   "name": "choosing a category does not jump to the top of the page",
+   "pass": true,
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":164}"
+  },
+  {
+   "group": "Menu",
+   "name": "\"All categories\" restores everything",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "vegetarian filter covers all categories by default",
+   "pass": true,
+   "detail": "veggie-breakfast,burgers 5"
+  },
+  {
+   "group": "Menu",
+   "name": "vegetarian scope is stated",
+   "pass": true,
+   "detail": "5 vegetarian items in all categories."
+  },
+  {
+   "group": "Menu",
+   "name": "filter with no matches shows the empty state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "empty state names the scope",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "empty-state reset restores the full menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "reset clears the category from the URL",
+   "pass": true,
+   "detail": "http://127.0.0.1:3201/menu.html"
+  },
+  {
+   "group": "Menu",
+   "name": "reset returns focus to search",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "unknown search shows the empty state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "status announces no results",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "opening a shared category link filters to it",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "shared link selects the category control",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "desktop chip marks itself as current",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "only one chip is current",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "no leftover ARIA tabs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Menu",
+   "name": "browser back returns to all categories",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Header",
+   "name": "320px: header height equals --header-h",
+   "pass": true,
+   "detail": "68 vs 68"
+  },
+  {
+   "group": "Header",
+   "name": "320px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "68px"
+  },
+  {
+   "group": "Header",
+   "name": "320px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "68"
+  },
+  {
+   "group": "Header",
+   "name": "320px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "320px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "320px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":68,\"bar\":68}"
+  },
+  {
+   "group": "Header",
+   "name": "375px: header height equals --header-h",
+   "pass": true,
+   "detail": "68 vs 68"
+  },
+  {
+   "group": "Header",
+   "name": "375px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "68px"
+  },
+  {
+   "group": "Header",
+   "name": "375px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "68"
+  },
+  {
+   "group": "Header",
+   "name": "375px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "375px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "375px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":68,\"bar\":68}"
+  },
+  {
+   "group": "Header",
+   "name": "390px: header height equals --header-h",
+   "pass": true,
+   "detail": "68 vs 68"
+  },
+  {
+   "group": "Header",
+   "name": "390px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "68px"
+  },
+  {
+   "group": "Header",
+   "name": "390px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "68"
+  },
+  {
+   "group": "Header",
+   "name": "390px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "390px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "390px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":68,\"bar\":68}"
+  },
+  {
+   "group": "Header",
+   "name": "430px: header height equals --header-h",
+   "pass": true,
+   "detail": "68 vs 68"
+  },
+  {
+   "group": "Header",
+   "name": "430px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "68px"
+  },
+  {
+   "group": "Header",
+   "name": "430px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "68"
+  },
+  {
+   "group": "Header",
+   "name": "430px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "430px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":68,\"headerH\":68,\"stickyTop\":\"68px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "430px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":68,\"bar\":68}"
+  },
+  {
+   "group": "Header",
+   "name": "768px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "768px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "768px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "768px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "768px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "768px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "820px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "820px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "820px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "820px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "820px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "820px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "1024px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":false,\"toggle\":true}"
+  },
+  {
+   "group": "Header",
+   "name": "1099px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1100px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1180px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1280px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: header height equals --header-h",
+   "pass": true,
+   "detail": "76 vs 76"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: sticky offset comes from --header-h",
+   "pass": true,
+   "detail": "76px"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: compact (no more than 76px)",
+   "pass": true,
+   "detail": "76"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: nothing collides or overflows",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: exactly one navigation mode",
+   "pass": true,
+   "detail": "{\"varH\":76,\"headerH\":76,\"stickyTop\":\"76px\",\"overlaps\":0,\"overflow\":false,\"desktopNav\":true,\"toggle\":false}"
+  },
+  {
+   "group": "Header",
+   "name": "1440px: sticky bar sits exactly under the header",
+   "pass": true,
+   "detail": "{\"header\":76,\"bar\":76}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 home: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 home: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 about: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 about: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 menu: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 menu: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 gallery: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 gallery: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 contact: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "landscape: header and menu bar scroll away",
+   "pass": true,
+   "detail": "static,static"
+  },
+  {
+   "group": "Layout",
+   "name": "200% zoom (1440x900): header scrolls away",
+   "pass": true,
+   "detail": "static"
+  },
+  {
+   "group": "Layout",
+   "name": "gallery: no pinned or 3D effects",
+   "pass": true,
+   "detail": "{\"sticky\":0,\"three\":0,\"captions\":25,\"tiles\":25}"
+  },
+  {
+   "group": "Layout",
+   "name": "gallery: every photo has a visible caption",
+   "pass": true,
+   "detail": "{\"sticky\":0,\"three\":0,\"captions\":25,\"tiles\":25}"
+  },
+  {
+   "group": "Layout",
+   "name": "home: no pinned scroll storytelling",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Layout",
+   "name": "home mobile: headline and buttons are above the fold",
+   "pass": true,
+   "detail": "{\"stickySections\":0,\"ctaBottom\":433.390625,\"h1Top\":120,\"fold\":784}"
+  },
+  {
+   "group": "Touch",
+   "name": "home: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "home: inputs are 16px or larger",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "about: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "about: inputs are 16px or larger",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "menu: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "menu: inputs are 16px or larger",
+   "pass": true,
+   "detail": "16,16"
+  },
+  {
+   "group": "Touch",
+   "name": "gallery: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "gallery: inputs are 16px or larger",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "contact: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "contact: inputs are 16px or larger",
+   "pass": true,
+   "detail": "16,16,16"
+  },
+  {
+   "group": "Touch",
+   "name": "contact form has autocomplete attributes",
+   "pass": true,
+   "detail": "{\"name\":\"name\",\"email\":\"email\",\"type\":\"email\"}"
+  },
+  {
+   "group": "Touch",
+   "name": "safe-area spacing is enabled",
+   "pass": true,
+   "detail": "width=device-width, initial-scale=1.0, viewport-fit=cover"
+  },
+  {
+   "group": "Touch",
+   "name": "action bar steps aside while typing",
+   "pass": true,
+   "detail": "hidden"
+  },
+  {
+   "group": "Touch",
+   "name": "action bar returns after typing",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "action bar has Menu, Call and Directions",
+   "pass": true,
+   "detail": "/menu.html tel:+441992631555 https://www.google.com/maps/dir/?api=1&destination=257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE"
+  },
+  {
+   "group": "Keyboard",
+   "name": "mobile nav starts closed and labelled",
+   "pass": true,
+   "detail": "false|Open navigation menu"
+  },
+  {
+   "group": "Keyboard",
+   "name": "mobile nav opens by keyboard and updates its label",
+   "pass": true,
+   "detail": "true|Close navigation menu"
+  },
+  {
+   "group": "Keyboard",
+   "name": "current page is marked in mobile nav",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Keyboard",
+   "name": "Escape closes mobile nav",
+   "pass": true,
+   "detail": "false|Open navigation menu"
+  },
+  {
+   "group": "Keyboard",
+   "name": "focus returns to the toggle",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Keyboard",
+   "name": "closed nav is out of the tab order",
+   "pass": true,
+   "detail": "none"
+  },
+  {
+   "group": "Dialog",
+   "name": "closed lightbox is hidden from AT and keyboard",
+   "pass": true,
+   "detail": "{\"open\":false,\"display\":\"none\"}"
+  },
+  {
+   "group": "Dialog",
+   "name": "Tab never lands in the closed lightbox",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Dialog",
+   "name": "opens as a modal with focus inside",
+   "pass": true,
+   "detail": "{\"open\":true,\"focus\":\"lightbox-close\",\"modal\":true,\"src\":\"/assets/img/r/full-english-fries-1200.webp\",\"caption\":\"Full Olympic (3 of 25)\"}"
+  },
+  {
+   "group": "Dialog",
+   "name": "shows the chosen photo and a caption",
+   "pass": true,
+   "detail": "{\"open\":true,\"focus\":\"lightbox-close\",\"modal\":true,\"src\":\"/assets/img/r/full-english-fries-1200.webp\",\"caption\":\"Full Olympic (3 of 25)\"}"
+  },
+  {
+   "group": "Dialog",
+   "name": "Tab stays inside the dialog",
+   "pass": true,
+   "detail": "lightbox-prev,lightbox-next,lightbox-close,lightbox-prev,lightbox-next,lightbox-close,lightbox-prev,lightbox-next"
+  },
+  {
+   "group": "Dialog",
+   "name": "Shift+Tab stays inside the dialog",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Dialog",
+   "name": "arrow keys change photo",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Dialog",
+   "name": "Escape closes and focus returns to the photo",
+   "pass": true,
+   "detail": "{\"open\":false,\"index\":\"2\"}"
+  },
+  {
+   "group": "Dialog",
+   "name": "photo fits the screen on mobile",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Dialog",
+   "name": "clicking the backdrop closes it",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "no endpoint: no form and no success message are shown",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "no endpoint: phone and email links are prominent",
+   "pass": true,
+   "detail": "{\"form\":false,\"tel\":2,\"mail\":2,\"success\":false}"
+  },
+  {
+   "group": "Contact",
+   "name": "empty submit marks each field with a linked error",
+   "pass": true,
+   "detail": "true,true,true / true,true,true / true,true,true"
+  },
+  {
+   "group": "Contact",
+   "name": "focus moves to the first invalid field",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "no success shown on invalid input",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "invalid email is caught",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "error clears once the name is valid",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "provider failure shows an error, not success",
+   "pass": true,
+   "detail": "{\"err\":true,\"ok\":true,\"msg\":\"Hello, simulate-provider-failure please.\",\"name\":\"Sam Tester\",\"focus\":\"form-error\",\"role\":\"alert\"}"
+  },
+  {
+   "group": "Contact",
+   "name": "entered text is kept on failure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "failure is announced and focused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "failure offers phone and email",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "submit works again after failure",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "endpoint offline shows an error and keeps the text",
+   "pass": true,
+   "detail": "{\"err\":true,\"ok\":true,\"msg\":\"Hello, simulate-endpoint-offline please.\"}"
+  },
+  {
+   "group": "Contact",
+   "name": "honeypot is rejected, not faked as success",
+   "pass": true,
+   "detail": "{\"err\":true,\"ok\":true}"
+  },
+  {
+   "group": "Contact",
+   "name": "success appears only after the endpoint confirms",
+   "pass": true,
+   "detail": "{\"ok\":true,\"text\":\"Thanks Sam, your message has been sent. We'll reply to sam@example.com.\",\"msg\":\"\",\"err\":true,\"focus\":\"form-success\"}"
+  },
+  {
+   "group": "Contact",
+   "name": "form clears only after success",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "success message receives focus",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Contact",
+   "name": "without JS the form gives way to phone and email",
+   "pass": true,
+   "detail": "{\"form\":\"none\",\"text\":true}"
+  },
+  {
+   "group": "Worker",
+   "name": "valid message returns 200",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "other sites are refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "missing fields return 400 with field errors",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "header injection in the name is refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "oversized message is refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "honeypot is refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "GET is refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "provider error is not reported as success",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "provider outage is not reported as success",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "Turnstile token is required when configured",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "failed Turnstile check is refused",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Worker",
+   "name": "no credentials in the site files",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Motion",
+   "name": "home: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
+   "name": "about: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
+   "name": "menu: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
+   "name": "gallery: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
+   "name": "contact: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
+   "name": "menu jumps instantly with reduced motion",
+   "pass": true,
+   "detail": "96"
+  },
+  {
+   "group": "Motion",
+   "name": "scroll reveals all complete",
+   "pass": true,
+   "detail": "3 -> 0"
+  },
+  {
+   "group": "Images",
+   "name": "home: no missing images (7)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "home: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":7,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+  },
+  {
+   "group": "Images",
+   "name": "home: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Images",
+   "name": "about: no missing images (4)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "about: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":4,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+  },
+  {
+   "group": "Images",
+   "name": "about: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Images",
+   "name": "menu: no missing images (2)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "menu: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+  },
+  {
+   "group": "Images",
+   "name": "menu: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Images",
+   "name": "gallery: no missing images (27)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "gallery: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":27,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
+  },
+  {
+   "group": "Images",
+   "name": "gallery: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Images",
+   "name": "contact: no missing images (2)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "contact: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+  },
+  {
+   "group": "Images",
+   "name": "contact: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0000"
+  },
+  {
+   "group": "Images",
+   "name": "hero image is prioritised and not lazy",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "below-the-fold images are lazy",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "home at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "home at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "about at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "about at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "menu at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "menu at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "gallery at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "gallery at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "contact at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "contact at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "contact form showing errors",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "gallery dialog open",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "menu empty state",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "mobile nav open",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}
