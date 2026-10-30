@@ -19,7 +19,7 @@ To review: run `npm install`, then `npm run preview`, then open http://localhost
 
 **Vegetarian labels: this will look like a big reduction**
 - The printed menu has no vegetarian marks, only the Veggie Breakfast section and items named "Veggie".
-- About 100 labels on the old site were guesses from ingredients, and one was wrong: "Egg, Cumberland Sausage & Chips".
+- The old site had 89 labels, mostly guesses from ingredients, and one was wrong: "Egg, Cumberland Sausage & Chips".
 - Only 5 labels remain (Veggie Set 1 to 3, Veggie Burger, Meal 4). The other 81 likely candidates are kept in the data file as `vegCandidate` and take seconds to switch on once confirmed.
 
 **Header and layout**
@@ -60,7 +60,7 @@ To review: run `npm install`, then `npm run preview`, then open http://localhost
 
 Median of 3 runs per page and device, Lighthouse 12.8.2 in headless Chrome. Mobile uses the default simulated slow 4G and 4x CPU slowdown. Desktop uses the desktop preset.
 
-Before and after were both served from the same local server, with gzip and a 10-minute cache to match GitHub Pages. "Before" is the current `master` code.
+Before and after were both served from the same local server, with gzip and a 10-minute cache to match GitHub Pages. "Before" is local `master` (65b0df2). That is one commit ahead of the live site, which doesn't yet have the email card.
 
 | Page | Device | Performance | Accessibility | Best practices | SEO | LCP | Page weight |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -99,7 +99,7 @@ Limitations:
 | Metadata | Titles, canonicals, share images, sitemap, robots, JSON-LD parsing |
 | axe | WCAG 2.2 AA and best-practice rules on all pages at 2 widths, plus 4 interactive states |
 
-Also done by hand: every dish and price compared with the printed menu, and all screenshots reviewed.
+Also done: a scripted comparison of every dish and price with the printed menu, plus a read-through of the rendered menu pages, and a visual review of the key desktop, tablet and mobile screenshots.
 
 **Not tested:**
 - Real phones, or a screen reader such as VoiceOver or NVDA.
@@ -143,7 +143,7 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 | Long-cache headers | File names are versioned for CSS and JS, but GitHub Pages fixes the cache at 10 minutes | Optional: Cloudflare cache rule for `/assets/*`, 1 year for `assets/css`, `assets/js` and `assets/fonts`. Lighthouse flags this until then |
 | Privacy | The form and Google Map involve personal data and third-party cookies. The site has no privacy notice | Add a privacy page before enabling the form, and consider a click-to-load map |
 
-**Deploying (when you decide to):** merge `site-audit-improvements` into `master` and push. GitHub Pages then publishes it. Afterwards:
+**Deploying (when you decide to):** merge `site-audit-improvements` into `master` and push. GitHub Pages then publishes it, along with the unpushed email card commit already on local `master`. Afterwards:
 1. Open each page and check https://olympiccafe.co.uk/CLAUDE.md now returns a 404.
 2. Test share previews with the Facebook Sharing Debugger or by pasting a link into WhatsApp.
 3. Re-run Lighthouse on the live site.
