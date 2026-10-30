@@ -28,9 +28,9 @@ Pages are heavier because they show more photos, all lazy-loaded below the fold.
 
 ### Site furniture: "The Shopfront"
 
-The header, buttons, logo and footer were redesigned around the cafe front, with the same scalloped edge as the paper tickets.
+The header, buttons, logo and footer were redesigned around the cafe front. The footer and mobile action bar share the scalloped edge of the paper tickets.
 
-- **Header:** a burgundy awning with a striped scalloped edge hanging over the page. Desktop links drop a cream tag on hover, and the current page keeps its tag.
+- **Header:** a burgundy bar. Desktop links drop a cream tag on hover, and the current page keeps its tag.
 - **Mobile menu:** a burgundy sheet set like the printed menu, with dotted leaders and short handwritten notes. The bottom action bar now makes Menu the cream ticket.
 - **Buttons:** tear-off order tickets with a perforated stub holding an arrow. Burgundy is primary, cream paper is secondary. Every existing button picks this up from `.btn` in `src/css/site.css`.
 - **Logo:** the torch now stands in for the i of Olympic, and the lettering sits on one line. It is vector (`src/brand/logo.svg`), traced from the master artwork, and the lettering follows the text colour. The flame flickers on hover. The master files in `brand_assets/` are unchanged.

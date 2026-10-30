@@ -1,5 +1,5 @@
 {
- "date": "2026-10-30T20:08:48.890Z",
+ "date": "2026-10-30T20:15:13.656Z",
  "total": 418,
  "failed": 0,
  "results": [
@@ -799,13 +799,13 @@
    "group": "Menu",
    "name": "category heading is visible below the sticky bars",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":281}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
   },
   {
    "group": "Menu",
    "name": "choosing a category does not jump to the top of the page",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":281}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
   },
   {
    "group": "Menu",
@@ -1909,7 +1909,7 @@
    "group": "Layout",
    "name": "home mobile: headline and buttons are above the fold",
    "pass": true,
-   "detail": "{\"stickySections\":0,\"ctaBottom\":502.765625,\"h1Top\":325.375,\"fold\":784}"
+   "detail": "{\"stickySections\":0,\"ctaBottom\":512.765625,\"h1Top\":335.375,\"fold\":784}"
   },
   {
    "group": "Touch",
@@ -2353,7 +2353,7 @@
    "group": "Images",
    "name": "about: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
+   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2407,7 +2407,7 @@
    "group": "Images",
    "name": "contact: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
   },
   {
    "group": "Images",
