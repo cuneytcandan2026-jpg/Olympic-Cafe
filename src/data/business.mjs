@@ -24,6 +24,9 @@ export const BUSINESS = {
   descriptor: 'Breakfast · Brunch · Lunch',
 };
 
+// One short temporary message shown on every page, such as Christmas or bank holiday hours. Leave empty for none.
+export const NOTICE = process.env.SITE_NOTICE || '';
+
 // Add genuine customer reviews here, with permission, as { quote, author, source }. The homepage section
 // only appears when this list has entries. Never add review markup or a rating that is not real.
 export const REVIEWS = [];

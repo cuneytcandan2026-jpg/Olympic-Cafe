@@ -142,6 +142,7 @@
     if (isPastResults()) alignResults(false);
   });
   document.getElementById('menu-form').addEventListener('submit', (e) => e.preventDefault());
+  document.getElementById('menu-print').addEventListener('click', () => window.print());
   reset.addEventListener('click', resetAll);
   emptyReset.addEventListener('click', resetAll);
 

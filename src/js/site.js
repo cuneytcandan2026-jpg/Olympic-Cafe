@@ -26,6 +26,14 @@
   document.addEventListener('focusin', (e) => document.body.classList.toggle('typing', isField(e.target)));
   document.addEventListener('focusout', () => document.body.classList.remove('typing'));
 
+  // Marks today's row in any opening hours list, using UK time wherever the visitor is.
+  const today = new Intl.DateTimeFormat('en-GB', { weekday: 'long', timeZone: 'Europe/London' }).format(new Date());
+  document.querySelectorAll('[data-days]').forEach((row) => {
+    if (!row.dataset.days.split(',').includes(today)) return;
+    row.classList.add('is-today');
+    row.querySelector('.today-tag').hidden = false;
+  });
+
   // Only sections that are off-screen right now get hidden, and only here in JS,
   // so nothing above the fold animates and nothing stays hidden if this never runs.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -99,6 +99,7 @@
   .action-bar a:active { @apply bg-brand-ink; }
   .action-bar a:focus-visible { outline: 3px solid #F1DEC0; outline-offset: -5px; }
   /* Lifted out of the way while typing so it can't cover a field or sit on the on-screen keyboard. */
+  @media (max-width: 359.98px) { .action-bar a { @apply gap-1 text-sm; } }
   .typing .action-bar { transform: translateY(110%); visibility: hidden; }
 
   .paper-texture {
@@ -106,6 +107,115 @@
       radial-gradient(circle at 20% 30%, rgba(217, 148, 94, 0.1), transparent 55%),
       radial-gradient(circle at 80% 70%, rgba(138, 24, 26, 0.06), transparent 55%);
   }
+  /* Fine paper grain over the wash. Kept near the bottom of the 5-12% the brand guidelines allow. */
+  .paper-texture { position: relative; isolation: isolate; }
+  .paper-texture::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Order ticket: cream paper with a torn, scalloped lower edge. The one recurring paper object on the site. */
+  .ticket { @apply relative rounded-t-2xl bg-brand-creamlight; filter: drop-shadow(0 14px 18px rgba(31, 31, 31, 0.22)) drop-shadow(0 2px 3px rgba(138, 24, 26, 0.14)); }
+  .ticket::after {
+    content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 8px;
+    background: radial-gradient(circle at 8px 0, #FBF4E7 7.5px, transparent 8px) repeat-x;
+    background-size: 16px 8px;
+  }
+  .hours-row { @apply flex flex-wrap items-center gap-x-2 border-b border-dotted border-brand-burgundy/30 py-0.5; }
+  .hours-row > :last-child { margin-left: auto; }
+  .hours-row.is-today > span:first-child { @apply text-brand-burgundy; }
+  .today-tag { @apply rounded-full bg-brand-burgundy px-2 text-xs font-semibold leading-5 text-brand-cream; }
+
+  /* Hero: the table runs off the right edge of the screen. */
+  .hero { @apply grid; }
+  .hero-photo { @apply relative; aspect-ratio: 16 / 9; max-height: 55vh; }
+  .hero-copy { @apply flex flex-col px-4 py-5 sm:px-6; }
+  @media (min-width: 1024px) {
+    .hero { grid-template-columns: minmax(0, 11fr) minmax(0, 13fr); }
+    .hero-photo { order: 2; aspect-ratio: auto; max-height: none; height: clamp(34rem, calc(100vh - var(--header-h) - 3.5rem), 46rem); }
+    .hero-copy { @apply justify-center py-10 pr-10; padding-left: max(2.5rem, calc((100vw - 80rem) / 2 + 2.5rem)); }
+    .hero-ticket { position: absolute; left: -2.5rem; bottom: -1.5rem; width: 19rem; padding: 1.25rem 1.5rem 1rem; }
+  }
+
+  /* Long table: plates shot on one table, laid edge to edge so the wood runs across the screen. */
+  .long-table { @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6; }
+  .table-tile { @apply relative block overflow-hidden; color: #fff; }
+  .table-tile::before, .table-tile::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .table-tile::before { background: #8A181A; mix-blend-mode: multiply; opacity: 0.08; }
+  .table-tile::after { background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 52%); }
+  .table-tile-photo { @apply aspect-square w-full object-cover; transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+  .table-tile:hover .table-tile-photo { transform: scale(1.05); }
+  .table-tile:active .table-tile-photo { transform: scale(1.02); }
+  .table-tile:focus-visible { outline: 3px solid #fff; outline-offset: -6px; border-radius: 0; }
+  .table-tile-label { @apply absolute bottom-0 left-0 right-0 p-3 md:p-4; z-index: 2; line-height: 1.3; }
+
+  /* Round frames follow the plates in the photos. */
+  .plate-frame { @apply aspect-square rounded-full object-cover; box-shadow: 0 0 0 4px #FBF4E7, 0 0 0 5px rgba(138, 24, 26, 0.35), 0 16px 24px -10px rgba(31, 31, 31, 0.32); }
+
+  /* Signature dish: large photo off the left edge, with the words on a raised card. */
+  .feature { @apply grid; }
+  .feature-photo { aspect-ratio: 4 / 3; }
+  .feature-card { @apply relative z-10 mx-4 -mt-10 rounded-2xl border border-brand-burgundy/20 bg-brand-creamlight p-6 shadow-lifted sm:mx-6; }
+  @media (min-width: 1024px) {
+    .feature { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; }
+    .feature-photo { grid-column: 1 / span 8; grid-row: 1; aspect-ratio: auto; height: 34rem; }
+    .feature-card { grid-column: 8 / span 5; grid-row: 1; margin: 0 max(2.5rem, calc((100vw - 80rem) / 2 + 2.5rem)) 0 0; padding: 2rem; }
+  }
+
+  /* Rings */
+  .rings-photos { @apply grid grid-cols-12 items-start; }
+  .rings-photo-main { grid-column: 1 / span 7; grid-row: 1; }
+  .rings-photo-side { grid-column: 7 / span 6; grid-row: 1; margin-top: 30%; position: relative; }
+  .ring-row { @apply border-b border-brand-burgundy/15 py-2.5; }
+  .leader { @apply min-w-4 flex-1 border-b-2 border-dotted border-brand-burgundy/30; transform: translateY(-0.25em); }
+  .leader-on-dark { @apply border-brand-cream/40; }
+
+  /* Pairings */
+  .pairing-photos { @apply relative flex items-center pl-1 pt-1; }
+  .pairing-and {
+    @apply relative z-10 -ml-3 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-burgundy font-display text-xl font-semibold text-brand-cream;
+    box-shadow: 0 0 0 3px #FBF4E7;
+  }
+
+  /* Sunday Roast: a board set entirely in type, because there is no roast photo yet. */
+  .roast-board { @apply grid gap-6 rounded-2xl border border-brand-cream/40 p-6 md:grid-cols-2 md:gap-10 md:p-12; outline: 1px solid rgba(241, 222, 192, 0.25); outline-offset: 6px; }
+  .roast-title { @apply font-display text-5xl leading-none md:text-7xl; letter-spacing: -0.03em; }
+
+  /* Two photos meeting edge to edge */
+  .diptych { @apply grid grid-cols-2; }
+  .diptych-photo { @apply w-full object-cover; aspect-ratio: 4 / 3; }
+  .diptych-label { @apply h-full p-4 md:p-8; }
+  .diptych > div { @apply flex flex-col; }
+  .diptych-label { flex: 1; }
+
+  /* Visit: the ticket lying on the same table as the food. */
+  .visit { @apply relative overflow-hidden; }
+  .visit-photo { @apply h-56 w-full object-cover; object-position: left center; }
+  .visit-inner { @apply relative -mt-12 pb-12; }
+  .visit-ticket { @apply p-6; }
+  @media (min-width: 1024px) {
+    .visit { min-height: 44rem; }
+    .visit-photo { @apply absolute inset-0 h-full; }
+    .visit-inner { @apply mt-0 flex justify-end py-16; }
+    .visit-ticket { width: 28rem; padding: 2rem; }
+  }
+  .torch-divider { @apply flex items-center gap-3; }
+  .torch-divider::before, .torch-divider::after { content: ''; flex: 1; height: 1px; background: rgba(138, 24, 26, 0.35); }
+  .torch-divider img { height: 48px; width: auto; }
+
+  .site-notice { @apply bg-brand-ink px-4 py-2 text-center text-sm font-semibold text-brand-creamlight; }
+
+  /* Menu: small round plates. Horizontal scroll on phones, with the next tile peeking in. */
+  .menu-strip { @apply flex gap-4 overflow-x-auto py-1 sm:px-0; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .menu-strip::-webkit-scrollbar { display: none; }
+  .menu-strip a { @apply flex w-20 shrink-0 flex-col items-center gap-2 rounded-lg text-center text-sm font-semibold leading-tight text-brand-ink md:w-24; scroll-snap-align: start; }
+  .menu-strip img { @apply h-16 w-16 md:h-20 md:w-20; transition: transform 0.3s var(--ease-spring); }
+  .menu-strip a:hover { @apply text-brand-burgundy; }
+  .menu-strip a:hover img { transform: translateY(-3px); }
+  .menu-strip a:active img { transform: scale(0.96); }
+  li[data-search][hidden] { display: none; } /* Dishes with a photo are flex rows, which would otherwise beat [hidden]. */
+  .dish-thumb { @apply h-16 w-16 shrink-0 rounded-full object-cover shadow-base; }
+
   .card { @apply rounded-2xl bg-white shadow-base; }
   .dish-card { transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease; }
   .dish-card:hover { @apply shadow-lifted; transform: translateY(-4px); }
@@ -137,11 +247,22 @@
   .veg-label { @apply inline-flex items-center gap-1 text-sm font-semibold text-brand-deepgreen; }
 
   /* Gallery */
-  .gallery-link { @apply block overflow-hidden rounded-2xl shadow-base; }
+  .gallery-group { @apply grid grid-cols-2 gap-x-1 gap-y-4 md:grid-cols-3 lg:grid-cols-4; grid-auto-flow: dense; }
+  .gallery-group figure { @apply flex h-full flex-col; }
+  .gallery-group .gallery-link { @apply flex-1; }
+  .gallery-group img { @apply h-full w-full object-cover; aspect-ratio: 16 / 10; }
+  .gallery-feature, .gallery-wide { @apply col-span-2; }
+  @media (min-width: 768px) { .gallery-feature { grid-row: span 2; } }
+  .gallery-link { @apply block overflow-hidden; }
   .gallery-link img { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .gallery-link:hover img { transform: scale(1.04); }
   .gallery-link:active img { transform: scale(1.01); }
   .lightbox { @apply m-auto max-h-none max-w-none bg-transparent p-0; width: 100%; height: 100%; }
+  .lightbox-menu { @apply mt-2 inline-flex min-h-11 items-center rounded-full bg-brand-cream px-5 text-sm font-semibold text-brand-burgundy; transition: transform 0.2s var(--ease-spring); }
+  .lightbox-menu:hover { @apply bg-white; transform: translateY(-1px); }
+  .lightbox-menu:active { transform: scale(0.97); }
+  .lightbox-menu:focus-visible { outline: 3px solid #F1DEC0; outline-offset: 2px; }
+  .lightbox-menu[hidden] { display: none; }
   .lightbox::backdrop { background: rgba(31, 31, 31, 0.94); }
   .lightbox-btn { @apply absolute z-10 inline-flex h-12 w-12 items-center justify-center rounded-full text-brand-creamlight; background: rgba(251, 244, 231, 0.16); transition: transform 0.2s var(--ease-spring), background-color 0.2s ease; }
   .lightbox-btn:hover { background: rgba(251, 244, 231, 0.3); transform: scale(1.06); }
@@ -163,6 +284,9 @@
   :root { --action-bar-h: 48px; }
 }
 
+/* Only appears on the printed menu. */
+.print-only { display: none; }
+
 /* Without JS the toggle can't work, so the links are simply listed. */
 html:not(.js) .js-only { display: none !important; }
 html:not(.js) .site-header { position: static; height: auto; }
@@ -173,10 +297,21 @@ html:not(.js) .site-header { position: static; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .reveal-pending { opacity: 1; transform: none; }
-  .btn:hover, .dish-card:hover, .gallery-link:hover img, .lightbox-btn:hover { transform: none; }
+  .btn:hover, .dish-card:hover, .gallery-link:hover img, .lightbox-btn:hover, .table-tile:hover .table-tile-photo, .menu-strip a:hover img, .lightbox-menu:hover { transform: none; }
 }
 
 @media print {
   .site-header, .action-bar, .menu-controls { position: static; }
   .action-bar, .js-only { display: none !important; }
+  /* A clean paper menu: dish names and prices only, no photos or page furniture. */
+  .site-header, footer, .site-notice, .menu-controls, .menu-strip, .dish-thumb, #menu-veg-note { display: none !important; }
+  .print-only { display: block !important; }
+  body { padding-bottom: 0; font-size: 10pt; line-height: 1.35; background: #fff; }
+  #menu-results { padding: 0; max-width: none; }
+  [data-category] { break-inside: auto; margin-top: 12pt !important; }
+  [data-category] h2 { font-size: 15pt; break-after: avoid; }
+  [data-search] { break-inside: avoid; padding: 3pt 0; }
+  [data-search] h3 { font-size: 10.5pt; }
+  [data-search] p { font-size: 9pt; margin: 0; }
+  a { text-decoration: none; }
 }

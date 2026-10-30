@@ -1,4 +1,4 @@
-import { photo } from '../templates/layout.mjs';
+import { diptych } from '../templates/layout.mjs';
 
 export default {
   key: 'about',
@@ -16,32 +16,11 @@ export default {
     </div>
   </section>
 
-  <section class="pb-8 md:pb-12">
-    <div class="container-page">
-      <div class="grid overflow-hidden rounded-3xl shadow-base md:grid-cols-2">
-        <div class="on-dark bg-brand-burgundy p-6 text-brand-cream md:p-10">
-          <h2 class="mb-2 text-2xl md:text-3xl">British roots</h2>
-          <p>Full English breakfasts, Sunday roasts, shepherd's pie and proper cafe favourites.</p>
-        </div>
-        <div class="bg-brand-cream p-6 text-brand-ink md:p-10">
-          <h2 class="mb-2 text-2xl text-brand-burgundy md:text-3xl">Mediterranean character</h2>
-          <p>Halloumi, feta, olives and sucuk run through our breakfasts and brunch menu.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pb-10 md:pb-14" data-reveal>
-    <div class="container-page grid gap-6 sm:grid-cols-2">
-      <figure>
-        ${photo({ img: 'full-english-fries-2', alt: 'A cooked breakfast with bacon, egg, sausage, beans and chips, with a side plate of toast', sizes: '(min-width: 640px) 50vw, 100vw', cls: 'aspect-video w-full rounded-2xl object-cover shadow-base' })}
-        <figcaption class="mt-2 text-sm">A cooked breakfast with chips and toast</figcaption>
-      </figure>
-      <figure>
-        ${photo({ img: 'avocado-toast-brie-fries', alt: 'Sicily Coast: crushed avocado on sourdough with mushrooms, sun-dried tomato, feta and pesto, with chips', sizes: '(min-width: 640px) 50vw, 100vw', cls: 'aspect-video w-full rounded-2xl object-cover shadow-base' })}
-        <figcaption class="mt-2 text-sm">Sicily Coast, from our brunch menu</figcaption>
-      </figure>
-    </div>
+  <section class="pb-10 md:pb-14" aria-label="British roots and Mediterranean character">
+    ${diptych([
+      { img: 'full-english-fries-2', alt: 'A cooked breakfast with bacon, egg, sausage, beans and chips, with a side plate of toast', title: 'British roots', text: "Full English breakfasts, Sunday roasts, shepherd's pie and proper cafe favourites.", dark: true },
+      { img: 'avocado-toast-brie-fries', alt: 'Sicily Coast: crushed avocado on sourdough with mushrooms, sun-dried tomato, feta and pesto, with chips', title: 'Mediterranean character', text: 'Halloumi, feta, olives and sucuk run through our breakfasts and brunch menu.' },
+    ], 'h2')}
   </section>
 
   <section class="bg-white py-10 md:py-14" aria-labelledby="expect-heading" data-reveal>

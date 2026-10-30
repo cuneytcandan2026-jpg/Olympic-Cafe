@@ -1,8 +1,41 @@
 # Olympic Cafe website: handover
 
-Status: built and tested locally on branch `site-audit-improvements`. **Not published.** Production only changes when this branch is merged to `master` and pushed.
+Status: the audit work below (`site-audit-improvements`) is live on `master`. The creative refresh is on the local branch `creative-long-table` and is **not published**. Production only changes when that branch is merged to `master` and pushed.
 
 To review: run `npm install`, then `npm run preview`, then open http://localhost:3000. Screenshots are in `docs/preview/`.
+
+## Creative refresh: "The Long Table"
+
+The design idea comes from the photography: all 25 photos were shot on one golden wooden table, so the table carries the whole site.
+
+- **Homepage:** full-bleed table hero with a paper hours ticket; six edge-to-edge category tiles; a large signature dish with two supporting dishes; the five Rings; food and drink pairings; a type-only Sunday Roast board; a British and Mediterranean story pair; and a visit ticket on the table.
+- **Menu:** photo shortcuts, grouped dropdown, 15 dish thumbnails, and a print button with a clean print layout. Search, filters, prices and shareable links are unchanged.
+- **Gallery:** grouped by meal, feature tiles, and a "See it on the menu" link and swipe in the viewer.
+- **About:** the two text panels and separate photos became one British and Mediterranean pair.
+- **Shared:** today's hours marked in UK time, and an optional site-wide notice (`NOTICE` in `src/data/business.mjs`, currently empty).
+- **Corrected captions:** "Cheese Burger" is now "Burger with cheese, lettuce and onion", because the menu's Cheese Burger has no lettuce. "Latte" is now "Coffee with latte art", because the cocoa dusting could mean a cappuccino or mocha.
+
+Lighthouse, local, mobile, median of 3 (before is section 2):
+
+| Page | Performance | Accessibility | Best practices | SEO | LCP | Page weight |
+| --- | --- | --- | --- | --- | --- | --- |
+| Home | 96 → 95 | 100 | 100 | 100 | 2.7s → 2.8s | 401 → 666 KB |
+| Menu | 99 → 97 | 100 | 100 | 100 | 1.7s → 2.1s | 130 → 205 KB |
+| Gallery | 95 → 96 | 100 | 100 | 100 | 2.9s → 2.6s | 568 → 757 KB |
+| About | 99 → 99 | 100 | 100 | 100 | 2.1s → 2.0s | 227 → 161 KB |
+
+Pages are heavier because they show more photos, all lazy-loaded below the fold. These are local lab numbers, so re-measure after deployment.
+
+**Owner to confirm for this refresh**
+- [ ] The Rings section lists all five with prices. The brand guidelines ask for clearance before expanding ring imagery, so it uses names only, with no ring graphics. Please take advice before adding any.
+- [ ] Sunday Roast is now much more prominent. Is it still offered, and at these prices?
+- [ ] Is the featured Mediterranean Breakfast, with Full Olympic and Avo Breeze, the right selection?
+- [ ] Is the Milkshake photo a Crazy Shake? It has a chocolate piece on top. The pairing says "from" the Milkshake price so it is correct either way.
+- [ ] Are the three breakfast photos Set 2, Set 3 and Set 6? They look like it. Captions stay generic until confirmed.
+- [ ] "Today" on the hours ignores bank holidays. Use the notice for those, and supply exceptional hours before any "Open now" badge is added.
+- [ ] "From" prices on the category tiles use the lowest priced item in that category, such as Granola for Breakfast.
+
+**Photography that would help most:** the shopfront, the interior, the team, a Sunday roast, and a dessert.
 
 ## 1. What changed
 
@@ -83,7 +116,7 @@ Limitations:
 
 ## 3. Test results
 
-`npm test` passes **398 of 398** checks in real Chrome (`docs/test-results.json`).
+`npm test` passes **411 of 411** checks in real Chrome (`docs/test-results.json`).
 
 | Area | Covered |
 | --- | --- |

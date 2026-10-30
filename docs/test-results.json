@@ -1,6 +1,6 @@
 {
- "date": "2026-10-30T15:39:36.993Z",
- "total": 398,
+ "date": "2026-10-30T19:36:40.289Z",
+ "total": 411,
  "failed": 0,
  "results": [
   {
@@ -25,7 +25,7 @@
    "group": "SEO home",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "12222333222222"
+   "detail": "122333233333233322332222"
   },
   {
    "group": "SEO home",
@@ -313,7 +313,7 @@
    "group": "SEO gallery",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "1222"
+   "detail": "122222222"
   },
   {
    "group": "SEO gallery",
@@ -545,7 +545,7 @@
   },
   {
    "group": "Links",
-   "name": "all 90 internal URLs return 200",
+   "name": "all 156 internal URLs return 200",
    "pass": true,
    "detail": ""
   },
@@ -560,6 +560,78 @@
    "name": "/index.html forwards to / (client-side, GitHub Pages has no 301)",
    "pass": true,
    "detail": "http://127.0.0.1:3201/?x=1#y"
+  },
+  {
+   "group": "Creative",
+   "name": "homepage prices all come from the menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "all six category tiles link to real categories",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "no unverified popularity or bundle wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "pairings say they are priced separately",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "no booking, ordering or delivery features",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "today's opening hours are marked in UK time",
+   "pass": true,
+   "detail": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
+  },
+  {
+   "group": "Creative",
+   "name": "without JS no row claims to be today",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "print button opens the print dialog",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "printed menu drops page furniture and photos but keeps every dish",
+   "pass": true,
+   "detail": "{\"header\":\"none\",\"thumb\":\"none\",\"bar\":\"none\",\"items\":222}"
+  },
+  {
+   "group": "Creative",
+   "name": "photo strip opens the chosen category",
+   "pass": true,
+   "detail": "burgers"
+  },
+  {
+   "group": "Creative",
+   "name": "temporary notice appears when set",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Creative",
+   "name": "no notice on the published build",
+   "pass": true,
+   "detail": ""
   },
   {
    "group": "No JS",
@@ -685,13 +757,13 @@
    "group": "Menu",
    "name": "category heading is visible below the sticky bars",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":164}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
   },
   {
    "group": "Menu",
    "name": "choosing a category does not jump to the top of the page",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":164}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
   },
   {
    "group": "Menu",
@@ -1795,7 +1867,7 @@
    "group": "Layout",
    "name": "home mobile: headline and buttons are above the fold",
    "pass": true,
-   "detail": "{\"stickySections\":0,\"ctaBottom\":433.390625,\"h1Top\":120,\"fold\":784}"
+   "detail": "{\"stickySections\":0,\"ctaBottom\":512.765625,\"h1Top\":335.375,\"fold\":784}"
   },
   {
    "group": "Touch",
@@ -1951,7 +2023,7 @@
    "group": "Dialog",
    "name": "Tab stays inside the dialog",
    "pass": true,
-   "detail": "lightbox-prev,lightbox-next,lightbox-close,lightbox-prev,lightbox-next,lightbox-close,lightbox-prev,lightbox-next"
+   "detail": "lightbox-prev,lightbox-next,lightbox-menu,lightbox-close,lightbox-prev,lightbox-next,lightbox-menu,lightbox-close"
   },
   {
    "group": "Dialog",
@@ -1964,6 +2036,12 @@
    "name": "arrow keys change photo",
    "pass": true,
    "detail": ""
+  },
+  {
+   "group": "Dialog",
+   "name": "recognised dishes link to their menu category",
+   "pass": true,
+   "detail": "{\"hidden\":false,\"href\":\"/menu.html#set-breakfast\"}"
   },
   {
    "group": "Dialog",
@@ -2203,11 +2281,11 @@
    "group": "Motion",
    "name": "scroll reveals all complete",
    "pass": true,
-   "detail": "3 -> 0"
+   "detail": "6 -> 0"
   },
   {
    "group": "Images",
-   "name": "home: no missing images (7)",
+   "name": "home: no missing images (24)",
    "pass": true,
    "detail": ""
   },
@@ -2215,7 +2293,7 @@
    "group": "Images",
    "name": "home: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":7,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":24,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2243,7 +2321,7 @@
   },
   {
    "group": "Images",
-   "name": "menu: no missing images (2)",
+   "name": "menu: no missing images (23)",
    "pass": true,
    "detail": ""
   },
@@ -2251,7 +2329,7 @@
    "group": "Images",
    "name": "menu: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":23,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2269,13 +2347,13 @@
    "group": "Images",
    "name": "gallery: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":27,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
+   "detail": "{\"total\":27,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.00030810060680093926}"
   },
   {
    "group": "Images",
    "name": "gallery: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0000"
+   "detail": "0.0003"
   },
   {
    "group": "Images",

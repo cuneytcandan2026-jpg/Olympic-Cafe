@@ -1,4 +1,5 @@
-import { BUSINESS as B } from '../data/business.mjs';
+import { BUSINESS as B, NOTICE } from '../data/business.mjs';
+import { cropOf } from '../data/crops.mjs';
 import { MENU } from '../data/menu.mjs';
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -166,6 +167,7 @@ ${scriptTags}
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
 ${header(key)}
 <main id="main-content" tabindex="-1">
+${NOTICE ? `<p class="site-notice">${esc(NOTICE)}</p>` : ''}
 ${body}
 </main>
 ${footer()}
@@ -179,6 +181,33 @@ ${actionBar(key)}
 export function photo({ img, alt, sizes, cls = '', eager = false, priority = false }) {
   const srcset = [480, 800, 1200].map((w) => `/assets/img/r/${img}-${w}.webp ${w}w`).join(', ');
   return `<img src="/assets/img/r/${img}-800.webp" srcset="${srcset}" sizes="${sizes}" width="1200" height="675" alt="${esc(alt)}" class="${cls}"${eager ? '' : ' loading="lazy"'}${priority ? ' fetchpriority="high"' : ''} decoding="async" />`;
+}
+
+// An art-directed crop from src/data/crops.mjs. The real proportions are always reserved.
+export function cropped({ name, alt, sizes, cls = '', eager = false }) {
+  const { widths, width, height } = cropOf(name);
+  const srcset = widths.map((w) => `/assets/img/c/${name}-${w}.webp ${w}w`).join(', ');
+  const middle = widths[Math.floor(widths.length / 2)];
+  return `<img src="/assets/img/c/${name}-${middle}.webp" srcset="${srcset}" sizes="${sizes}" width="${width}" height="${height}" alt="${esc(alt)}" class="${cls}"${eager ? '' : ' loading="lazy"'} decoding="async" />`;
+}
+
+// A small torch between two thin rules. The brand guidelines allow this as a divider, but not as repeated decoration.
+export const torchDivider = (cls = '') => `<div class="torch-divider ${cls}" aria-hidden="true"><img src="/assets/img/torch.webp" width="37" height="96" alt="" loading="lazy" /></div>`;
+
+// Hours as a list. site.js marks today's row, in UK time, for visitors with JavaScript.
+export const hoursRows = (rowCls = '', labelKey = 'labelLong') => B.hours.map((h) => `<li class="hours-row ${rowCls}" data-days="${h.days.join(',')}"><span class="font-semibold">${h[labelKey]}</span><span class="today-tag" hidden>Today</span><span class="whitespace-nowrap">${h.time}</span></li>`).join('');
+
+// Two photos meeting edge to edge on the same table, each with a short line beneath it.
+export function diptych(items, headingTag = 'h3') {
+  return `<div class="diptych">
+        ${items.map((d) => `<div>
+          ${photo({ img: d.img, alt: d.alt, sizes: '50vw', cls: 'diptych-photo' })}
+          <div class="diptych-label ${d.dark ? 'on-dark bg-brand-burgundy text-brand-cream' : 'bg-brand-cream text-brand-ink'}">
+            <${headingTag} class="text-lg md:text-2xl ${d.dark ? '' : 'text-brand-burgundy'}">${esc(d.title)}</${headingTag}>
+            <p class="mt-1 text-sm md:text-base">${esc(d.text)}</p>
+          </div>
+        </div>`).join('\n        ')}
+      </div>`;
 }
 
 export function imagePreload(img, sizes) {

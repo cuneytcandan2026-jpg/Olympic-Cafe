@@ -1,6 +1,27 @@
 import { MENU, dishCount } from '../data/menu.mjs';
 import { BUSINESS as B } from '../data/business.mjs';
-import { esc, formatPrice } from '../templates/layout.mjs';
+import { EXPLORE, MENU_GROUPS } from '../data/explore.mjs';
+import { cropped, esc, formatPrice } from '../templates/layout.mjs';
+
+// Dishes whose photo was checked against the printed description. Everything else stays text only,
+// so the page stays fast and no plate is shown for a dish it doesn't match.
+const DISH_PHOTOS = {
+  'set-breakfast/Full Olympic': 'full-english-fries',
+  'set-breakfast/Mediterranean Breakfast': 'mediterranean-breakfast',
+  'set-breakfast/Titan Breakfast': 'titan-breakfast',
+  'brunch/Egg Benedict': 'egg-royal-salad',
+  'brunch/Sicily Coast': 'avocado-toast-brie-fries',
+  'brunch/Avo Breeze': 'avocado-toast-poached-egg-fries',
+  'sweet-savoury/Red Ring': 'pancake-ring-special',
+  'sweet-savoury/Blue Ring': 'french-toast-fruit',
+  'lunch/Grilled Chicken': 'grilled-chicken-rice-plate',
+  'burgers/Chicken Burger': 'chicken-burger',
+  'jacket-potato/Tuna Mayo': 'jacket-potato-tuna',
+  'sandwiches/Bacon': 'bacon-roll',
+  'cold-drinks/Iced Coffee': 'iced-coffee',
+  'hot-drinks/Matcha Latte': 'matcha-latte',
+  'freshly-squeezed/Orange Juice': 'orange-juice',
+};
 
 function priceBlock(item) {
   if (item.prices) {
@@ -13,7 +34,10 @@ function priceBlock(item) {
 function dish(item, category) {
   const { inline, below } = priceBlock(item);
   const search = `${item.name} ${item.desc || ''} ${category.name}`.toLowerCase();
-  return `<li class="border-b border-brand-burgundy/10 py-3" data-search="${esc(search)}" data-veg="${item.veg ? '1' : '0'}">
+  const thumb = DISH_PHOTOS[`${category.id}/${item.name}`];
+  return `<li class="border-b border-brand-burgundy/10 py-3${thumb ? ' flex items-start gap-3' : ''}" data-search="${esc(search)}" data-veg="${item.veg ? '1' : '0'}">
+            ${thumb ? cropped({ name: thumb, alt: `${item.name} at Olympic Cafe`, sizes: '64px', cls: 'dish-thumb' }) : ''}
+            ${thumb ? '<div class="min-w-0 flex-1">' : ''}
             <div class="flex items-start justify-between gap-4">
               <h3 class="text-lg leading-snug">${esc(item.name)}</h3>
               ${inline}
@@ -21,6 +45,7 @@ function dish(item, category) {
             ${item.desc ? `<p class="mt-0.5 text-sm">${esc(item.desc)}</p>` : ''}
             ${below}
             ${item.veg ? '<p class="veg-label mt-1"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Vegetarian</p>' : ''}
+            ${thumb ? '</div>' : ''}
           </li>`;
 }
 
@@ -43,9 +68,17 @@ export default {
   scripts: ['menu'],
   body: `  <section class="bg-brand-creamlight pb-3 pt-5 md:pt-8">
     <div class="container-page">
+      <div class="xl:flex xl:items-center xl:justify-between xl:gap-10">
+      <div class="min-w-0">
       <p class="kicker mb-1">/ THE FULL MENU</p>
       <h1 class="mb-1 text-4xl text-brand-burgundy md:text-5xl">Our menu</h1>
       <p class="max-w-3xl text-sm md:text-base">Everything we serve at Olympic Cafe in Waltham Cross, with prices. Have an allergy or dietary need? Please tell us before you order, or call <a href="${B.phoneHref}" class="whitespace-nowrap font-semibold text-brand-burgundy underline">${B.phoneDisplay}</a>.</p>
+      <p class="print-only">${B.address.street}, ${B.address.town}, ${B.address.postcode}. Full menu: ${B.baseUrl.replace('https://', '')}/menu.html</p>
+      </div>
+      <nav class="menu-strip mt-3 xl:mt-0 xl:shrink-0" aria-label="Popular menu sections">
+        ${EXPLORE.map((t) => `<a href="#${t.cat}">${cropped({ name: t.crop, alt: t.alt, sizes: '80px', cls: 'plate-frame' })}${esc(t.label)}</a>`).join('\n        ')}
+      </nav>
+      </div>
     </div>
   </section>
 
@@ -60,7 +93,7 @@ export default {
           <label for="menu-category" class="sr-only">Category</label>
           <select id="menu-category" class="field-control min-w-0 px-3">
             <option value="">All categories</option>
-            ${MENU.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('\n            ')}
+            ${MENU_GROUPS.map((g) => `<optgroup label="${esc(g.label)}">${g.ids.map((id) => `<option value="${id}">${esc(MENU.find((c) => c.id === id).name)}</option>`).join('')}</optgroup>`).join('\n            ')}
           </select>
         </div>
         <label class="veg-toggle justify-center">
@@ -84,7 +117,10 @@ export default {
   <div id="menu-results" class="container-page py-4 md:py-6">
     <div class="js-only mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
       <p id="menu-status" class="text-sm font-semibold" role="status" aria-live="polite">Showing all ${dishCount} items.</p>
-      <button id="menu-reset" type="button" class="text-link hidden text-sm">Reset search and filters</button>
+      <div class="flex flex-wrap items-center gap-x-4">
+        <button id="menu-reset" type="button" class="text-link hidden text-sm">Reset search and filters</button>
+        <button id="menu-print" type="button" class="text-link text-sm">Print this menu</button>
+      </div>
     </div>
     <div id="menu-empty" class="py-10 text-center" hidden>
       <h2 class="mb-2 text-2xl text-brand-burgundy">Nothing matches that</h2>

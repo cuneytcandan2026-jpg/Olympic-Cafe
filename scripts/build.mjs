@@ -9,6 +9,7 @@ import esbuild from 'esbuild';
 import sharp from 'sharp';
 import { page } from '../src/templates/layout.mjs';
 import { BUSINESS } from '../src/data/business.mjs';
+import { CROPS } from '../src/data/crops.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(process.env.OUT_DIR || ROOT);
@@ -83,6 +84,33 @@ async function buildImages() {
     }
   }
 
+  // Art-directed crops. Rebuilt when the crop list changes, not only when a photo does.
+  const crops = path.join(IMG_OUT, 'c');
+  const cropList = path.join(ROOT, 'src/data/crops.mjs');
+  fs.mkdirSync(crops, { recursive: true });
+  for (const { name, src, left, top, width, height, widths } of CROPS) {
+    const input = path.join(IMG_SOURCE, `${src}.jpeg`);
+    for (const w of widths) {
+      const output = path.join(crops, `${name}-${w}.webp`);
+      if (isFresh(output, input) && isFresh(output, cropList)) continue;
+      await sharp(input).extract({ left, top, width, height }).resize({ width: w }).webp({ quality: w <= 320 ? 70 : 74, effort: 6 }).toFile(output);
+    }
+  }
+
+  // The visit section: the matcha photo with its own table extended to the right. The grain runs
+  // horizontally, so stretching the last stretch of bare wood continues it with no visible join.
+  const matcha = path.join(IMG_SOURCE, 'matcha-latte.jpeg');
+  for (const w of [800, 1600]) {
+    const output = path.join(crops, `table-visit-${w}.webp`);
+    if (isFresh(output, matcha) && isFresh(output, cropList)) continue;
+    const wood = await sharp(matcha).extract({ left: 1120, top: 0, width: 320, height: 810 }).resize(980, 810, { fit: 'fill' }).toBuffer();
+    const base = await sharp(matcha).extract({ left: 0, top: 0, width: 1120, height: 810 }).toBuffer();
+    const joined = await sharp({ create: { width: 2100, height: 810, channels: 3, background: '#000' } })
+      .composite([{ input: base, left: 0, top: 0 }, { input: wood, left: 1120, top: 0 }])
+      .png().toBuffer();
+    await sharp(joined).resize({ width: w }).webp({ quality: 70, effort: 6 }).toFile(output);
+  }
+
   const shares = { home: 'table-spread-overhead-1', menu: 'titan-breakfast', about: 'full-english-fries-2', gallery: 'full-english-hash-browns', contact: 'latte-art' };
   for (const [name, source] of Object.entries(shares)) {
     const input = path.join(IMG_SOURCE, `${source}.jpeg`);
@@ -96,6 +124,8 @@ async function buildImages() {
   for (const width of [185, 370]) {
     await sharp(logo).resize({ width }).webp({ quality: 88, alphaQuality: 90, effort: 6 }).toFile(path.join(IMG_OUT, `logo-${width}.webp`));
   }
+  // The approved torch icon, cut from the master logo for the small torch dividers.
+  await sharp(logo).extract({ left: 622, top: 20, width: 124, height: 318 }).resize({ height: 96 }).webp({ quality: 88, alphaQuality: 90, effort: 6 }).toFile(path.join(IMG_OUT, 'torch.webp'));
   const favicon = path.join(ROOT, 'src/brand/favicon-256.png');
   await sharp(favicon).resize(64, 64).png({ compressionLevel: 9, palette: true }).toFile(path.join(IMG_OUT, 'favicon.png'));
   await sharp(favicon).resize(180, 180).flatten({ background: '#FBF4E7' }).png({ compressionLevel: 9, palette: true }).toFile(path.join(IMG_OUT, 'apple-touch-icon.png'));

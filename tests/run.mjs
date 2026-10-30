@@ -27,8 +27,8 @@ function check(group, name, pass, detail = '') {
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
-execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore', env: { ...process.env, CONTACT_ENDPOINT: '/api/contact', OUT_DIR: PREVIEW } });
-execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore', env: { ...process.env, CONTACT_ENDPOINT: '', OUT_DIR: '' } });
+execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore', env: { ...process.env, CONTACT_ENDPOINT: '/api/contact', SITE_NOTICE: 'Test notice', OUT_DIR: PREVIEW } });
+execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore', env: { ...process.env, CONTACT_ENDPOINT: '', SITE_NOTICE: '', OUT_DIR: '' } });
 fs.cpSync(path.join(ROOT, 'assets/img'), path.join(PREVIEW, 'assets/img'), { recursive: true });
 
 const servers = [
@@ -131,6 +131,45 @@ check('Links', 'directions link targets the cafe address', read('index.html').in
   await wait(200);
   check('Links', '/index.html forwards to / (client-side, GitHub Pages has no 301)', new URL(page.url()).pathname === '/' && page.url().includes('?x=1#y'), page.url());
   await page.close();
+}
+
+// ---------- Creative components: real data and working links ----------
+{
+  const home = read('index.html');
+  const homeText = home.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
+  const prices = [['set-breakfast', 'Mediterranean Breakfast'], ['set-breakfast', 'Full Olympic'], ['brunch', 'Avo Breeze'], ['brunch', 'Sicily Coast'], ['burgers', 'Chicken Burger'], ['jacket-potato', 'Tuna Mayo'], ['sweet-savoury', 'Red Ring'], ['sweet-savoury', 'Black Ring'], ['sweet-savoury', 'Yellow Ring'], ['sweet-savoury', 'Blue Ring'], ['sweet-savoury', 'Green Ring'], ['sunday-roast', 'Lamb'], ['sunday-roast', 'Chicken']];
+  const wrong = prices.filter(([c, n]) => !homeText.includes(`\u00a3${MENU.find((m) => m.id === c).items.find((i) => i.name === n).price}`));
+  check('Creative', 'homepage prices all come from the menu', wrong.length === 0, wrong.join());
+  const tileLinks = [...home.matchAll(/class="table-tile" href="\/menu\.html#([\w-]+)"/g)];
+  check('Creative', 'all six category tiles link to real categories', tileLinks.length === 6 && tileLinks.every((m) => MENU.some((c) => c.id === m[1])));
+  check('Creative', 'no unverified popularity or bundle wording', !/bestseller|customer favourite|most popular|meal deal|free drink/i.test(homeText));
+  check('Creative', 'pairings say they are priced separately', /ordered and priced separately/.test(homeText));
+  check('Creative', 'no booking, ordering or delivery features', !/book a table|order online|delivery|whatsapp|newsletter/i.test(homeText));
+  const page = await open(`${SITE}/`, { reduced: true });
+  const today = new Intl.DateTimeFormat('en-GB', { weekday: 'long', timeZone: 'Europe/London' }).format(new Date());
+  const marked = await page.evaluate(() => [...document.querySelectorAll('.visit .is-today')].map((r) => r.dataset.days));
+  check('Creative', "today's opening hours are marked in UK time", marked.length === 1 && marked[0].includes(today), marked.join());
+  await page.close();
+  const noJs = await open(`${SITE}/`, { js: false });
+  check('Creative', 'without JS no row claims to be today', await noJs.$$eval('.today-tag', (els) => els.every((el) => el.hidden)));
+  await noJs.close();
+  const menu = await open(`${SITE}/menu.html`, { reduced: true });
+  await menu.evaluate(() => { window.__printed = false; window.print = () => { window.__printed = true; }; });
+  await menu.click('#menu-print');
+  check('Creative', 'print button opens the print dialog', await menu.evaluate(() => window.__printed));
+  await menu.emulateMediaType('print');
+  const printed = await menu.evaluate(() => ({ header: getComputedStyle(document.querySelector('.site-header')).display, thumb: getComputedStyle(document.querySelector('.dish-thumb')).display, bar: getComputedStyle(document.querySelector('.action-bar')).display, items: [...document.querySelectorAll('[data-search]')].filter((el) => el.offsetParent !== null).length }));
+  check('Creative', 'printed menu drops page furniture and photos but keeps every dish', printed.header === 'none' && printed.thumb === 'none' && printed.bar === 'none' && printed.items === dishCount, JSON.stringify(printed));
+  await menu.close();
+  const strip = await open(`${SITE}/menu.html`, { width: 390, height: 844, mobile: true, reduced: true });
+  await strip.click('.menu-strip a[href="#burgers"]');
+  await wait(200);
+  const stripSections = await strip.evaluate(() => [...document.querySelectorAll('[data-category]')].filter((el) => el.offsetParent !== null).map((el) => el.id));
+  check('Creative', 'photo strip opens the chosen category', stripSections.join() === 'burgers', stripSections.join());
+  await strip.close();
+  const notice = read('.preview/index.html');
+  check('Creative', 'temporary notice appears when set', notice.includes('class="site-notice"') && notice.includes('Test notice'));
+  check('Creative', 'no notice on the published build', !home.includes('class="site-notice"'));
 }
 
 // ---------- Without JavaScript ----------
@@ -290,7 +329,7 @@ for (const [width, height] of SIZES) {
       const bar = document.querySelector('.action-bar');
       const barTop = getComputedStyle(bar).display === 'none' ? innerHeight : bar.getBoundingClientRect().top;
       const footer = document.querySelector('footer').getBoundingClientRect();
-      const wide = [...document.querySelectorAll('body *')].filter((el) => el.offsetParent !== null && el.getBoundingClientRect().right > document.documentElement.clientWidth + 1 && !el.closest('#menu-chips') && !el.closest('.sr-only'));
+      const wide = [...document.querySelectorAll('body *')].filter((el) => el.offsetParent !== null && el.getBoundingClientRect().right > document.documentElement.clientWidth + 1 && !el.closest('#menu-chips') && !el.closest('.menu-strip') && !el.closest('.sr-only'));
       return {
         scrollW: document.documentElement.scrollWidth,
         clientW: document.documentElement.clientWidth,
@@ -421,6 +460,8 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
   check('Dialog', 'Shift+Tab stays inside the dialog', (await page.evaluate(() => document.activeElement.id)).startsWith('lightbox-'));
   await page.keyboard.press('ArrowRight');
   check('Dialog', 'arrow keys change photo', /4 of 25/.test(await page.$eval('#lightbox-caption', (el) => el.textContent)));
+  const menuLink = await page.$eval('#lightbox-menu', (el) => ({ hidden: el.hidden, href: el.getAttribute('href') }));
+  check('Dialog', 'recognised dishes link to their menu category', !menuLink.hidden && menuLink.href.endsWith('#set-breakfast'), JSON.stringify(menuLink));
   await page.keyboard.press('ArrowLeft');
   await page.keyboard.press('Escape');
   await wait(100);
@@ -592,7 +633,8 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
       total: imgs.length,
       broken: imgs.filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
       noDims: imgs.filter((i) => !i.getAttribute('width') || !i.getAttribute('height')).length,
-      noAlt: imgs.filter((i) => !i.getAttribute('alt')).length,
+      // The torch divider is decorative: empty alt inside aria-hidden.
+      noAlt: imgs.filter((i) => !i.getAttribute('alt') && !i.closest('[aria-hidden=true]')).length,
       cls: window.__cls,
     };
   });

@@ -1,16 +1,32 @@
-import { PHOTOS } from '../data/gallery.mjs';
+import { GROUPS, PHOTOS } from '../data/gallery.mjs';
 import { esc, photo } from '../templates/layout.mjs';
 
-const SIZES = '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 360px) 50vw, 100vw';
+const SIZES = '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw';
+const FEATURE_SIZES = '(min-width: 1024px) 50vw, (min-width: 768px) 66vw, 100vw';
 
-const tiles = PHOTOS.map((p, i) => `<li>
+let index = 0;
+function tile(p, position) {
+  const i = index++;
+  const feature = position === 0 && !p.wide;
+  return `<li${feature ? ' class="gallery-feature"' : p.wide ? ' class="gallery-wide"' : ''}>
           <figure>
-            <a class="gallery-link" href="/assets/img/r/${p.img}-1200.webp" data-index="${i}" data-full="/assets/img/r/${p.img}-1200.webp" data-label="${esc(p.label)}" aria-label="View larger photo: ${esc(p.label)}">
-              ${photo({ img: p.img, alt: `${p.label} at Olympic Cafe`, sizes: SIZES, cls: 'aspect-video w-full object-cover', eager: i < 4 })}
+            <a class="gallery-link" href="/assets/img/r/${p.img}-1200.webp" data-index="${i}" data-full="/assets/img/r/${p.img}-1200.webp" data-label="${esc(p.label)}"${p.menu ? ` data-menu="${p.menu}"` : ''} aria-label="View larger photo: ${esc(p.label)}">
+              ${photo({ img: p.img, alt: `${p.label} at Olympic Cafe`, sizes: feature || p.wide ? FEATURE_SIZES : SIZES, eager: i < 3 })}
             </a>
-            <figcaption class="mt-1.5 text-sm leading-snug">${esc(p.label)}</figcaption>
+            <figcaption class="mt-1.5 px-1 text-sm leading-snug">${esc(p.label)}</figcaption>
           </figure>
-        </li>`).join('\n        ');
+        </li>`;
+}
+
+const groups = GROUPS.map((g) => `<section class="mb-10 md:mb-14" aria-labelledby="group-${g.id}">
+      <div class="container-page mb-3 flex flex-wrap items-baseline justify-between gap-x-6">
+        <h2 id="group-${g.id}" class="text-2xl text-brand-burgundy md:text-3xl">${esc(g.title)}</h2>
+        ${g.menu ? `<a href="/menu.html#${g.menu}" class="text-link text-sm">${esc(g.link)}</a>` : ''}
+      </div>
+      <ul class="gallery-group">
+        ${PHOTOS.filter((p) => p.group === g.id).map(tile).join('\n        ')}
+      </ul>
+    </section>`).join('\n\n    ');
 
 export default {
   key: 'gallery',
@@ -29,13 +45,9 @@ export default {
     </div>
   </section>
 
-  <section class="pb-10 md:pb-14" aria-label="Photo gallery">
-    <div class="container-page">
-      <ul class="grid gap-x-4 gap-y-5 min-[360px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        ${tiles}
-      </ul>
-    </div>
-  </section>
+  <div class="pt-2">
+    ${groups}
+  </div>
 
   <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
     <div class="relative h-full w-full">
@@ -51,6 +63,7 @@ export default {
       <figure class="flex h-full w-full flex-col items-center justify-center px-16 py-16">
         <img id="lightbox-img" alt="" class="max-h-full min-h-0 max-w-full rounded-2xl object-contain" />
         <figcaption id="lightbox-caption" class="mt-3 text-center text-sm text-brand-creamlight" aria-live="polite"></figcaption>
+        <a id="lightbox-menu" class="lightbox-menu" href="/menu.html" hidden>See it on the menu</a>
       </figure>
     </div>
   </dialog>`,
