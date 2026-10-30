@@ -116,11 +116,19 @@ check('Links', 'directions link targets the cafe address', read('index.html').in
       const response = await fetch(SITE + ref);
       if (response.status !== 200) broken.push(`${ref} ${response.status}`);
     }
-    for (const m of html.matchAll(/href="\/[^"]*#([\w-]+)"/g)) {
+    // Assets are skipped: the logo's #ids are shapes inside logo.svg, not page anchors.
+    for (const m of html.matchAll(/href="\/(?!assets\/)[^"]*#([\w-]+)"/g)) {
       if (!menuHtml.includes(`id="${m[1]}"`)) broken.push(`#${m[1]}`);
     }
   }
   check('Links', `all ${seen.size} internal URLs return 200`, broken.length === 0, broken.join(', '));
+  const svg = read('assets/img/logo.svg');
+  const logoIds = [...read(fileOf('home')).matchAll(/logo\.svg#([\w-]+)/g)].map((m) => m[1]);
+  check('Links', 'every logo part exists in logo.svg', logoIds.length > 0 && logoIds.every((id) => svg.includes(`id="${id}"`)), logoIds.join());
+  for (const key of [...Object.keys(PAGES), '404']) {
+    const html = read(key === '404' ? '404.html' : fileOf(key));
+    check('Links', `${key}: footer credits Laara Digital with a link`, /Website designed by <a href="https:\/\/laaradigital\.co\.uk\/"[^>]*>Laara Digital<\/a>/.test(html));
+  }
   const missing = await fetch(`${SITE}/no-such-page`);
   check('Links', 'unknown URLs return a real 404', missing.status === 404);
 }

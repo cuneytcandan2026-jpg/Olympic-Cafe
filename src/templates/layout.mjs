@@ -4,13 +4,19 @@ import { MENU } from '../data/menu.mjs';
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// "note" is the short handwritten line beside each link in the mobile menu.
 const NAV = [
-  { href: '/', label: 'Home', key: 'home' },
-  { href: '/about.html', label: 'About', key: 'about' },
-  { href: '/menu.html', label: 'Menu', key: 'menu' },
-  { href: '/gallery.html', label: 'Gallery', key: 'gallery' },
-  { href: '/contact.html', label: 'Contact', key: 'contact' },
+  { href: '/', label: 'Home', key: 'home', note: 'Start here' },
+  { href: '/about.html', label: 'About', key: 'about', note: 'Our story' },
+  { href: '/menu.html', label: 'Menu', key: 'menu', note: 'Come hungry' },
+  { href: '/gallery.html', label: 'Gallery', key: 'gallery', note: 'See the food' },
+  { href: '/contact.html', label: 'Contact', key: 'contact', note: 'Find us' },
 ];
+
+const LAARA_URL = 'https://laaradigital.co.uk/';
+
+// The torch stands in for the i of Olympic. Decorative here: the surrounding link or footer text carries the name.
+const logo = (cls = '') => `<svg class="logo ${cls}" aria-hidden="true" focusable="false" viewBox="0 0 4312 1000" width="215" height="50"><use href="/assets/img/logo.svg#letters" class="logo-letters" /><use href="/assets/img/logo.svg#handle" class="logo-handle" /><use href="/assets/img/logo.svg#shade" class="logo-shade" /><g class="logo-fire"><use href="/assets/img/logo.svg#flame" class="logo-flame" /><use href="/assets/img/logo.svg#line" class="logo-line" /></g></svg>`;
 
 export const ICONS = {
   menu: '<path d="M4 3v7a3 3 0 0 0 3 3v8M7 3v6M10 3v7a3 3 0 0 1-3 3M17 21v-8h-3V7a4 4 0 0 1 4-4h0v18"/>',
@@ -61,32 +67,35 @@ export function schema() {
 
 function header(current) {
   const desktop = NAV.map((n) => `<a href="${n.href}" class="nav-link"${n.key === current ? ' aria-current="page"' : ''}>${n.label}</a>`).join('\n        ');
-  const mobile = NAV.map((n) => `<a href="${n.href}" class="flex min-h-12 items-center font-semibold text-brand-ink"${n.key === current ? ' aria-current="page"' : ''}>${n.label}</a>`).join('\n      ');
-  return `<header class="site-header border-b border-brand-burgundy/10 bg-brand-creamlight">
-  <div class="site-header-inner container-page flex items-center justify-between gap-4">
-    <a href="/" class="shrink-0 rounded" aria-label="Olympic Cafe home">
-      <img class="site-logo" src="/assets/img/logo-185.webp" srcset="/assets/img/logo-185.webp 185w, /assets/img/logo-370.webp 370w" sizes="185px" width="185" height="60" alt="Olympic Cafe" />
-    </a>
-    <nav class="hidden items-center gap-8 nav:flex" aria-label="Primary">
+  const mobile = NAV.map((n) => `<a href="${n.href}" class="sheet-link" data-note="${n.note}"${n.key === current ? ' aria-current="page"' : ''}>${n.label}<span class="leader leader-on-dark" aria-hidden="true"></span></a>`).join('\n      ');
+  return `<header class="site-header on-dark">
+  <div class="site-header-bar">
+    <div class="site-header-inner container-page flex items-center justify-between gap-4">
+      <a href="/" class="logo-link shrink-0" aria-label="Olympic Cafe home">${logo('site-logo')}</a>
+      <nav class="hidden items-stretch gap-2.5 self-stretch nav:flex" aria-label="Primary">
         ${desktop}
-    </nav>
-    <div class="flex items-center gap-4">
-      <a href="${B.phoneHref}" class="hidden min-h-11 items-center gap-2 whitespace-nowrap font-semibold text-brand-burgundy hover:underline active:opacity-70 md:inline-flex">${icon('phone', 18)}${B.phoneDisplay}</a>
-      <a href="/menu.html" class="btn btn-primary hidden whitespace-nowrap nav:inline-flex">View Menu</a>
-      <button id="menu-toggle" type="button" class="js-only -mr-2 inline-flex h-12 w-12 items-center justify-center rounded-lg text-brand-burgundy hover:bg-brand-burgundy/10 active:bg-brand-burgundy/20 nav:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-        <svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path data-icon-open d="M3 6h18M3 12h18M3 18h18"/><path data-icon-close d="M6 6l12 12M18 6L6 18" hidden/></svg>
-      </button>
+      </nav>
+      <div class="flex items-center gap-5">
+        <a href="${B.phoneHref}" class="header-phone hidden min-h-11 items-center gap-2 whitespace-nowrap font-semibold md:inline-flex">${icon('phone', 18)}${B.phoneDisplay}</a>
+        <a href="/menu.html" class="btn btn-on-dark hidden whitespace-nowrap nav:inline-flex">View Menu</a>
+        <button id="menu-toggle" type="button" class="menu-toggle js-only -mr-2 inline-flex h-12 w-12 items-center justify-center rounded-xl nav:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path data-icon-open d="M3 8h18M3 16h12"/><path data-icon-close d="M6 6l12 12M18 6L6 18" hidden/></svg>
+        </button>
+      </div>
     </div>
   </div>
-  <nav id="mobile-nav" class="mobile-nav hidden flex-col border-t border-brand-burgundy/10 bg-brand-creamlight px-4 py-3 shadow-lifted sm:px-6 nav:!hidden" aria-label="Mobile">
+  <nav id="mobile-nav" class="mobile-nav hidden flex-col nav:!hidden" aria-label="Mobile">
       ${mobile}
-      <a href="${B.phoneHref}" class="flex min-h-12 items-center gap-2 font-semibold text-brand-burgundy">${icon('phone', 18)}Call ${B.phoneDisplay}</a>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        <a href="/menu.html" class="btn btn-on-dark w-full">View Menu</a>
+        <a href="${B.phoneHref}" class="btn btn-outline-on-dark w-full">Call ${B.phoneDisplay}</a>
+      </div>
   </nav>
 </header>`;
 }
 
 function actionBar(current) {
-  return `<nav class="action-bar flex divide-x divide-brand-cream/25 bg-brand-burgundy shadow-lifted md:hidden on-dark" aria-label="Quick actions">
+  return `<nav class="action-bar flex on-dark md:hidden" aria-label="Quick actions">
   <a href="/menu.html${current === 'menu' ? '#menu-results' : ''}">${icon('menu')}Menu</a>
   <a href="${B.phoneHref}">${icon('phone')}Call</a>
   <a href="${B.directionsUrl}" rel="noopener">${icon('pin')}Directions</a>
@@ -94,32 +103,38 @@ function actionBar(current) {
 }
 
 function footer() {
-  const hours = B.hours.map((h) => `${h.label}: ${h.time}`).join('<br />');
-  const links = NAV.slice(1).map((n) => `<li><a href="${n.href}" class="inline-flex min-h-11 min-w-11 items-center text-brand-creamlight hover:text-white hover:underline active:opacity-70">${n.label}</a></li>`).join('\n          ');
-  return `<footer class="on-dark bg-brand-ink py-12 text-brand-creamlight">
-  <div class="container-page grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-    <div>
-      <span class="inline-block rounded-2xl bg-brand-creamlight px-3 py-2"><img src="/assets/img/logo-185.webp" srcset="/assets/img/logo-185.webp 185w, /assets/img/logo-370.webp 370w" sizes="185px" width="185" height="60" alt="Olympic Cafe" loading="lazy" /></span>
-      <p class="mt-3 text-sm">${B.descriptor}</p>
-    </div>
-    <div>
-      <h2 class="mb-2 text-lg text-brand-cream">Visit us</h2>
-      <p class="text-sm">${addressLines}</p>
-      <a href="${B.directionsUrl}" rel="noopener" class="text-link text-sm">Get directions</a><br />
-      <a href="${B.phoneHref}" class="text-link text-sm">${B.phoneDisplay}</a>
-    </div>
-    <nav aria-label="Footer">
-      <h2 class="mb-2 text-lg text-brand-cream">Explore</h2>
-      <ul class="text-sm">
+  const links = NAV.slice(1).map((n) => `<li><a href="${n.href}" class="footer-link">${n.label}</a></li>`).join('\n          ');
+  return `<footer class="site-footer">
+  <div class="container-page grid gap-10 pb-10 pt-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:pb-14 lg:pt-20">
+    <nav class="on-dark lg:col-span-4" aria-label="Footer">
+      <h2 class="kicker mb-3 font-accent text-sm font-normal">/ EXPLORE</h2>
+      <ul>
           ${links}
       </ul>
     </nav>
-    <div>
-      <h2 class="mb-2 text-lg text-brand-cream">Hours</h2>
-      <p class="text-sm">${hours}<br />Eat in or take away</p>
+    <div class="on-dark lg:col-span-4">
+      <h2 class="mb-3 font-display text-3xl leading-tight text-brand-cream md:text-4xl">Come and pull up a chair.</h2>
+      <p class="text-base">${addressLines}</p>
+      <p class="mt-1 text-sm">${B.descriptor}</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="${B.directionsUrl}" rel="noopener" class="btn btn-on-dark whitespace-nowrap">Get Directions</a>
+        <a href="${B.phoneHref}" class="btn btn-outline-on-dark whitespace-nowrap">${B.phoneDisplay}</a>
+      </div>
+    </div>
+    <div class="receipt ticket md:col-span-2 lg:col-span-4 lg:ml-auto">
+      <h2 class="kicker mb-3 font-normal text-center">/ OPENING HOURS</h2>
+      <ul class="text-sm">${hoursRows('py-1', 'label')}</ul>
+      <p class="mt-3 flex items-baseline justify-between gap-3 text-sm font-semibold"><span>Eat in</span><span class="leader" aria-hidden="true"></span><span>or take away</span></p>
+      <p class="kicker mt-4 text-center">Thank you. See you soon.</p>
     </div>
   </div>
-  <p class="container-page mt-8 text-xs text-brand-creamlight">&copy; 2026 Olympic Cafe. All rights reserved.</p>
+  <div class="footer-wordmark" aria-hidden="true">${logo('w-full h-auto')}</div>
+  <div class="footer-legal on-dark">
+    <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
+      <p>Website designed by <a href="${LAARA_URL}" rel="noopener" class="footer-credit">Laara Digital</a></p>
+    </div>
+  </div>
 </footer>`;
 }
 
@@ -151,7 +166,7 @@ ${noindex ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" 
 <meta name="twitter:title" content="${esc(ogTitle || title)}" />
 <meta name="twitter:description" content="${esc(ogDescription || description)}" />
 <meta name="twitter:image" content="${image}" />
-<meta name="theme-color" content="#FBF4E7" />
+<meta name="theme-color" content="#8A181A" />
 <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
 <script>document.documentElement.classList.add('js');${key === 'home' ? "if(location.pathname==='/index.html')location.replace('/'+location.search+location.hash);" : ''}</script>

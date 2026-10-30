@@ -1,6 +1,6 @@
 {
- "date": "2026-10-30T19:36:40.289Z",
- "total": 411,
+ "date": "2026-10-30T20:08:48.890Z",
+ "total": 418,
  "failed": 0,
  "results": [
   {
@@ -545,7 +545,49 @@
   },
   {
    "group": "Links",
-   "name": "all 156 internal URLs return 200",
+   "name": "all 155 internal URLs return 200",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "every logo part exists in logo.svg",
+   "pass": true,
+   "detail": "letters,handle,shade,flame,line,letters,handle,shade,flame,line"
+  },
+  {
+   "group": "Links",
+   "name": "home: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "about: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "menu: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "gallery: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "contact: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "404: footer credits Laara Digital with a link",
    "pass": true,
    "detail": ""
   },
@@ -757,13 +799,13 @@
    "group": "Menu",
    "name": "category heading is visible below the sticky bars",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":281}"
   },
   {
    "group": "Menu",
    "name": "choosing a category does not jump to the top of the page",
    "pass": true,
-   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":291}"
+   "detail": "{\"heading\":305,\"barBottom\":209,\"scrollY\":281}"
   },
   {
    "group": "Menu",
@@ -1867,7 +1909,7 @@
    "group": "Layout",
    "name": "home mobile: headline and buttons are above the fold",
    "pass": true,
-   "detail": "{\"stickySections\":0,\"ctaBottom\":512.765625,\"h1Top\":335.375,\"fold\":784}"
+   "detail": "{\"stickySections\":0,\"ctaBottom\":502.765625,\"h1Top\":325.375,\"fold\":784}"
   },
   {
    "group": "Touch",
@@ -2285,7 +2327,7 @@
   },
   {
    "group": "Images",
-   "name": "home: no missing images (24)",
+   "name": "home: no missing images (22)",
    "pass": true,
    "detail": ""
   },
@@ -2293,7 +2335,7 @@
    "group": "Images",
    "name": "home: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":24,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":22,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2303,7 +2345,7 @@
   },
   {
    "group": "Images",
-   "name": "about: no missing images (4)",
+   "name": "about: no missing images (2)",
    "pass": true,
    "detail": ""
   },
@@ -2311,7 +2353,7 @@
    "group": "Images",
    "name": "about: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":4,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
   },
   {
    "group": "Images",
@@ -2321,7 +2363,7 @@
   },
   {
    "group": "Images",
-   "name": "menu: no missing images (23)",
+   "name": "menu: no missing images (21)",
    "pass": true,
    "detail": ""
   },
@@ -2329,7 +2371,7 @@
    "group": "Images",
    "name": "menu: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":23,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":21,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
@@ -2339,7 +2381,7 @@
   },
   {
    "group": "Images",
-   "name": "gallery: no missing images (27)",
+   "name": "gallery: no missing images (25)",
    "pass": true,
    "detail": ""
   },
@@ -2347,7 +2389,7 @@
    "group": "Images",
    "name": "gallery: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":27,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.00030810060680093926}"
+   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.00030810060680093926}"
   },
   {
    "group": "Images",
@@ -2357,7 +2399,7 @@
   },
   {
    "group": "Images",
-   "name": "contact: no missing images (2)",
+   "name": "contact: no missing images (0)",
    "pass": true,
    "detail": ""
   },
@@ -2365,7 +2407,7 @@
    "group": "Images",
    "name": "contact: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":2,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",

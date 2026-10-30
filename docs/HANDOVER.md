@@ -26,7 +26,18 @@ Lighthouse, local, mobile, median of 3 (before is section 2):
 
 Pages are heavier because they show more photos, all lazy-loaded below the fold. These are local lab numbers, so re-measure after deployment.
 
+### Site furniture: "The Shopfront"
+
+The header, buttons, logo and footer were redesigned around the cafe front, with the same scalloped edge as the paper tickets.
+
+- **Header:** a burgundy awning with a striped scalloped edge hanging over the page. Desktop links drop a cream tag on hover, and the current page keeps its tag.
+- **Mobile menu:** a burgundy sheet set like the printed menu, with dotted leaders and short handwritten notes. The bottom action bar now makes Menu the cream ticket.
+- **Buttons:** tear-off order tickets with a perforated stub holding an arrow. Burgundy is primary, cream paper is secondary. Every existing button picks this up from `.btn` in `src/css/site.css`.
+- **Logo:** the torch now stands in for the i of Olympic, and the lettering sits on one line. It is vector (`src/brand/logo.svg`), traced from the master artwork, and the lettering follows the text colour. The flame flickers on hover. The master files in `brand_assets/` are unchanged.
+- **Footer:** large links, the address with two buttons, a paper receipt with the hours, the name set across the full width, and a legal strip with "Website designed by Laara Digital" linking to https://laaradigital.co.uk/.
+
 **Owner to confirm for this refresh**
+- [ ] **New logo:** this goes against section 03 of the brand guidelines, which says not to redraw the logo, change the torch proportions or use a substitute treatment. The lettering is the original traced artwork, but the arrangement is new and the torch is smaller and simplified. The owner needs to approve it. It also drops the "Dinner" tagline, which settles the Dinner point below on the website only. Menus, signage and the favicon still use the old artwork, and the guidelines would need updating if it is adopted.
 - [ ] The Rings section lists all five with prices. The brand guidelines ask for clearance before expanding ring imagery, so it uses names only, with no ring graphics. Please take advice before adding any.
 - [ ] Sunday Roast is now much more prominent. Is it still offered, and at these prices?
 - [ ] Is the featured Mediterranean Breakfast, with Full Olympic and Avo Breeze, the right selection?
@@ -77,7 +88,7 @@ Pages are heavier because they show more photos, all lazy-loaded below the fold.
 **Performance**
 - Runtime Tailwind CDN replaced by a 25KB compiled file.
 - Fonts self-hosted and reduced from 9 styles to 4.
-- Header logo reduced from 271KB to 9KB (retina version 23KB).
+- Header logo reduced from 271KB to 9KB (retina version 23KB). It has since been replaced by a 28KB SVG, about 12KB compressed.
 - Photos served at 480, 800 and 1200px with `srcset`, explicit dimensions, a prioritised hero and lazy loading below the fold.
 
 **Corrected from the photos**
@@ -147,7 +158,7 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 
 **Business details and wording**
 - [ ] Address, phone and opening hours (Mon-Sat 5:30am-5pm, Sun 6am-4pm).
-- [ ] **Dinner:** the site no longer mentions dinner, to match a 5pm close. The logo artwork, brand guidelines and printed menu still say "Breakfast - Brunch - Lunch - Dinner". The logo was left unchanged as instructed. Either the hours or the logo tagline should eventually change.
+- [ ] **Dinner:** the site no longer mentions dinner, to match a 5pm close. The master logo artwork, brand guidelines and printed menu still say "Breakfast - Brunch - Lunch - Dinner". The website logo no longer carries the tagline. Either the hours or the printed tagline should eventually change.
 - [ ] "All day" in the headline is kept as you asked. Is it fine given the 5pm close?
 - [ ] Is `info@olympiccafe.co.uk` monitored? The domain has mail records, but delivery hasn't been tested. It is left out of the schema until confirmed.
 - [ ] Is the map pin and directions destination the right spot?

@@ -11,11 +11,16 @@
   :root {
     /* One source for everything that has to clear the sticky header. */
     --header-h: 68px;
+    /* The awning's scallops: the bottom of the header, with the page showing between them. */
+    --awning-h: 10px;
     --action-bar-h: 0px;
     --sticky-h: 0px;
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --scallops-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='12'%3E%3Cpath d='M0 0h28v1a14 11 0 0 1-28 0z' fill='%238A181A'/%3E%3Cpath d='M28 0h28v1a14 11 0 0 1-28 0z' fill='%23F1DEC0'/%3E%3C/svg%3E");
+    --scallops-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10'%3E%3Cpath d='M0 10V9a14 9 0 0 1 28 0v1z' fill='%238A181A'/%3E%3C/svg%3E");
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
   }
-  @media (min-width: 768px) { :root { --header-h: 76px; } }
+  @media (min-width: 768px) { :root { --header-h: 76px; --awning-h: 12px; } }
   @media (max-width: 767.98px) { :root { --action-bar-h: 60px; } }
 
   html {
@@ -32,6 +37,8 @@
     padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom, 0px));
     overflow-wrap: break-word;
   }
+  /* The page runs up behind the awning, so the first section shows between the scallops. */
+  main { margin-top: calc(var(--awning-h) * -1); }
   h1, h2, h3 { @apply font-display font-semibold; letter-spacing: -0.02em; }
   h1 { letter-spacing: -0.03em; }
 
@@ -45,59 +52,174 @@
   .kicker { @apply font-accent text-sm text-brand-terracottadark; }
   .on-dark .kicker { @apply text-brand-cream; }
 
-  /* Header */
+  /* Header: the shopfront awning. Burgundy bar, then a striped scalloped edge hanging over the page. */
   .site-header { position: sticky; top: 0; z-index: 50; height: var(--header-h); }
-  .site-header-inner { height: var(--header-h); }
-  .site-logo { height: 60px; width: auto; }
-  .nav-link { @apply relative inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-brand-ink; }
-  .nav-link::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px;
-    background: #8A181A; transform: scaleX(0); transform-origin: left;
-    transition: transform 0.25s cubic-bezier(0.65, 0, 0.35, 1);
+  .site-header::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: var(--awning-h); z-index: 2; pointer-events: none;
+    background: var(--scallops-down) repeat-x left top / auto 100%;
+    filter: drop-shadow(0 3px 3px rgba(31, 31, 31, 0.28));
   }
-  .nav-link:hover::after, .nav-link[aria-current='page']::after { transform: scaleX(1); }
-  .nav-link:active { @apply text-brand-burgundy; }
+  .site-header-bar {
+    @apply relative bg-brand-burgundy text-brand-cream;
+    z-index: 3;
+    background-image: var(--grain), radial-gradient(60rem 10rem at 12% 0, rgba(217, 148, 94, 0.22), transparent 70%);
+  }
+  .site-header-inner { height: calc(var(--header-h) - var(--awning-h)); }
+  .site-logo { height: 42px; width: auto; }
+  @media (min-width: 768px) { .site-logo { height: 50px; } }
+  .logo-link { @apply inline-flex min-h-11 items-center rounded-lg; transition: transform 0.3s var(--ease-spring); }
+  .logo-link:hover { transform: rotate(-1.5deg) scale(1.03); }
+  .logo-link:active { transform: scale(0.98); }
+  .logo-link:hover .logo-fire { animation: flicker 0.9s ease-in-out infinite; }
+
+  /* Logo colours. Lettering follows the text colour, so the same artwork works on cream and on burgundy. */
+  .logo { display: block; overflow: visible; color: inherit; }
+  .logo-letters { fill: currentColor; }
+  .logo-handle { fill: #CC872E; }
+  .logo-shade { fill: #9A5F1B; }
+  .logo-flame { fill: #F2A81D; }
+  .logo-line { fill: #8A181A; }
+  .logo-fire { transform-box: fill-box; transform-origin: 50% 100%; }
+  @keyframes flicker {
+    0%, 100% { transform: scale(1, 1) skewX(0deg); }
+    30% { transform: scale(0.96, 1.05) skewX(-2deg); }
+    65% { transform: scale(1.03, 0.97) skewX(2deg); }
+  }
+
+  /* Desktop links: a cream tag drops from the awning. It stays down on the current page. */
+  .nav-link { @apply relative z-0 inline-flex items-center whitespace-nowrap px-3.5 font-semibold text-brand-cream; transition: color 0.15s ease, transform 0.15s ease; }
+  .nav-link::before {
+    @apply rounded-b-xl bg-brand-cream;
+    content: ''; position: absolute; left: 0; right: 0; top: -14px; bottom: 7px; z-index: -1;
+    opacity: 0; transform: translateY(-100%);
+    transition: transform 0.35s var(--ease-spring), opacity 0.15s ease;
+  }
+  .nav-link:hover, .nav-link[aria-current='page'] { @apply text-brand-burgundy; }
+  .nav-link:hover::before, .nav-link[aria-current='page']::before { opacity: 1; transform: none; }
+  .nav-link:active { transform: translateY(1px); }
+  .nav-link:focus-visible { outline-offset: -5px; }
+  .nav-link:hover:focus-visible, .nav-link[aria-current='page']:focus-visible { outline-color: #8A181A; }
+
+  .header-phone { @apply rounded text-brand-cream; }
+  .header-phone svg { transition: transform 0.3s var(--ease-spring); }
+  .header-phone:hover { @apply text-white underline underline-offset-4; }
+  .header-phone:hover svg { transform: rotate(-12deg) scale(1.1); }
+  .header-phone:active { @apply opacity-70; }
+  .menu-toggle { @apply text-brand-cream; transition: transform 0.15s ease; }
+  .menu-toggle:hover { background: rgba(241, 222, 192, 0.16); }
+  .menu-toggle:active { transform: scale(0.94); background: rgba(241, 222, 192, 0.28); }
+
+  /* Mobile menu: a sheet set like the printed menu, with dotted leaders. */
   .mobile-nav {
-    position: absolute; top: 100%; left: 0; right: 0;
+    @apply bg-brand-burgundy px-4 pb-6 pt-6 text-brand-cream shadow-lifted sm:px-6;
+    position: absolute; top: calc(100% - var(--awning-h)); left: 0; right: 0; z-index: 1;
     max-height: calc(100vh - var(--header-h));
     max-height: calc(100dvh - var(--header-h));
     overflow-y: auto;
+    background-image: var(--grain);
+    animation: sheet-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .mobile-nav a[aria-current='page'] { @apply text-brand-burgundy underline underline-offset-4; }
+  @keyframes sheet-in { from { opacity: 0; transform: translateY(-14px); } }
+  .sheet-link { @apply flex min-h-14 items-baseline gap-3 rounded-lg py-2 font-display text-3xl font-semibold leading-tight text-brand-cream; transition: transform 0.25s var(--ease-spring); }
+  .sheet-link::after { content: attr(data-note); @apply whitespace-nowrap font-accent text-sm font-normal text-brand-cream; }
+  .sheet-link:hover { @apply text-white; transform: translateX(4px); }
+  .sheet-link:active { transform: translateX(1px); }
+  .sheet-link[aria-current='page'] { @apply text-white; }
+  .sheet-link[aria-current='page']::after { content: 'You are here'; }
 
-  /* Buttons: 48px high, as the brand guidelines ask */
+  /* Buttons: tear-off order tickets, 48px high as the brand guidelines ask. The paper is ::before, because a mask
+     on the button itself would clip its focus ring. The stub at the right holds the arrow. */
   .btn {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-center text-base font-semibold;
-    transition: transform 0.25s var(--ease-spring), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    --stub: 2.5rem; --notch: 6px;
+    --btn-bg: #8A181A; --btn-ink: #F1DEC0; --btn-perf: rgba(241, 222, 192, 0.55);
+    @apply relative inline-flex min-h-12 items-center justify-center gap-2 py-2.5 text-center text-base font-semibold;
+    padding-left: 1.25rem; padding-right: calc(var(--stub) + 1rem);
+    isolation: isolate; color: var(--btn-ink);
+    filter: drop-shadow(0 6px 8px rgba(138, 24, 26, 0.26)) drop-shadow(0 1px 1px rgba(31, 31, 31, 0.16));
+    transition: transform 0.28s var(--ease-spring);
   }
-  .btn:active { transform: scale(0.98); }
-  .btn:focus-visible { outline-offset: 3px; }
-  .btn-primary { @apply bg-brand-burgundy text-brand-cream; box-shadow: 0 8px 20px -6px rgba(138, 24, 26, 0.5); }
-  .btn-primary:hover { @apply bg-brand-burgundydark; transform: translateY(-2px); }
-  .btn-secondary { @apply border-2 border-brand-burgundy text-brand-burgundy; }
-  .btn-secondary:hover { @apply bg-brand-burgundy text-brand-cream; transform: translateY(-2px); }
-  .btn-on-dark { @apply bg-brand-cream text-brand-burgundy; }
-  .btn-on-dark:hover { @apply bg-white; transform: translateY(-2px); }
-  .btn-outline-on-dark { @apply border-2 border-brand-cream text-brand-cream; }
-  .btn-outline-on-dark:hover { @apply bg-brand-cream text-brand-burgundy; transform: translateY(-2px); }
+  .btn::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: 0.75rem;
+    background-color: var(--btn-bg);
+    background-image: linear-gradient(to bottom, var(--btn-perf) 55%, transparent 0);
+    background-size: 1.5px 7px; background-repeat: repeat-y;
+    background-position: calc(100% - var(--stub)) 0;
+    -webkit-mask-image: radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0, transparent 92%, #000), radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%, transparent 92%, #000);
+    mask-image: radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0, transparent 92%, #000), radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%, transparent 92%, #000);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    transition: background-color 0.2s ease;
+  }
+  .btn::after {
+    content: ''; position: absolute; top: 50%; right: calc(var(--stub) / 2 - 0.5rem); width: 1rem; height: 1rem; margin-top: -0.5rem;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 8h11M9 3.5 13.5 8 9 12.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 8h11M9 3.5 13.5 8 9 12.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    transition: transform 0.28s var(--ease-spring);
+  }
+  @media (max-width: 639.98px) { .btn { --stub: 2.25rem; padding-left: 1rem; padding-right: calc(var(--stub) + 0.75rem); } }
+  .btn:hover { transform: translateY(-2px) rotate(-1deg); }
+  .btn:hover::after { transform: translateX(3px); }
+  .btn:active { transform: translateY(1px) scale(0.98); }
+  .btn:focus-visible { outline-offset: 3px; border-radius: 0.75rem; }
+  .btn:disabled { opacity: 0.6; cursor: progress; }
+  .btn-primary:hover { --btn-bg: #6E1315; }
+  .btn-secondary { --btn-bg: #F1DEC0; --btn-ink: #8A181A; --btn-perf: rgba(138, 24, 26, 0.5); }
+  .btn-secondary:hover { --btn-bg: #F6E6D3; }
+  .btn-on-dark { --btn-bg: #F1DEC0; --btn-ink: #8A181A; --btn-perf: rgba(138, 24, 26, 0.5); filter: drop-shadow(0 6px 8px rgba(31, 31, 31, 0.3)); }
+  .btn-on-dark:hover { --btn-bg: #FBF4E7; }
+  .btn-outline-on-dark { --btn-bg: #6E1315; --btn-ink: #FBF4E7; --btn-perf: rgba(241, 222, 192, 0.5); filter: drop-shadow(0 6px 8px rgba(31, 31, 31, 0.3)); }
+  .btn-outline-on-dark:hover { --btn-bg: #551011; }
+  @media (forced-colors: active) { .btn { border: 2px solid ButtonText; } }
 
   /* Inline text links */
   .text-link { @apply inline-flex min-h-11 items-center font-semibold text-brand-burgundy underline underline-offset-4; }
-  .text-link:hover { @apply text-brand-burgundydark; text-decoration-thickness: 2px; }
+  .text-link:hover { @apply text-brand-burgundydark; text-decoration-style: wavy; }
   .text-link:active { @apply opacity-70; }
   .on-dark .text-link { @apply text-brand-cream; }
   .on-dark .text-link:hover { @apply text-white; }
 
   /* Mobile action bar */
   .action-bar {
+    @apply bg-brand-burgundy;
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     padding-bottom: env(safe-area-inset-bottom, 0px);
     transition: transform 0.2s ease;
   }
+  .action-bar::before {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 8px; pointer-events: none;
+    background: var(--scallops-up) repeat-x left bottom / auto 100%;
+  }
   .action-bar a { @apply flex flex-1 items-center justify-center gap-2 font-semibold text-brand-cream; height: var(--action-bar-h); }
+  .action-bar a + a { border-left: 1px dashed rgba(241, 222, 192, 0.4); }
   .action-bar a:hover { @apply bg-brand-burgundydark; }
   .action-bar a:active { @apply bg-brand-ink; }
   .action-bar a:focus-visible { outline: 3px solid #F1DEC0; outline-offset: -5px; }
+  /* Menu is the main job of the bar, so it is the paper ticket. */
+  .action-bar a:first-child { @apply bg-brand-cream text-brand-burgundy; }
+  .action-bar a:first-child:hover { @apply bg-brand-creamlight; }
+  .action-bar a:first-child:active { @apply bg-brand-terracottapale; }
+  .action-bar a:first-child:focus-visible { outline-color: #8A181A; }
+
+  /* Footer: the bill, on a burgundy cloth, with the name set as large as the page allows. */
+  .site-footer { @apply relative bg-brand-burgundy text-brand-creamlight; background-image: var(--grain), radial-gradient(70rem 30rem at 85% 0, rgba(217, 148, 94, 0.2), transparent 70%); }
+  .site-footer::before {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 10px; pointer-events: none;
+    background: var(--scallops-up) repeat-x left bottom / auto 100%;
+  }
+  .footer-link { @apply inline-flex min-h-12 items-center rounded-lg font-display text-3xl font-semibold leading-tight text-brand-cream md:text-4xl; transition: transform 0.28s var(--ease-spring); }
+  .footer-link::after { content: '\2192'; margin-left: 0.5rem; font-family: theme('fontFamily.body'); font-size: 0.7em; opacity: 0; transform: translateX(-8px); transition: transform 0.28s var(--ease-spring), opacity 0.15s ease; }
+  .footer-link:hover { @apply text-white; transform: translateX(4px); }
+  .footer-link:hover::after { opacity: 1; transform: none; }
+  .footer-link:active { transform: translateX(1px); }
+  .receipt { @apply w-full max-w-sm self-start justify-self-center p-6 text-brand-ink; transform: rotate(-1.5deg); transition: transform 0.4s var(--ease-spring); }
+  .receipt:hover { transform: rotate(0deg) translateY(-3px); }
+  .footer-wordmark { @apply mx-auto w-full max-w-screen-xl px-4 text-brand-creamlight sm:px-6 lg:px-10; margin-bottom: -1%; }
+  .footer-legal { @apply relative bg-brand-burgundydark py-1.5 text-sm text-brand-creamlight; }
+  .footer-legal p { @apply flex min-h-11 flex-wrap items-center gap-x-1.5; }
+  .footer-credit { @apply inline-flex min-h-11 items-center rounded font-semibold text-brand-cream underline underline-offset-4; }
+  .footer-credit:hover { @apply text-white; text-decoration-style: wavy; }
+  .footer-credit:active { @apply opacity-70; }
   /* Lifted out of the way while typing so it can't cover a field or sit on the on-screen keyboard. */
   @media (max-width: 359.98px) { .action-bar a { @apply gap-1 text-sm; } }
   .typing .action-bar { transform: translateY(110%); visibility: hidden; }
@@ -203,7 +325,7 @@
   .torch-divider::before, .torch-divider::after { content: ''; flex: 1; height: 1px; background: rgba(138, 24, 26, 0.35); }
   .torch-divider img { height: 48px; width: auto; }
 
-  .site-notice { @apply bg-brand-ink px-4 py-2 text-center text-sm font-semibold text-brand-creamlight; }
+  .site-notice { @apply bg-brand-ink px-4 pb-2 text-center text-sm font-semibold text-brand-creamlight; padding-top: calc(var(--awning-h) + 0.5rem); }
 
   /* Menu: small round plates. Horizontal scroll on phones, with the next tile peeking in. */
   .menu-strip { @apply flex gap-4 overflow-x-auto py-1 sm:px-0; scrollbar-width: none; scroll-snap-type: x proximity; }
@@ -291,13 +413,14 @@
 html:not(.js) .js-only { display: none !important; }
 html:not(.js) .site-header { position: static; height: auto; }
 @media (max-width: 1099.98px) {
-  html:not(.js) .mobile-nav { position: static; display: flex !important; max-height: none; }
+  html:not(.js) .mobile-nav { position: static; display: flex !important; max-height: none; padding-bottom: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .reveal-pending { opacity: 1; transform: none; }
-  .btn:hover, .dish-card:hover, .gallery-link:hover img, .lightbox-btn:hover, .table-tile:hover .table-tile-photo, .menu-strip a:hover img, .lightbox-menu:hover { transform: none; }
+  .btn:hover, .btn:hover::after, .logo-link:hover, .receipt, .receipt:hover, .sheet-link:hover, .footer-link:hover, .dish-card:hover, .gallery-link:hover img, .lightbox-btn:hover, .table-tile:hover .table-tile-photo, .menu-strip a:hover img, .lightbox-menu:hover { transform: none; }
+  .logo-link:hover .logo-fire { animation: none; }
 }
 
 @media print {

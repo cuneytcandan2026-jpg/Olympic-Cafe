@@ -119,11 +119,9 @@ async function buildImages() {
     await sharp(input).resize(1200, 630, { fit: 'cover' }).jpeg({ quality: 78, mozjpeg: true }).toFile(output);
   }
 
-  // The master artwork: the pack's "nav" versions crop the bottom of the tagline.
+  // The site logo is vector, referenced by id from the header and footer.
+  fs.copyFileSync(path.join(ROOT, 'src/brand/logo.svg'), path.join(IMG_OUT, 'logo.svg'));
   const logo = path.join(ROOT, 'brand_assets/Photos/Logo Pack/olympic-cafe-logo-master-transparent.png');
-  for (const width of [185, 370]) {
-    await sharp(logo).resize({ width }).webp({ quality: 88, alphaQuality: 90, effort: 6 }).toFile(path.join(IMG_OUT, `logo-${width}.webp`));
-  }
   // The approved torch icon, cut from the master logo for the small torch dividers.
   await sharp(logo).extract({ left: 622, top: 20, width: 124, height: 318 }).resize({ height: 96 }).webp({ quality: 88, alphaQuality: 90, effort: 6 }).toFile(path.join(IMG_OUT, 'torch.webp'));
   const favicon = path.join(ROOT, 'src/brand/favicon-256.png');
