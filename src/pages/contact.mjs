@@ -1,5 +1,5 @@
 import { BUSINESS as B, CONTACT_CONFIG as C } from '../data/business.mjs';
-import { addressLines, esc, icon } from '../templates/layout.mjs';
+import { addressLines, esc, icon, openingPhrase } from '../templates/layout.mjs';
 
 function field({ id, label, type = 'text', autocomplete, hint, multiline }) {
   const describedBy = `${id}-error${hint ? ` ${id}-hint` : ''}`;
@@ -50,8 +50,8 @@ const form = C.endpoint
 export default {
   key: 'contact',
   path: '/contact.html',
-  title: 'Contact | Olympic Cafe, Waltham Cross',
-  description: 'Find Olympic Cafe at 257 High Street, Waltham Cross, Hertfordshire, EN8 7BE. Get directions, opening hours and contact details, or call 01992 631 555.',
+  title: 'Contact & Directions | Olympic Cafe, Waltham Cross',
+  description: 'Find Olympic Cafe at 257 High Street, Waltham Cross, EN8 7BE, a minute from Theobalds Grove station. Opening hours, directions, or call 01992 631 555.',
   ogTitle: 'Contact | Olympic Cafe',
   ogDescription: 'Find us, call us or email us. Olympic Cafe, 257 High Street, Waltham Cross.',
   ogImage: 'contact',
@@ -61,7 +61,7 @@ export default {
     <div class="container-page">
       <p class="kicker mb-1">/ GET IN TOUCH</p>
       <h1 class="mb-2 text-4xl text-brand-burgundy md:text-5xl">Come say hello</h1>
-      <p class="max-w-2xl md:text-lg">Find us on Waltham Cross High Street, open seven days a week for eat-in or takeaway.</p>
+      <p class="max-w-2xl md:text-lg">Find us at ${B.address.street}, ${B.address.town}, ${esc(B.landmark)}. We're open seven days a week ${openingPhrase()} for breakfast, brunch and lunch, to eat in or take away.</p>
     </div>
   </section>
 

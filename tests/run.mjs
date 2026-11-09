@@ -87,10 +87,28 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
   check(group, 'schema has stable @id, url and menu', ld['@type'] === 'CafeOrCoffeeShop' && ld['@id'] === `${BUSINESS.baseUrl}/#cafe` && ld.url === `${BUSINESS.baseUrl}/` && ld.hasMenu === `${BUSINESS.baseUrl}/menu.html`);
   check(group, 'schema has no ratings or reviews', !ld.aggregateRating && !ld.review);
   check(group, 'schema details are visible on the page', html.includes(BUSINESS.address.postcode) && html.includes(BUSINESS.phoneDisplay));
+  const decimals = (n) => (String(n).split('.')[1] || '').length;
+  check(group, 'schema geo has 5+ decimal places', ld.geo && decimals(ld.geo.latitude) >= 5 && decimals(ld.geo.longitude) >= 5);
+  check(group, 'schema menu and map links', ld.menu === ld.hasMenu && /^https:\/\/maps\.google\.com\/\?cid=\d+$/.test(ld.hasMap));
+  check(group, 'schema has no unverified email', !ld.email);
 }
+check('SEO', 'schema description is the visible homepage intro', (() => {
+  const home = read('index.html');
+  const ld = JSON.parse(home.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
+  return home.replace(/<script[\s\S]*?<\/script>/g, '').includes(`>${ld.description}</p>`);
+})());
+check('SEO', 'contact page says where we are', read('contact.html').replace(/<[^>]+>/g, ' ').includes(BUSINESS.landmark));
 const sitemap = read('sitemap.xml');
 check('SEO', 'sitemap lists the 5 pages with / as home', Object.values(PAGES).every((p) => sitemap.includes(`<loc>${BUSINESS.baseUrl}${p}</loc>`)) && !sitemap.includes('index.html') && !sitemap.includes('404'));
-check('SEO', 'robots.txt points at the sitemap', read('robots.txt').includes(`Sitemap: ${BUSINESS.baseUrl}/sitemap.xml`));
+check('SEO', 'sitemap has a lastmod date for every page', (sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length === Object.keys(PAGES).length);
+const robots = read('robots.txt');
+check('SEO', 'robots.txt points at the sitemap', robots.includes(`Sitemap: ${BUSINESS.baseUrl}/sitemap.xml`));
+// Search crawlers must never be blocked: that would take the cafe out of Google, Bing, Copilot or ChatGPT search.
+const robotGroups = robots.replace(/#.*$/gm, '').split(/\n\s*\n/).filter((g) => /user-agent/i.test(g));
+const blocked = (agent) => robotGroups.some((g) => new RegExp(`user-agent:\\s*(${agent}|\\*)\\s*$`, 'im').test(g) && /^disallow:\s*\/\s*$/im.test(g));
+check('SEO', 'robots.txt lets search crawlers in', !['Googlebot', 'Bingbot', 'OAI-SearchBot'].some(blocked));
+const keyFile = fs.readdirSync(ROOT).find((f) => /^[0-9a-f]{32}\.txt$/.test(f));
+check('SEO', 'IndexNow key file holds its own key', keyFile && read(keyFile).trim() === keyFile.replace('.txt', ''));
 check('SEO', '404 page is noindex', read('404.html').includes('name="robots" content="noindex"'));
 
 const menuHtml = read('menu.html');

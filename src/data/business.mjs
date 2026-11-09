@@ -14,6 +14,11 @@ export const BUSINESS = {
     postcode: 'EN8 7BE',
     country: 'GB',
   },
+  // The map pin and listing from the café's Google Business Profile, checked 9 November 2026.
+  geo: { latitude: 51.6913972, longitude: -0.0343561 },
+  mapsUrl: 'https://maps.google.com/?cid=8714870921426489416',
+  // Walking time from Google Maps walking directions, checked 9 November 2026 (1 min, about 110 m).
+  landmark: "a minute's walk from Theobalds Grove station",
   directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE',
   mapEmbedUrl: 'https://maps.google.com/maps?q=257%20High%20Street%2C%20Waltham%20Cross%2C%20Hertfordshire%2C%20EN8%207BE&z=15&output=embed',
   hours: [

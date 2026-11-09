@@ -2,7 +2,7 @@ import { BANK_HOLIDAYS, BANK_HOLIDAYS_UNTIL, BUSINESS as B, HOURS_EXCEPTIONS, RE
 import { DISH_PHOTOS, EXPLORE } from '../data/explore.mjs';
 import { dishId, findDish, MENU, priceLabel } from '../data/menu.mjs';
 import { DEFAULT_HEADING, MOMENTS, NEXT_VISIT_HEADING, ROAST_FROM, ROAST_HEADING } from '../data/moments.mjs';
-import { addressLines, cropped, diptych, esc, formatPrice, hoursRows, icon, imagePreload, jsonScript, photo, torchDivider } from '../templates/layout.mjs';
+import { addressLines, cropped, diptych, esc, formatPrice, hoursRows, icon, imagePreload, jsonScript, photo, summary, torchDivider } from '../templates/layout.mjs';
 
 const HERO_SIZES = '(min-width: 1024px) 58vw, 100vw';
 
@@ -118,7 +118,7 @@ export default {
   key: 'home',
   path: '/',
   title: 'Olympic Cafe | Breakfast, Brunch & Lunch in Waltham Cross',
-  description: 'Neighbourhood cafe on Waltham Cross High Street serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Open 7 days a week.',
+  description: 'Neighbourhood cafe on Waltham Cross High Street serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Open 7 days from 5:30am.',
   ogTitle: 'Olympic Cafe | Waltham Cross',
   ogDescription: 'Proper food and a warm welcome on Waltham Cross High Street. Eat in or take away, 7 days a week.',
   ogImage: 'home',
@@ -140,7 +140,7 @@ export default {
         <a href="/menu.html" class="btn btn-primary flex-1 whitespace-nowrap sm:flex-none">View Menu</a>
         <a href="${B.directionsUrl}" rel="noopener" class="btn btn-secondary flex-1 whitespace-nowrap sm:flex-none">Get Directions</a>
       </div>
-      <p class="max-w-xl text-base md:text-lg lg:mb-6">Olympic Cafe is a neighbourhood cafe on Waltham Cross High Street, serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Eat in or take away, seven days a week.</p>
+      <p class="max-w-xl text-base md:text-lg lg:mb-6">${summary()}</p>
       <p class="mt-3 flex items-start gap-2 text-sm font-semibold text-brand-burgundy lg:order-2 lg:mt-4">${icon('pin', 18, 'mt-1 shrink-0')}${B.address.street}, ${B.address.town}, ${B.address.postcode}</p>
     </div>
   </section>
@@ -281,7 +281,8 @@ export default {
         ${torchDivider('mb-3')}
         <p class="kicker mb-1 text-center">/ COME SAY HELLO</p>
         <h2 id="visit-heading" class="mb-4 text-center text-3xl text-brand-burgundy">Visit Olympic Cafe in Waltham Cross</h2>
-        <p class="mb-4 text-center">${addressLines}</p>
+        <p class="text-center">${addressLines}</p>
+        <p class="mb-4 mt-1 text-center text-sm">${esc(B.landmark[0].toUpperCase() + B.landmark.slice(1))}</p>
         <ul class="mb-1">${hoursRows('py-1', 'label')}</ul>
         <p class="mb-5 text-sm">Eat in or take away</p>
         <div class="grid gap-3">

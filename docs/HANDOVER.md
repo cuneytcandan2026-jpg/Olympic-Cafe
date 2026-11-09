@@ -230,6 +230,37 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 4. Check the map pin, add the real photos, and keep special hours up to date.
 5. Make other listings match too, so details are consistent everywhere.
 
-## 6. Editing the site from now on
+**Bing Webmaster Tools** (Bing feeds Copilot and Bing's AI answers)
+1. Go to bing.com/webmasters and choose "Import from Google Search Console" once Search Console is set up, or verify the site directly.
+2. Submit `https://olympiccafe.co.uk/sitemap.xml`.
+3. After each deploy, run `npm run indexnow`. It tells Bing and other IndexNow engines which pages changed. It checks the key file is live before sending anything.
+4. Claim or check the listing at bingplaces.com. It couldn't be checked from outside, and a Bing search for "Olympic Cafe Waltham Cross" showed no local listing.
+
+## 6. AI search visibility (checked 9 November 2026)
+
+**What the site now does**
+- All key information is plain HTML: address, phone, hours, every menu category, dish and price. Nothing important needs JavaScript or sits in a PDF or image.
+- Googlebot, Bingbot, OAI-SearchBot (ChatGPT search), GPTBot, ChatGPT-User, PerplexityBot and Claude-SearchBot all get a normal 200 response with the same content. GitHub Pages serves the site directly, with no firewall or bot protection in front.
+- One `CafeOrCoffeeShop` JSON-LD block on each page: name, description (the visible homepage intro), address, map pin, hours, phone, menu link, map link, cuisine and price range. There are no ratings, reviews or "best" claims, and the email is left out until confirmed.
+- The sitemap has a `lastmod` date for each page. The build moves it only when a page's published content changes, using `src/data/page-dates.json`.
+- The homepage and contact page say when we open (5:30am, 6am on Sundays) and that we're a minute's walk from Theobalds Grove station.
+
+**Crawler decisions**
+- *Search* crawlers (Googlebot, Bingbot, OAI-SearchBot) must stay allowed. Blocking OAI-SearchBot keeps the café out of ChatGPT search answers.
+- *Model training* is a separate choice and is currently allowed. Blocking GPTBot or Google-Extended in `robots.txt` stops training use without affecting Google Search, AI Overviews or ChatGPT search. The lines to add are in the comment at the top of `robots.txt`. Edit them in `scripts/build.mjs`, since `robots.txt` is generated. For a café, allowing training does no harm and may help AI assistants know the business, but it's your call.
+- Bing has new separate training and "grounding" preferences that take effect from 1 February 2027. Both default to allowed, so nothing needs doing to stay in Copilot answers.
+- Google Search Console has a "Search generative AI" setting (Settings). It defaults to included. Check that nobody has switched it off.
+
+**Owner actions found in the listings check**
+- [ ] Google Business Profile: change the website from `http://www.olympiccafe.co.uk/` to `https://olympiccafe.co.uk/`. It redirects correctly, but the exact address is better.
+- [ ] Google Business Profile lists **Dinner** under dining options, but you close at 5pm. Remove it, or tell us if you serve an early evening menu.
+- [ ] Google Business Profile says **Accepts reservations** and **Delivery**. The website says only "eat in or take away". Confirm which is right. If you deliver through Uber Eats, the website can say so.
+- [ ] Nextdoor shows the café as **permanently closed**. Claim the page at nextdoor.co.uk/pages/olympic-cafe/ and correct it.
+- [ ] Wanderlog shows the right address but puts the café in **Waltham Abbey** and has no website link. Ask them to correct it.
+- [ ] No TripAdvisor or Yelp listing was found for this address. Both rank highly for "best café in Waltham Cross". Consider claiming or creating one.
+- [ ] ChatGPT's answers cited directories such as Cylex, HelloCounty, Birdeye, WorldCafeMap and Uber Eats. Make sure the café's listing on each is claimed and correct, with the website link.
+- [ ] Keep asking happy customers for Google reviews. AI answers leaned heavily on review counts and ratings.
+
+## 7. Editing the site from now on
 
 The root HTML, CSS and JS files are generated. Change business facts in `src/data/business.mjs`, dishes in `src/data/menu.mjs`, and pages in `src/pages/`. Then run `npm run build`, followed by `npm test`.

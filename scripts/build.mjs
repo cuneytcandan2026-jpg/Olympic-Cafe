@@ -129,10 +129,50 @@ async function buildImages() {
   await sharp(favicon).resize(180, 180).flatten({ background: '#FBF4E7' }).png({ compressionLevel: 9, palette: true }).toFile(path.join(IMG_OUT, 'apple-touch-icon.png'));
 }
 
-function writeSeoFiles(pages) {
-  const urls = pages.filter((p) => !p.noindex).map((p) => `  <url>\n    <loc>${BUSINESS.baseUrl}${p.path}</loc>\n  </url>`).join('\n');
+// The sitemap's lastmod only moves when a page's published content changes, so search engines can trust it.
+// Each page's HTML is fingerprinted with the CSS and JS file hashes taken out, so a style-only change doesn't count.
+// Only the real site build records new dates. Test builds into OUT_DIR read the file and leave it alone.
+const PAGE_DATES = path.join(ROOT, 'src/data/page-dates.json');
+
+function pageDates(rendered) {
+  const saved = fs.existsSync(PAGE_DATES) ? JSON.parse(fs.readFileSync(PAGE_DATES, 'utf8')) : {};
+  const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London' }).format(new Date());
+  const dates = {};
+  for (const { path: urlPath, html } of rendered) {
+    const fingerprint = hash(html.replace(/\.[0-9a-f]{10}\.(css|js)/g, '.$1'));
+    dates[urlPath] = saved[urlPath] && saved[urlPath].hash === fingerprint ? saved[urlPath] : { hash: fingerprint, date: today };
+  }
+  if (OUT === ROOT && JSON.stringify(dates) !== JSON.stringify(saved)) fs.writeFileSync(PAGE_DATES, `${JSON.stringify(dates, null, 2)}\n`);
+  return dates;
+}
+
+// Search and AI-search crawlers (Googlebot, Bingbot, OAI-SearchBot and the rest) are all allowed by the * group.
+// Model training is a separate choice, recorded in docs/HANDOVER.md. Blocking a training crawler here does not
+// remove the site from search, but blocking a search crawler does.
+const ROBOTS = `# Olympic Cafe. Everything on this site is public and may be crawled.
+#
+# Search engines and AI search tools (Googlebot, Bingbot, OAI-SearchBot and others) need this access
+# for the cafe to be found and cited. Keep it.
+#
+# AI model training is a separate decision and is currently allowed. To opt out of training only,
+# without affecting search, add these lines at the end, separated from the * group by a blank line:
+#   User-agent: GPTBot
+#   Disallow: /
+#   User-agent: Google-Extended
+#   Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: ${BUSINESS.baseUrl}/sitemap.xml
+`;
+
+function writeSeoFiles(rendered) {
+  const indexed = rendered.filter((p) => !p.noindex);
+  const dates = pageDates(indexed);
+  const urls = indexed.map((p) => `  <url>\n    <loc>${BUSINESS.baseUrl}${p.path}</loc>\n    <lastmod>${dates[p.path].date}</lastmod>\n  </url>`).join('\n');
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
-  fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${BUSINESS.baseUrl}/sitemap.xml\n`);
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), ROBOTS);
 }
 
 fs.mkdirSync(OUT, { recursive: true });
@@ -144,8 +184,9 @@ const OUTPUT_NAMES = { home: 'index.html', about: 'about.html', menu: 'menu.html
 const pages = [];
 for (const name of ['home', 'about', 'menu', 'gallery', 'contact', 'notfound']) {
   const { default: definition } = await import(pathToFileURL(path.join(ROOT, `src/pages/${name}.mjs`)).href);
-  pages.push(definition);
-  fs.writeFileSync(path.join(OUT, OUTPUT_NAMES[definition.key]), page(definition, assets));
+  const html = page(definition, assets);
+  pages.push({ path: definition.path, noindex: definition.noindex, html });
+  fs.writeFileSync(path.join(OUT, OUTPUT_NAMES[definition.key]), html);
 }
 writeSeoFiles(pages);
 console.log(`Built ${pages.length} pages to ${OUT}. CSS ${assets.css}`);

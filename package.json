@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node tests/run.mjs",
     "build": "node scripts/build.mjs",
-    "preview": "node scripts/build.mjs && node serve.mjs"
+    "preview": "node scripts/build.mjs && node serve.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "keywords": [],
   "author": "",

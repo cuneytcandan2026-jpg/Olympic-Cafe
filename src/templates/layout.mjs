@@ -36,14 +36,25 @@ export const priceRange = () => {
   return `£${Math.min(...food).toFixed(2)}-£${Math.max(...food).toFixed(2)}`;
 };
 
+// The opening times as a phrase, such as "from 5:30am (6am on Sundays)".
+export const openingPhrase = () => {
+  const [week, sunday] = B.hours.map((h) => h.time.split('–')[0]);
+  return `from ${week} (${sunday} on Sundays)`;
+};
+
+export const summary = () => `${B.name} is a neighbourhood cafe on Waltham Cross High Street, serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Eat in or take away, seven days a week ${openingPhrase()}.`;
+
 export function schema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'CafeOrCoffeeShop',
     '@id': `${B.baseUrl}/#cafe`,
     name: B.name,
+    description: summary(),
     url: `${B.baseUrl}/`,
     hasMenu: `${B.baseUrl}/menu.html`,
+    menu: `${B.baseUrl}/menu.html`,
+    hasMap: B.mapsUrl,
     image: `${B.baseUrl}/assets/img/og/home.jpg`,
     telephone: B.phoneSchema,
     servesCuisine: B.servesCuisine,
@@ -56,6 +67,7 @@ export function schema() {
       postalCode: B.address.postcode,
       addressCountry: B.address.country,
     },
+    geo: { '@type': 'GeoCoordinates', latitude: B.geo.latitude, longitude: B.geo.longitude },
     openingHoursSpecification: B.hours.map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: h.days,

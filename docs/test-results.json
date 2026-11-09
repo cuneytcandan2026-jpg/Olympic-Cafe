@@ -1,6 +1,6 @@
 {
- "date": "2026-10-30T21:23:20.254Z",
- "total": 528,
+ "date": "2026-11-09T17:23:31.419Z",
+ "total": 548,
  "failed": 0,
  "results": [
   {
@@ -13,7 +13,7 @@
    "group": "SEO home",
    "name": "unique description, 70-170 chars",
    "pass": true,
-   "detail": "160"
+   "detail": "165"
   },
   {
    "group": "SEO home",
@@ -96,6 +96,24 @@
   {
    "group": "SEO home",
    "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema has no unverified email",
    "pass": true,
    "detail": ""
   },
@@ -196,6 +214,24 @@
    "detail": ""
   },
   {
+   "group": "SEO about",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO about",
+   "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO menu",
    "name": "unique title",
    "pass": true,
@@ -288,6 +324,24 @@
   {
    "group": "SEO menu",
    "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema has no unverified email",
    "pass": true,
    "detail": ""
   },
@@ -388,10 +442,28 @@
    "detail": ""
   },
   {
+   "group": "SEO gallery",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO gallery",
+   "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO contact",
    "name": "unique title",
    "pass": true,
-   "detail": "Contact | Olympic Cafe, Waltham Cross"
+   "detail": "Contact &amp; Directions | Olympic Cafe, Waltham Cross"
   },
   {
    "group": "SEO contact",
@@ -484,6 +556,36 @@
    "detail": ""
   },
   {
+   "group": "SEO contact",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "schema description is the visible homepage intro",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "contact page says where we are",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO",
    "name": "sitemap lists the 5 pages with / as home",
    "pass": true,
@@ -491,7 +593,25 @@
   },
   {
    "group": "SEO",
+   "name": "sitemap has a lastmod date for every page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
    "name": "robots.txt points at the sitemap",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "robots.txt lets search crawlers in",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO",
+   "name": "IndexNow key file holds its own key",
    "pass": true,
    "detail": ""
   },
@@ -2413,13 +2533,13 @@
    "group": "Images",
    "name": "gallery: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.00030810060680093926}"
+   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",
    "name": "gallery: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0003"
+   "detail": "0.0000"
   },
   {
    "group": "Images",
@@ -2431,7 +2551,7 @@
    "group": "Images",
    "name": "contact: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
+   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
   },
   {
    "group": "Images",

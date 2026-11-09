@@ -1,3 +1,15 @@
+# Olympic Cafe. Everything on this site is public and may be crawled.
+#
+# Search engines and AI search tools (Googlebot, Bingbot, OAI-SearchBot and others) need this access
+# for the cafe to be found and cited. Keep it.
+#
+# AI model training is a separate decision and is currently allowed. To opt out of training only,
+# without affecting search, add these lines at the end, separated from the * group by a blank line:
+#   User-agent: GPTBot
+#   Disallow: /
+#   User-agent: Google-Extended
+#   Disallow: /
+
 User-agent: *
 Allow: /
 
