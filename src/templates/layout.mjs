@@ -1,4 +1,4 @@
-import { BUSINESS as B, NOTICE, GTM_ID } from '../data/business.mjs';
+import { BUSINESS as B, NOTICE, GA_ID } from '../data/business.mjs';
 import { cropOf } from '../data/crops.mjs';
 import { MENU } from '../data/menu.mjs';
 
@@ -143,20 +143,20 @@ function footer() {
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
-      ${GTM_ID ? '<p class="js-only"><button type="button" class="footer-credit" data-cookie-settings>Cookie settings</button></p>' : ''}
+      ${GA_ID ? '<p class="js-only"><button type="button" class="footer-credit" data-cookie-settings>Cookie settings</button></p>' : ''}
       <p>Website designed by <a href="${LAARA_URL}" rel="noopener" class="footer-credit">Laara Digital</a></p>
     </div>
   </div>
 </footer>`;
 }
 
-// Consent first: Google Consent Mode starts with everything denied, and Tag Manager is only fetched once the
+// Consent first: Google Consent Mode starts with everything denied, and Google Analytics is only fetched once the
 // visitor accepts analytics, so nothing is sent to Google before that. A choice is kept for a year, then asked again.
 // window.ocConsent is called by site.js when the visitor chooses.
-function gtmHead() {
+function analyticsHead() {
   return `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
-window.ocConsent=function(granted){gtag('consent','update',{analytics_storage:granted?'granted':'denied'});if(!granted||window.ocGtm)return;window.ocGtm=true;dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${GTM_ID}';document.head.appendChild(j);};
+window.ocConsent=function(granted){gtag('consent','update',{analytics_storage:granted?'granted':'denied'});if(!granted||window.ocGa)return;window.ocGa=true;gtag('js',new Date());gtag('config','${GA_ID}');var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtag/js?id=${GA_ID}';document.head.appendChild(j);};
 try{var c=JSON.parse(localStorage.getItem('${CONSENT_KEY}'));if(c&&Date.now()-c.at<${CONSENT_MAX_AGE})ocConsent(c.analytics===true);}catch(e){}</script>`;
 }
 
@@ -185,7 +185,7 @@ export function page({ key, path, title, description, ogTitle, ogDescription, og
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-${GTM_ID ? gtmHead() : ''}
+${GA_ID ? analyticsHead() : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 ${noindex ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" href="${url}" />`}
@@ -218,7 +218,7 @@ ${scriptTags}
 </head>
 <body>
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
-${GTM_ID ? cookieBanner() : ''}
+${GA_ID ? cookieBanner() : ''}
 ${header(key)}
 <main id="main-content" tabindex="-1">
 ${NOTICE ? `<p class="site-notice">${esc(NOTICE)}</p>` : ''}

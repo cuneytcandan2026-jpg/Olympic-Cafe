@@ -1,5 +1,5 @@
 {
- "date": "2026-11-10T00:45:50.651Z",
+ "date": "2026-11-10T01:00:32.375Z",
  "total": 582,
  "failed": 0,
  "results": [
@@ -3293,31 +3293,31 @@
   },
   {
    "group": "Cookies",
-   "name": "home: Tag Manager is not in the HTML until consent",
+   "name": "home: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
   {
    "group": "Cookies",
-   "name": "about: Tag Manager is not in the HTML until consent",
+   "name": "about: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
   {
    "group": "Cookies",
-   "name": "menu: Tag Manager is not in the HTML until consent",
+   "name": "menu: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
   {
    "group": "Cookies",
-   "name": "gallery: Tag Manager is not in the HTML until consent",
+   "name": "gallery: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
   {
    "group": "Cookies",
-   "name": "contact: Tag Manager is not in the HTML until consent",
+   "name": "contact: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
@@ -3425,9 +3425,9 @@
   },
   {
    "group": "Cookies",
-   "name": "Accept loads Tag Manager",
+   "name": "Accept loads Google Analytics",
    "pass": true,
-   "detail": "https://www.googletagmanager.com/gtm.js?id=GTM-57BJ28J4"
+   "detail": "https://www.googletagmanager.com/gtag/js?id=G-RKBW4QZWJE"
   },
   {
    "group": "Cookies",
@@ -3443,7 +3443,7 @@
   },
   {
    "group": "Cookies",
-   "name": "after accepting, the next page loads Tag Manager",
+   "name": "after accepting, the next page loads Google Analytics",
    "pass": true,
    "detail": ""
   },

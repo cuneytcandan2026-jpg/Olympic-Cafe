@@ -9,7 +9,7 @@ import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import worker from '../workers/contact/worker.js';
 import { MENU, dishCount, dishId } from '../src/data/menu.mjs';
-import { BUSINESS, GTM_ID } from '../src/data/business.mjs';
+import { BUSINESS, GA_ID } from '../src/data/business.mjs';
 import { MOMENTS } from '../src/data/moments.mjs';
 import { DISH_PHOTOS } from '../src/data/explore.mjs';
 
@@ -1148,10 +1148,10 @@ const nowState = (page) => page.evaluate(() => ({
   const group = 'Cookies';
   for (const [key, urlPath] of Object.entries(PAGES)) {
     const html = fs.readFileSync(path.join(ROOT, urlPath === '/' ? 'index.html' : urlPath.slice(1)), 'utf8');
-    check(group, `${key}: Tag Manager is not in the HTML until consent`, !/<script[^>]+googletagmanager|<iframe[^>]+googletagmanager/.test(html));
+    check(group, `${key}: Google Analytics is not in the HTML until consent`, !/<script[^>]+googletagmanager|<iframe[^>]+googletagmanager/.test(html));
   }
 
-  // A fresh visitor in a clean browser context. Tag Manager is answered locally so the test never calls Google.
+  // A fresh visitor in a clean browser context. Google is answered locally so the test never calls Google.
   async function firstVisit(url, { width = 1440, height = 900, mobile = false, before } = {}) {
     const ctx = await browser.createBrowserContext();
     const page = await ctx.newPage();
@@ -1205,7 +1205,7 @@ const nowState = (page) => page.evaluate(() => ({
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('oc-consent')));
     check(group, 'Accept hides the banner', !(await bannerOpen(page)));
     check(group, 'Accept saves the choice', stored && stored.analytics === true);
-    check(group, 'Accept loads Tag Manager', page.google.some((u) => u.includes(`gtm.js?id=${GTM_ID}`)), page.google.join(' '));
+    check(group, 'Accept loads Google Analytics', page.google.some((u) => u.includes(`gtag/js?id=${GA_ID}`)), page.google.join(' '));
     check(group, 'Accept grants analytics storage only', await page.evaluate(() => {
       const consent = [...dataLayer].filter((e) => e[0] === 'consent');
       return consent[0][1] === 'default' && consent[0][2].analytics_storage === 'denied' && consent[0][2].ad_storage === 'denied'
@@ -1215,7 +1215,7 @@ const nowState = (page) => page.evaluate(() => ({
     await page.reload({ waitUntil: 'load' });
     await wait(300);
     check(group, 'after accepting, the next page has no banner', !(await bannerOpen(page)));
-    check(group, 'after accepting, the next page loads Tag Manager', page.google.length > 0);
+    check(group, 'after accepting, the next page loads Google Analytics', page.google.length > 0);
 
     await page.evaluate(() => { document.cookie = '_ga=GA1.1.123.456; path=/'; document.querySelector('[data-cookie-settings]').scrollIntoView(); });
     await page.focus('[data-cookie-settings]');
