@@ -4,7 +4,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-57BJ28J4');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+window.ocConsent=function(granted){gtag('consent','update',{analytics_storage:granted?'granted':'denied'});if(!granted||window.ocGtm)return;window.ocGtm=true;dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=GTM-57BJ28J4';document.head.appendChild(j);};
+try{var c=JSON.parse(localStorage.getItem('oc-consent'));if(c&&Date.now()-c.at<31536000000)ocConsent(c.analytics===true);}catch(e){}</script>
 <title>Page not found | Olympic Cafe, Waltham Cross</title>
 <meta name="description" content="That page could not be found. Try the Olympic Cafe menu or contact page." />
 <meta name="robots" content="noindex" />
@@ -31,13 +34,22 @@
 <link rel="preload" href="/assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/fonts/fredoka-600.woff2" as="font" type="font/woff2" crossorigin />
 
-<link rel="stylesheet" href="/assets/css/site.350e2ebed2.css" />
+<link rel="stylesheet" href="/assets/css/site.6e723cc755.css" />
 
-<script src="/assets/js/site.f84a444309.js" defer></script>
+<script src="/assets/js/site.e807effc1a.js" defer></script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-57BJ28J4" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
+<section id="cookie-banner" class="cookie-banner js-only" aria-labelledby="cookie-title" data-key="oc-consent" data-max-age="31536000000" hidden>
+  <p class="kicker" aria-hidden="true">/ COOKIES</p>
+  <h2 id="cookie-title" class="text-2xl leading-tight text-brand-burgundy" tabindex="-1">Mind if we count visits?</h2>
+  <p class="mt-2 text-sm">We'd like to use Google Analytics cookies to see how people use this site. They're only set if you accept. You can change your mind any time under Cookie settings at the bottom of the page.</p>
+  <p class="mt-2 text-sm font-semibold" data-consent-current hidden></p>
+  <div class="mt-4 grid grid-cols-2 gap-3">
+    <button type="button" class="btn btn-primary" data-consent="accept">Accept</button>
+    <button type="button" class="btn btn-primary" data-consent="reject">Reject</button>
+  </div>
+</section>
 <header class="site-header on-dark">
   <div class="site-header-bar">
     <div class="site-header-inner container-page flex items-center justify-between gap-4">
@@ -115,6 +127,7 @@
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
+      <p class="js-only"><button type="button" class="footer-credit" data-cookie-settings>Cookie settings</button></p>
       <p>Website designed by <a href="https://laaradigital.co.uk/" rel="noopener" class="footer-credit">Laara Digital</a></p>
     </div>
   </div>

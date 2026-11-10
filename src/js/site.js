@@ -34,6 +34,60 @@
     row.querySelector('.today-tag').hidden = false;
   });
 
+  // Cookie consent. The banner shows until the visitor accepts or rejects analytics, and Cookie settings in the
+  // footer brings it back. The choice is kept in this browser only. If storage is blocked, it lasts for this page.
+  const banner = document.getElementById('cookie-banner');
+  if (banner && typeof window.ocConsent === 'function') {
+    const key = banner.dataset.key;
+    const maxAge = Number(banner.dataset.maxAge);
+    const current = banner.querySelector('[data-consent-current]');
+    let opener = null;
+    let choice = null;
+    try {
+      const saved = JSON.parse(localStorage.getItem(key));
+      if (saved && Date.now() - saved.at < maxAge) choice = saved.analytics === true;
+    } catch (e) { /* storage blocked: ask again */ }
+
+    // Rejecting after accepting has to remove the cookies Google Analytics already set.
+    const clearAnalyticsCookies = () => {
+      const host = location.hostname;
+      const domains = ['', host, `.${host}`, `.${host.replace(/^www\./, '')}`];
+      document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((name) => /^_(ga|gid|gat)/.test(name)).forEach((name) => {
+        domains.forEach((d) => { document.cookie = `${name}=; Max-Age=0; path=/${d ? `; domain=${d}` : ''}`; });
+      });
+    };
+
+    const show = (focus) => {
+      current.hidden = choice === null;
+      current.textContent = choice === null ? '' : `Right now you've ${choice ? 'accepted' : 'rejected'} analytics cookies.`;
+      banner.hidden = false;
+      if (focus) banner.querySelector('h2').focus();
+    };
+    const hide = () => {
+      const hadFocus = banner.contains(document.activeElement);
+      banner.hidden = true;
+      if (hadFocus) (opener || document.getElementById('main-content')).focus({ preventScroll: true });
+      opener = null;
+    };
+
+    banner.addEventListener('click', (e) => {
+      const button = e.target.closest('[data-consent]');
+      if (!button) return;
+      choice = button.dataset.consent === 'accept';
+      try { localStorage.setItem(key, JSON.stringify({ analytics: choice, at: Date.now() })); } catch (err) { /* this page only */ }
+      window.ocConsent(choice);
+      if (!choice) clearAnalyticsCookies();
+      hide();
+    });
+    // Reopened from the footer, Escape closes it again without changing the choice.
+    banner.addEventListener('keydown', (e) => { if (e.key === 'Escape' && choice !== null) hide(); });
+    document.querySelectorAll('[data-cookie-settings]').forEach((button) => button.addEventListener('click', () => {
+      opener = button;
+      show(true);
+    }));
+    if (choice === null) show(false);
+  }
+
   // Only sections that are off-screen right now get hidden, and only here in JS,
   // so nothing above the fold animates and nothing stays hidden if this never runs.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

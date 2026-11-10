@@ -143,11 +143,37 @@ function footer() {
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
+      ${GTM_ID ? '<p class="js-only"><button type="button" class="footer-credit" data-cookie-settings>Cookie settings</button></p>' : ''}
       <p>Website designed by <a href="${LAARA_URL}" rel="noopener" class="footer-credit">Laara Digital</a></p>
     </div>
   </div>
 </footer>`;
 }
+
+// Consent first: Google Consent Mode starts with everything denied, and Tag Manager is only fetched once the
+// visitor accepts analytics, so nothing is sent to Google before that. A choice is kept for a year, then asked again.
+// window.ocConsent is called by site.js when the visitor chooses.
+function gtmHead() {
+  return `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+window.ocConsent=function(granted){gtag('consent','update',{analytics_storage:granted?'granted':'denied'});if(!granted||window.ocGtm)return;window.ocGtm=true;dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${GTM_ID}';document.head.appendChild(j);};
+try{var c=JSON.parse(localStorage.getItem('${CONSENT_KEY}'));if(c&&Date.now()-c.at<${CONSENT_MAX_AGE})ocConsent(c.analytics===true);}catch(e){}</script>`;
+}
+
+function cookieBanner() {
+  return `<section id="cookie-banner" class="cookie-banner js-only" aria-labelledby="cookie-title" data-key="${CONSENT_KEY}" data-max-age="${CONSENT_MAX_AGE}" hidden>
+  <p class="kicker" aria-hidden="true">/ COOKIES</p>
+  <h2 id="cookie-title" class="text-2xl leading-tight text-brand-burgundy" tabindex="-1">Mind if we count visits?</h2>
+  <p class="mt-2 text-sm">We'd like to use Google Analytics cookies to see how people use this site. They're only set if you accept. You can change your mind any time under Cookie settings at the bottom of the page.</p>
+  <p class="mt-2 text-sm font-semibold" data-consent-current hidden></p>
+  <div class="mt-4 grid grid-cols-2 gap-3">
+    <button type="button" class="btn btn-primary" data-consent="accept">Accept</button>
+    <button type="button" class="btn btn-primary" data-consent="reject">Reject</button>
+  </div>
+</section>`;
+}
+const CONSENT_KEY = 'oc-consent';
+const CONSENT_MAX_AGE = 365 * 24 * 60 * 60 * 1000;
 
 export function page({ key, path, title, description, ogTitle, ogDescription, ogImage, body, scripts = [], preloads = '', extraHead = '', noindex = false }, assets) {
   const url = `${B.baseUrl}${path}`;
@@ -159,7 +185,7 @@ export function page({ key, path, title, description, ogTitle, ogDescription, og
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-${GTM_ID ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');</script>` : ''}
+${GTM_ID ? gtmHead() : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 ${noindex ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" href="${url}" />`}
@@ -191,8 +217,8 @@ ${extraHead}
 ${scriptTags}
 </head>
 <body>
-${GTM_ID ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>` : ''}
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
+${GTM_ID ? cookieBanner() : ''}
 ${header(key)}
 <main id="main-content" tabindex="-1">
 ${NOTICE ? `<p class="site-notice">${esc(NOTICE)}</p>` : ''}

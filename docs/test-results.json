@@ -1,6 +1,6 @@
 {
- "date": "2026-11-10T00:33:13.366Z",
- "total": 548,
+ "date": "2026-11-10T00:45:50.651Z",
+ "total": 582,
  "failed": 0,
  "results": [
   {
@@ -25,7 +25,7 @@
    "group": "SEO home",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "1233333333322333233333233322332222"
+   "detail": "21233333333322333233333233322332222"
   },
   {
    "group": "SEO home",
@@ -139,7 +139,7 @@
    "group": "SEO about",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "12223332222"
+   "detail": "212223332222"
   },
   {
    "group": "SEO about",
@@ -253,7 +253,7 @@
    "group": "SEO menu",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "12233333333333323332333333233333233333333323333333323333333333333332333333323333233333333333323333233333333233333333332333333333333333333333332333333333323333333333233333333233332333333333332333333323333333333333333233333333333333333333333333333323222"
+   "detail": "212233333333333323332333333233333233333333323333333323333333333333332333333323333233333333333323333233333333233333333332333333333333333333333332333333333323333333333233333333233332333333333332333333323333333333333333233333333333333333333333333333323222"
   },
   {
    "group": "SEO menu",
@@ -367,7 +367,7 @@
    "group": "SEO gallery",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "122222222"
+   "detail": "2122222222"
   },
   {
    "group": "SEO gallery",
@@ -481,7 +481,7 @@
    "group": "SEO contact",
    "name": "heading levels never skip",
    "pass": true,
-   "detail": "122222222"
+   "detail": "2122222222"
   },
   {
    "group": "SEO contact",
@@ -2551,7 +2551,7 @@
    "group": "Images",
    "name": "contact: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.000007958422026712834}"
   },
   {
    "group": "Images",
@@ -2857,7 +2857,7 @@
    "group": "Right now",
    "name": "Sunday roast: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0002"
+   "detail": "0.0000"
   },
   {
    "group": "Right now",
@@ -3217,7 +3217,7 @@
    "group": "Order pad",
    "name": "320x640: bar clears the page end and action bar",
    "pass": true,
-   "detail": "{\"footer\":516.1875,\"barTop\":520,\"scrollY\":21575,\"maxScroll\":21575,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+   "detail": "{\"footer\":516.1875,\"barTop\":520,\"scrollY\":21619,\"maxScroll\":21619,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
   },
   {
    "group": "Order pad",
@@ -3229,7 +3229,7 @@
    "group": "Order pad",
    "name": "375x667: bar clears the page end and action bar",
    "pass": true,
-   "detail": "{\"footer\":543.1875,\"barTop\":547,\"scrollY\":19072,\"maxScroll\":19072,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+   "detail": "{\"footer\":543.1875,\"barTop\":547,\"scrollY\":19116,\"maxScroll\":19116,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
   },
   {
    "group": "Order pad",
@@ -3288,6 +3288,210 @@
   {
    "group": "Order pad",
    "name": "a dish link clears filters that would hide it",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "home: Tag Manager is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "about: Tag Manager is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "menu: Tag Manager is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "gallery: Tag Manager is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "contact: Tag Manager is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "home: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "home: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "about: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "about: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "menu: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "menu: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "gallery: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "gallery: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "contact: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "contact: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "mobile: banner sits above the action bar",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "mobile: banner keeps the 16px gutter",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Accept and Reject have equal weight",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "mobile: buttons are at least 44px tall",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "banner has no axe violations",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Accept hides the banner",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Accept saves the choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Accept loads Tag Manager",
+   "pass": true,
+   "detail": "https://www.googletagmanager.com/gtm.js?id=GTM-57BJ28J4"
+  },
+  {
+   "group": "Cookies",
+   "name": "Accept grants analytics storage only",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "after accepting, the next page has no banner",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "after accepting, the next page loads Tag Manager",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Cookie settings reopens the banner with focus on it",
+   "pass": true,
+   "detail": "cookie-title"
+  },
+  {
+   "group": "Cookies",
+   "name": "reopened banner states the current choice",
+   "pass": true,
+   "detail": "Right now you've accepted analytics cookies."
+  },
+  {
+   "group": "Cookies",
+   "name": "Escape closes it and returns focus to Cookie settings",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Reject saves the choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "Reject removes Google Analytics cookies",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "after rejecting, no banner and nothing from Google",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "a choice over a year old is asked again",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "without JavaScript there is no banner or settings button",
    "pass": true,
    "detail": ""
   }

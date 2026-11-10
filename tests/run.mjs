@@ -9,7 +9,7 @@ import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import worker from '../workers/contact/worker.js';
 import { MENU, dishCount, dishId } from '../src/data/menu.mjs';
-import { BUSINESS } from '../src/data/business.mjs';
+import { BUSINESS, GTM_ID } from '../src/data/business.mjs';
 import { MOMENTS } from '../src/data/moments.mjs';
 import { DISH_PHOTOS } from '../src/data/explore.mjs';
 
@@ -40,6 +40,16 @@ const servers = [
 await wait(800);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
+// Every page starts with a cookie choice already made, so the banner never sits over what other tests click.
+// The cookie banner tests use their own browser contexts to see a real first visit.
+const plainNewPage = browser.newPage.bind(browser);
+browser.newPage = async () => {
+  const page = await plainNewPage();
+  await page.evaluateOnNewDocument(() => {
+    try { localStorage.setItem('oc-consent', JSON.stringify({ analytics: false, at: Date.now() })); } catch (e) { /* about:blank */ }
+  });
+  return page;
+};
 const axeSource = fs.readFileSync(path.join(ROOT, 'node_modules/axe-core/axe.min.js'), 'utf8');
 
 async function open(url, { width = 1440, height = 900, js = true, reduced = false, mobile = false } = {}) {
@@ -1131,6 +1141,121 @@ const nowState = (page) => page.evaluate(() => ({
   await wait(100);
   check('Order pad', 'a dish link clears filters that would hide it', await target.evaluate((id) => document.getElementById(id).offsetParent !== null && !document.getElementById('menu-veg').checked, benedict));
   await target.close();
+}
+
+// ---------- Cookie consent: nothing from Google until the visitor accepts ----------
+{
+  const group = 'Cookies';
+  for (const [key, urlPath] of Object.entries(PAGES)) {
+    const html = fs.readFileSync(path.join(ROOT, urlPath === '/' ? 'index.html' : urlPath.slice(1)), 'utf8');
+    check(group, `${key}: Tag Manager is not in the HTML until consent`, !/<script[^>]+googletagmanager|<iframe[^>]+googletagmanager/.test(html));
+  }
+
+  // A fresh visitor in a clean browser context. Tag Manager is answered locally so the test never calls Google.
+  async function firstVisit(url, { width = 1440, height = 900, mobile = false, before } = {}) {
+    const ctx = await browser.createBrowserContext();
+    const page = await ctx.newPage();
+    await page.setViewport({ width, height, deviceScaleFactor: 1, hasTouch: mobile, isMobile: mobile });
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    page.google = [];
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+      if (/google-analytics|googletagmanager/.test(request.url())) {
+        page.google.push(request.url());
+        request.respond({ status: 200, contentType: 'text/javascript', body: '' });
+      } else request.continue();
+    });
+    if (before) await page.evaluateOnNewDocument(before);
+    await page.goto(url, { waitUntil: 'load' });
+    page.ctx = ctx;
+    return page;
+  }
+  const bannerOpen = (page) => page.$eval('#cookie-banner', (b) => !b.hidden);
+
+  for (const [key, urlPath] of Object.entries(PAGES)) {
+    const page = await firstVisit(SITE + urlPath);
+    await wait(300);
+    check(group, `${key}: banner shows on a first visit`, await bannerOpen(page));
+    check(group, `${key}: no request to Google before a choice`, page.google.length === 0, page.google.join(' '));
+    await page.ctx.close();
+  }
+
+  {
+    const page = await firstVisit(`${SITE}/`, { width: 390, height: 844, mobile: true });
+    const box = await page.evaluate(() => {
+      const banner = document.getElementById('cookie-banner').getBoundingClientRect();
+      const bar = document.querySelector('.action-bar').getBoundingClientRect();
+      const [accept, reject] = [...document.querySelectorAll('[data-consent]')].map((b) => b.getBoundingClientRect());
+      return { clear: banner.bottom <= bar.top, inside: banner.left >= 16 && banner.right <= innerWidth - 16, same: accept.width === reject.width && accept.height === reject.height, tall: accept.height >= 44 };
+    });
+    check(group, 'mobile: banner sits above the action bar', box.clear);
+    check(group, 'mobile: banner keeps the 16px gutter', box.inside);
+    check(group, 'Accept and Reject have equal weight', box.same);
+    check(group, 'mobile: buttons are at least 44px tall', box.tall);
+    await page.addScriptTag({ content: axeSource });
+    const axe = await page.evaluate(async () => (await window.axe.run(document.getElementById('cookie-banner'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } })).violations.map((v) => v.id));
+    check(group, 'banner has no axe violations', axe.length === 0, axe.join(' '));
+    await page.ctx.close();
+  }
+
+  {
+    const page = await firstVisit(`${SITE}/`);
+    await page.click('[data-consent="accept"]');
+    await wait(300);
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('oc-consent')));
+    check(group, 'Accept hides the banner', !(await bannerOpen(page)));
+    check(group, 'Accept saves the choice', stored && stored.analytics === true);
+    check(group, 'Accept loads Tag Manager', page.google.some((u) => u.includes(`gtm.js?id=${GTM_ID}`)), page.google.join(' '));
+    check(group, 'Accept grants analytics storage only', await page.evaluate(() => {
+      const consent = [...dataLayer].filter((e) => e[0] === 'consent');
+      return consent[0][1] === 'default' && consent[0][2].analytics_storage === 'denied' && consent[0][2].ad_storage === 'denied'
+        && consent.at(-1)[2].analytics_storage === 'granted' && !('ad_storage' in consent.at(-1)[2]);
+    }));
+    page.google.length = 0;
+    await page.reload({ waitUntil: 'load' });
+    await wait(300);
+    check(group, 'after accepting, the next page has no banner', !(await bannerOpen(page)));
+    check(group, 'after accepting, the next page loads Tag Manager', page.google.length > 0);
+
+    await page.evaluate(() => { document.cookie = '_ga=GA1.1.123.456; path=/'; document.querySelector('[data-cookie-settings]').scrollIntoView(); });
+    await page.focus('[data-cookie-settings]');
+    await page.keyboard.press('Enter');
+    const reopened = await page.evaluate(() => ({ focus: document.activeElement.id, current: document.querySelector('[data-consent-current]').textContent }));
+    check(group, 'Cookie settings reopens the banner with focus on it', (await bannerOpen(page)) && reopened.focus === 'cookie-title', reopened.focus);
+    check(group, 'reopened banner states the current choice', reopened.current.includes('accepted'), reopened.current);
+    await page.keyboard.press('Escape');
+    check(group, 'Escape closes it and returns focus to Cookie settings', !(await bannerOpen(page)) && await page.evaluate(() => document.activeElement.matches('[data-cookie-settings]')));
+    await page.keyboard.press('Enter');
+    await page.click('[data-consent="reject"]');
+    const after = await page.evaluate(() => ({ stored: JSON.parse(localStorage.getItem('oc-consent')), cookies: document.cookie }));
+    check(group, 'Reject saves the choice', after.stored.analytics === false);
+    check(group, 'Reject removes Google Analytics cookies', !/_ga/.test(after.cookies), after.cookies);
+    await page.ctx.close();
+  }
+
+  {
+    const page = await firstVisit(`${SITE}/`);
+    await page.click('[data-consent="reject"]');
+    page.google.length = 0;
+    await page.reload({ waitUntil: 'load' });
+    await wait(300);
+    check(group, 'after rejecting, no banner and nothing from Google', !(await bannerOpen(page)) && page.google.length === 0, page.google.join(' '));
+    await page.ctx.close();
+  }
+
+  {
+    const page = await firstVisit(`${SITE}/`, { before: () => localStorage.setItem('oc-consent', JSON.stringify({ analytics: true, at: Date.now() - 366 * 864e5 })) });
+    await wait(300);
+    check(group, 'a choice over a year old is asked again', (await bannerOpen(page)) && page.google.length === 0);
+    await page.ctx.close();
+  }
+
+  {
+    const page = await open(`${SITE}/`, { js: false, width: 390, height: 844 });
+    const hidden = await page.evaluate(() => [...document.querySelectorAll('#cookie-banner, [data-cookie-settings]')].every((el) => el.offsetParent === null));
+    check(group, 'without JavaScript there is no banner or settings button', hidden);
+    await page.close();
+  }
 }
 
 // ---------- Preview screenshots ----------
