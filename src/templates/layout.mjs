@@ -1,4 +1,4 @@
-import { BUSINESS as B, NOTICE, GA_ID } from '../data/business.mjs';
+import { BUSINESS as B, NOTICE, GA_ID, GSC_VERIFICATION } from '../data/business.mjs';
 import { cropOf } from '../data/crops.mjs';
 import { MENU } from '../data/menu.mjs';
 
@@ -188,6 +188,7 @@ export function page({ key, path, title, description, ogTitle, ogDescription, og
 ${GA_ID ? analyticsHead() : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
+${GSC_VERIFICATION ? `<meta name="google-site-verification" content="${GSC_VERIFICATION}" />` : ''}
 ${noindex ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" href="${url}" />`}
 <meta property="og:site_name" content="${B.name}" />
 <meta property="og:locale" content="en_GB" />

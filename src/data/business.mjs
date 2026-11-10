@@ -54,6 +54,10 @@ export const REVIEWS = [];
 // visitor accepts the cookie banner. Set GA_ID to an empty string at build time to leave analytics and the banner out.
 export const GA_ID = process.env.GA_ID ?? 'G-RKBW4QZWJE';
 
+// Google Search Console HTML-tag verification for https://olympiccafe.co.uk/. Keep it: the property was first verified
+// through Google Analytics, which only loads after cookie consent, so Google may not see that on a re-check.
+export const GSC_VERIFICATION = '7EyTNQdLD4MuZlO5Gm60by6xlT-Q8YR1aIOeso1oZ2g';
+
 // Set at build time. With no endpoint the contact page shows phone and email only, never a form that cannot deliver.
 export const CONTACT_CONFIG = {
   endpoint: process.env.CONTACT_ENDPOINT || '',
