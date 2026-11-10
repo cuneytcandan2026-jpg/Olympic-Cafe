@@ -143,7 +143,7 @@ function footer() {
   <div class="footer-legal on-dark">
     <div class="container-page flex flex-col gap-x-6 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; 2026 Olympic Cafe. All rights reserved.</p>
-      ${GA_ID ? '<p class="js-only"><button type="button" class="footer-credit" data-cookie-settings>Cookie settings</button></p>' : ''}
+      <p><a href="/privacy.html" class="footer-credit">Privacy and cookies</a>${GA_ID ? '<span class="js-only px-1" aria-hidden="true">&middot;</span><button type="button" class="footer-credit js-only" data-cookie-settings>Cookie settings</button>' : ''}</p>
       <p>Website designed by <a href="${LAARA_URL}" rel="noopener" class="footer-credit">Laara Digital</a></p>
     </div>
   </div>
@@ -165,7 +165,8 @@ function cookieBanner() {
   <p class="kicker" aria-hidden="true">/ COOKIES</p>
   <h2 id="cookie-title" class="text-2xl leading-tight text-brand-burgundy" tabindex="-1">Mind if we count visits?</h2>
   <p class="mt-2 text-sm">We'd like to use Google Analytics cookies to see how people use this site. They're only set if you accept. You can change your mind any time under Cookie settings at the bottom of the page.</p>
-  <p class="mt-2 text-sm font-semibold" data-consent-current hidden></p>
+  <a href="/privacy.html" class="text-link text-sm">Privacy and cookies</a>
+  <p class="text-sm font-semibold" data-consent-current hidden></p>
   <div class="mt-4 grid grid-cols-2 gap-3">
     <button type="button" class="btn btn-primary" data-consent="accept">Accept</button>
     <button type="button" class="btn btn-primary" data-consent="reject">Reject</button>

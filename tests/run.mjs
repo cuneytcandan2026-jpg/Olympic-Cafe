@@ -18,7 +18,7 @@ const PREVIEW = path.join(ROOT, '.preview');
 const SHOTS = path.join(ROOT, 'docs/preview');
 const SITE = 'http://127.0.0.1:3201';
 const FORM_SITE = 'http://127.0.0.1:3202';
-const PAGES = { home: '/', about: '/about.html', menu: '/menu.html', gallery: '/gallery.html', contact: '/contact.html' };
+const PAGES = { home: '/', about: '/about.html', menu: '/menu.html', gallery: '/gallery.html', contact: '/contact.html', privacy: '/privacy.html' };
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 const results = [];
@@ -109,7 +109,7 @@ check('SEO', 'schema description is the visible homepage intro', (() => {
 })());
 check('SEO', 'contact page says where we are', read('contact.html').replace(/<[^>]+>/g, ' ').includes(BUSINESS.landmark));
 const sitemap = read('sitemap.xml');
-check('SEO', 'sitemap lists the 5 pages with / as home', Object.values(PAGES).every((p) => sitemap.includes(`<loc>${BUSINESS.baseUrl}${p}</loc>`)) && !sitemap.includes('index.html') && !sitemap.includes('404'));
+check('SEO', 'sitemap lists every page with / as home', Object.values(PAGES).every((p) => sitemap.includes(`<loc>${BUSINESS.baseUrl}${p}</loc>`)) && !sitemap.includes('index.html') && !sitemap.includes('404'));
 check('SEO', 'sitemap has a lastmod date for every page', (sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length === Object.keys(PAGES).length);
 const robots = read('robots.txt');
 check('SEO', 'robots.txt points at the sitemap', robots.includes(`Sitemap: ${BUSINESS.baseUrl}/sitemap.xml`));
@@ -1241,6 +1241,35 @@ const nowState = (page) => page.evaluate(() => ({
     await wait(300);
     check(group, 'after rejecting, no banner and nothing from Google', !(await bannerOpen(page)) && page.google.length === 0, page.google.join(' '));
     await page.ctx.close();
+  }
+
+  // Taps on call, directions and menu are counted only after Accept. Links are stopped from navigating so the
+  // page stays put while the events are read back from dataLayer.
+  {
+    const tapEvents = (page) => page.evaluate(() => {
+      document.addEventListener('click', (e) => e.preventDefault());
+      ['a[href^="tel:"]', 'a[href*="google.com/maps"]', 'a[href^="/menu.html"]'].forEach((s) => document.querySelector(s).click());
+      return [...dataLayer].filter((e) => e[0] === 'event').map((e) => `${e[1]}:${e[2].link_area}`);
+    });
+    const page = await firstVisit(`${SITE}/`);
+    check(group, 'no tap events before a choice', (await tapEvents(page)).length === 0);
+    await page.click('[data-consent="accept"]');
+    const events = await tapEvents(page);
+    check(group, 'after Accept, call, directions and menu taps are counted', ['call_click', 'directions_click', 'menu_click'].every((n) => events.some((e) => e.startsWith(`${n}:`))), events.join(' '));
+    await page.ctx.close();
+    const rejected = await firstVisit(`${SITE}/`);
+    await rejected.click('[data-consent="reject"]');
+    check(group, 'after Reject, taps are not counted', (await tapEvents(rejected)).length === 0);
+    await rejected.ctx.close();
+  }
+
+  {
+    const page = await firstVisit(`${SITE}/privacy.html`);
+    await page.evaluate(() => document.querySelector('main [data-cookie-settings]').click());
+    check(group, 'privacy page button reopens the banner', await bannerOpen(page));
+    await page.ctx.close();
+    const footerLink = read('index.html').includes('href="/privacy.html"');
+    check(group, 'every page links to the privacy notice', Object.keys(PAGES).every((k) => read(fileOf(k)).includes('href="/privacy.html"')) && footerLink);
   }
 
   {

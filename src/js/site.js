@@ -88,6 +88,20 @@
     if (choice === null) show(false);
   }
 
+  // Counts taps on the actions that matter to the cafe, but only once analytics has been accepted on this page,
+  // so nothing queues up to be sent if someone accepts later.
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link || !window.ocGa || typeof window.gtag !== 'function') return;
+    const href = link.getAttribute('href');
+    const name = href.startsWith('tel:') ? 'call_click'
+      : /google\.com\/maps|maps\.google\.com/.test(href) ? 'directions_click'
+        : /^\/menu\.html/.test(href) ? 'menu_click' : null;
+    if (!name) return;
+    const area = link.closest('.action-bar') ? 'action_bar' : link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'page';
+    window.gtag('event', name, { link_url: link.href, link_area: area });
+  });
+
   // Only sections that are off-screen right now get hidden, and only here in JS,
   // so nothing above the fold animates and nothing stays hidden if this never runs.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

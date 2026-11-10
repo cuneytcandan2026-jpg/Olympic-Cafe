@@ -1,6 +1,6 @@
 {
- "date": "2026-11-10T01:18:25.774Z",
- "total": 582,
+ "date": "2026-11-10T01:45:14.479Z",
+ "total": 638,
  "failed": 0,
  "results": [
   {
@@ -574,6 +574,120 @@
    "detail": ""
   },
   {
+   "group": "SEO privacy",
+   "name": "unique title",
+   "pass": true,
+   "detail": "Privacy and Cookies | Olympic Cafe, Waltham Cross"
+  },
+  {
+   "group": "SEO privacy",
+   "name": "unique description, 70-170 chars",
+   "pass": true,
+   "detail": "138"
+  },
+  {
+   "group": "SEO privacy",
+   "name": "exactly one h1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "heading levels never skip",
+   "pass": true,
+   "detail": "212222222222"
+  },
+  {
+   "group": "SEO privacy",
+   "name": "canonical is production and page-specific",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/privacy.html"
+  },
+  {
+   "group": "SEO privacy",
+   "name": "og:url matches canonical",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "og:image is an absolute JPEG that exists",
+   "pass": true,
+   "detail": "https://olympiccafe.co.uk/assets/img/og/home.jpg"
+  },
+  {
+   "group": "SEO privacy",
+   "name": "og:image is 1200x630 and under 300KB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "no runtime Tailwind or Google Fonts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "no index.html links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "no staging or local URLs",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "no Dinner or night owls wording",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "one JSON-LD block",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema has stable @id, url and menu",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema has no ratings or reviews",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema details are visible on the page",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema geo has 5+ decimal places",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema menu and map links",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO privacy",
+   "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO",
    "name": "schema description is the visible homepage intro",
    "pass": true,
@@ -587,7 +701,7 @@
   },
   {
    "group": "SEO",
-   "name": "sitemap lists the 5 pages with / as home",
+   "name": "sitemap lists every page with / as home",
    "pass": true,
    "detail": ""
   },
@@ -665,7 +779,7 @@
   },
   {
    "group": "Links",
-   "name": "all 151 internal URLs return 200",
+   "name": "all 152 internal URLs return 200",
    "pass": true,
    "detail": ""
   },
@@ -702,6 +816,12 @@
   {
    "group": "Links",
    "name": "contact: footer credits Laara Digital with a link",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Links",
+   "name": "privacy: footer credits Laara Digital with a link",
    "pass": true,
    "detail": ""
   },
@@ -876,6 +996,18 @@
   {
    "group": "No JS",
    "name": "contact: navigation links are reachable",
+   "pass": true,
+   "detail": "flex"
+  },
+  {
+   "group": "No JS",
+   "name": "privacy: nothing is transparent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "No JS",
+   "name": "privacy: navigation links are reachable",
    "pass": true,
    "detail": "flex"
   },
@@ -1541,6 +1673,18 @@
   },
   {
    "group": "Layout",
+   "name": "320x640 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "320x640 privacy: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":320,\"clientW\":320,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
    "name": "375x667 home: no horizontal overflow",
    "pass": true,
    "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
@@ -1596,6 +1740,18 @@
   {
    "group": "Layout",
    "name": "375x667 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "375x667 privacy: action bar never covers the page end",
    "pass": true,
    "detail": "{\"scrollW\":375,\"clientW\":375,\"footerClear\":true,\"wide\":[]}"
   },
@@ -1661,6 +1817,18 @@
   },
   {
    "group": "Layout",
+   "name": "390x844 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "390x844 privacy: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":390,\"clientW\":390,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
    "name": "430x932 home: no horizontal overflow",
    "pass": true,
    "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
@@ -1716,6 +1884,18 @@
   {
    "group": "Layout",
    "name": "430x932 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "430x932 privacy: action bar never covers the page end",
    "pass": true,
    "detail": "{\"scrollW\":430,\"clientW\":430,\"footerClear\":true,\"wide\":[]}"
   },
@@ -1781,6 +1961,18 @@
   },
   {
    "group": "Layout",
+   "name": "768x1024 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "768x1024 privacy: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":768,\"clientW\":768,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
    "name": "1440x900 home: no horizontal overflow",
    "pass": true,
    "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
@@ -1836,6 +2028,18 @@
   {
    "group": "Layout",
    "name": "1440x900 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "1440x900 privacy: action bar never covers the page end",
    "pass": true,
    "detail": "{\"scrollW\":1440,\"clientW\":1440,\"footerClear\":true,\"wide\":[]}"
   },
@@ -1901,6 +2105,18 @@
   },
   {
    "group": "Layout",
+   "name": "844x390 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "844x390 privacy: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":844,\"clientW\":844,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
    "name": "667x375 home: no horizontal overflow",
    "pass": true,
    "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
@@ -1961,6 +2177,18 @@
   },
   {
    "group": "Layout",
+   "name": "667x375 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "667x375 privacy: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":667,\"clientW\":667,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
    "name": "720x450 home: no horizontal overflow",
    "pass": true,
    "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
@@ -2016,6 +2244,18 @@
   {
    "group": "Layout",
    "name": "720x450 contact: action bar never covers the page end",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 privacy: no horizontal overflow",
+   "pass": true,
+   "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
+  },
+  {
+   "group": "Layout",
+   "name": "720x450 privacy: action bar never covers the page end",
    "pass": true,
    "detail": "{\"scrollW\":720,\"clientW\":720,\"footerClear\":true,\"wide\":[]}"
   },
@@ -2114,6 +2354,18 @@
    "name": "contact: inputs are 16px or larger",
    "pass": true,
    "detail": "16,16,16"
+  },
+  {
+   "group": "Touch",
+   "name": "privacy: all controls are at least 44x44",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Touch",
+   "name": "privacy: inputs are 16px or larger",
+   "pass": true,
+   "detail": ""
   },
   {
    "group": "Touch",
@@ -2459,6 +2711,12 @@
   },
   {
    "group": "Motion",
+   "name": "privacy: reduced motion disables smooth scroll and reveals",
+   "pass": true,
+   "detail": "{\"scroll\":\"auto\",\"pending\":0}"
+  },
+  {
+   "group": "Motion",
    "name": "menu jumps instantly with reduced motion",
    "pass": true,
    "detail": "96"
@@ -2561,6 +2819,24 @@
   },
   {
    "group": "Images",
+   "name": "privacy: no missing images (0)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Images",
+   "name": "privacy: all have dimensions and alt text",
+   "pass": true,
+   "detail": "{\"total\":0,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.003330709236303208}"
+  },
+  {
+   "group": "Images",
+   "name": "privacy: layout shift under 0.1",
+   "pass": true,
+   "detail": "0.0033"
+  },
+  {
+   "group": "Images",
    "name": "hero image is prioritised and not lazy",
    "pass": true,
    "detail": ""
@@ -2628,6 +2904,18 @@
   {
    "group": "Axe",
    "name": "contact at 1440px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "privacy at 390px",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Axe",
+   "name": "privacy at 1440px",
    "pass": true,
    "detail": ""
   },
@@ -3241,7 +3529,7 @@
    "group": "Order pad",
    "name": "768x1024: bar clears the page end and action bar",
    "pass": true,
-   "detail": "{\"footer\":959.75,\"barTop\":964,\"scrollY\":11145,\"maxScroll\":11145,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+   "detail": "{\"footer\":959.75,\"barTop\":964,\"scrollY\":11189,\"maxScroll\":11189,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
   },
   {
    "group": "Order pad",
@@ -3265,7 +3553,7 @@
    "group": "Order pad",
    "name": "844x390: bar clears the page end and action bar",
    "pass": true,
-   "detail": "{\"footer\":326.25,\"barTop\":330,\"scrollY\":11622,\"maxScroll\":11622,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
+   "detail": "{\"footer\":326.25,\"barTop\":330,\"scrollY\":11666,\"maxScroll\":11666,\"footerClear\":true,\"barClear\":true,\"inside\":true,\"wide\":false}"
   },
   {
    "group": "Order pad",
@@ -3318,6 +3606,12 @@
   {
    "group": "Cookies",
    "name": "contact: Google Analytics is not in the HTML until consent",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "privacy: Google Analytics is not in the HTML until consent",
    "pass": true,
    "detail": ""
   },
@@ -3378,6 +3672,18 @@
   {
    "group": "Cookies",
    "name": "contact: no request to Google before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "privacy: banner shows on a first visit",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "privacy: no request to Google before a choice",
    "pass": true,
    "detail": ""
   },
@@ -3480,6 +3786,36 @@
   {
    "group": "Cookies",
    "name": "after rejecting, no banner and nothing from Google",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "no tap events before a choice",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "after Accept, call, directions and menu taps are counted",
+   "pass": true,
+   "detail": "call_click:header directions_click:page menu_click:header"
+  },
+  {
+   "group": "Cookies",
+   "name": "after Reject, taps are not counted",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "privacy page button reopens the banner",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "Cookies",
+   "name": "every page links to the privacy notice",
    "pass": true,
    "detail": ""
   },

@@ -180,9 +180,9 @@ copyFonts();
 await buildImages();
 const assets = { css: buildCss(), js: await buildJs() };
 
-const OUTPUT_NAMES = { home: 'index.html', about: 'about.html', menu: 'menu.html', gallery: 'gallery.html', contact: 'contact.html', notfound: '404.html' };
+const OUTPUT_NAMES = { home: 'index.html', about: 'about.html', menu: 'menu.html', gallery: 'gallery.html', contact: 'contact.html', privacy: 'privacy.html', notfound: '404.html' };
 const pages = [];
-for (const name of ['home', 'about', 'menu', 'gallery', 'contact', 'notfound']) {
+for (const name of ['home', 'about', 'menu', 'gallery', 'contact', 'privacy', 'notfound']) {
   const { default: definition } = await import(pathToFileURL(path.join(ROOT, `src/pages/${name}.mjs`)).href);
   const html = page(definition, assets);
   pages.push({ path: definition.path, noindex: definition.noindex, html });

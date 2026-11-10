@@ -1,22 +1,26 @@
 {
   "/": {
-    "hash": "7d8fc65aee",
+    "hash": "7e15215659",
     "date": "2026-11-10"
   },
   "/about.html": {
-    "hash": "8db1347c85",
+    "hash": "f88ffb1b52",
     "date": "2026-11-10"
   },
   "/menu.html": {
-    "hash": "234e212e09",
+    "hash": "322d2d0f2b",
     "date": "2026-11-10"
   },
   "/gallery.html": {
-    "hash": "1753862d94",
+    "hash": "5f6d624621",
     "date": "2026-11-10"
   },
   "/contact.html": {
-    "hash": "c41f62d89b",
+    "hash": "b132b4bb44",
+    "date": "2026-11-10"
+  },
+  "/privacy.html": {
+    "hash": "e10b6e4c74",
     "date": "2026-11-10"
   }
 }
