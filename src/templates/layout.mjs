@@ -1,4 +1,4 @@
-import { BUSINESS as B, NOTICE } from '../data/business.mjs';
+import { BUSINESS as B, NOTICE, GTM_ID } from '../data/business.mjs';
 import { cropOf } from '../data/crops.mjs';
 import { MENU } from '../data/menu.mjs';
 
@@ -159,6 +159,7 @@ export function page({ key, path, title, description, ogTitle, ogDescription, og
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+${GTM_ID ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');</script>` : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 ${noindex ? '<meta name="robots" content="noindex" />' : `<link rel="canonical" href="${url}" />`}
@@ -190,6 +191,7 @@ ${extraHead}
 ${scriptTags}
 </head>
 <body>
+${GTM_ID ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>` : ''}
 <a href="#main-content" class="sr-only rounded-full bg-brand-burgundy px-4 py-2 font-semibold text-brand-cream focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]">Skip to content</a>
 ${header(key)}
 <main id="main-content" tabindex="-1">

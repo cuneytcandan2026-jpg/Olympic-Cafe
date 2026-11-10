@@ -50,6 +50,9 @@ export const NOTICE = process.env.SITE_NOTICE || '';
 // only appears when this list has entries. Never add review markup or a rating that is not real.
 export const REVIEWS = [];
 
+// Google Tag Manager container, loaded on every page. Set GTM_ID to an empty string at build time to leave it out.
+export const GTM_ID = process.env.GTM_ID ?? 'GTM-57BJ28J4';
+
 // Set at build time. With no endpoint the contact page shows phone and email only, never a form that cannot deliver.
 export const CONTACT_CONFIG = {
   endpoint: process.env.CONTACT_ENDPOINT || '',

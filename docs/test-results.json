@@ -1,5 +1,5 @@
 {
- "date": "2026-11-09T17:23:31.419Z",
+ "date": "2026-11-10T00:33:13.366Z",
  "total": 548,
  "failed": 0,
  "results": [
@@ -2533,13 +2533,13 @@
    "group": "Images",
    "name": "gallery: all have dimensions and alt text",
    "pass": true,
-   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0}"
+   "detail": "{\"total\":25,\"broken\":[],\"noDims\":0,\"noAlt\":0,\"cls\":0.00030810060680093926}"
   },
   {
    "group": "Images",
    "name": "gallery: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0000"
+   "detail": "0.0003"
   },
   {
    "group": "Images",
@@ -2857,7 +2857,7 @@
    "group": "Right now",
    "name": "Sunday roast: layout shift under 0.1",
    "pass": true,
-   "detail": "0.0000"
+   "detail": "0.0002"
   },
   {
    "group": "Right now",

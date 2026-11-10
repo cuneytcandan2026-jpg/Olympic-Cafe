@@ -209,7 +209,7 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 | Contact form | Worker written and tested with a simulated provider, not deployed | Cloudflare and Resend accounts, confirmed inbox. Steps in `workers/contact/README.md` |
 | `/index.html` to `/` | Canonical tag and instant client-side forward are done. **Not a true 301**, which GitHub Pages can't do | Optional: put Cloudflare in front and add a redirect rule |
 | Long-cache headers | File names are versioned for CSS and JS, but GitHub Pages fixes the cache at 10 minutes | Optional: Cloudflare cache rule for `/assets/*`, 1 year for `assets/css`, `assets/js` and `assets/fonts`. Lighthouse flags this until then |
-| Privacy | The form and Google Map involve personal data and third-party cookies. The site has no privacy notice | Add a privacy page before enabling the form, and consider a click-to-load map |
+| Privacy | The form, Google Map and Google Tag Manager (GTM-57BJ28J4, set in `src/data/business.mjs`) involve personal data and third-party cookies. The site has no privacy notice or cookie consent | Add a privacy page before enabling the form, consider a click-to-load map, and set up cookie consent (e.g. Consent Mode in GTM) before analytics tags fire |
 
 **Deploying:** push `master`, and GitHub Pages publishes it. Afterwards:
 1. Open each page and check https://olympiccafe.co.uk/CLAUDE.md now returns a 404.
