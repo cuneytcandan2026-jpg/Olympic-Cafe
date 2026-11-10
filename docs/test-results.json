@@ -1,6 +1,6 @@
 {
- "date": "2026-11-10T01:45:14.479Z",
- "total": 638,
+ "date": "2026-11-10T02:20:24.798Z",
+ "total": 644,
  "failed": 0,
  "results": [
   {
@@ -114,6 +114,12 @@
   {
    "group": "SEO home",
    "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO home",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
    "pass": true,
    "detail": ""
   },
@@ -232,6 +238,12 @@
    "detail": ""
   },
   {
+   "group": "SEO about",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO menu",
    "name": "unique title",
    "pass": true,
@@ -342,6 +354,12 @@
   {
    "group": "SEO menu",
    "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO menu",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
    "pass": true,
    "detail": ""
   },
@@ -460,6 +478,12 @@
    "detail": ""
   },
   {
+   "group": "SEO gallery",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO contact",
    "name": "unique title",
    "pass": true,
@@ -570,6 +594,12 @@
   {
    "group": "SEO contact",
    "name": "schema has no unverified email",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "group": "SEO contact",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
    "pass": true,
    "detail": ""
   },
@@ -688,6 +718,12 @@
    "detail": ""
   },
   {
+   "group": "SEO privacy",
+   "name": "schema special hours match HOURS_EXCEPTIONS",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "group": "SEO",
    "name": "schema description is the visible homepage intro",
    "pass": true,
@@ -773,7 +809,7 @@
   },
   {
    "group": "Links",
-   "name": "directions link targets the cafe address",
+   "name": "directions link targets the cafe by name and address",
    "pass": true,
    "detail": ""
   },
@@ -2395,7 +2431,7 @@
    "group": "Touch",
    "name": "action bar has Menu, Call and Directions",
    "pass": true,
-   "detail": "/menu.html tel:+441992631555 https://www.google.com/maps/dir/?api=1&destination=257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE"
+   "detail": "/menu.html tel:+441992631555 https://www.google.com/maps/dir/?api=1&destination=Olympic%20Cafe%2C%20257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE"
   },
   {
    "group": "Keyboard",

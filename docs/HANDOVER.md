@@ -106,6 +106,7 @@ Lighthouse, local, mobile, median of 3, compared with the table above: Home stay
 **SEO**
 - One H1 per page and logical headings. Internal links use `/`.
 - Schema now has a stable `@id`, URL and menu link. No ratings or reviews.
+- Schema publishes `HOURS_EXCEPTIONS` as `specialOpeningHoursSpecification`. Directions links and the contact map search for "Olympic Cafe, 257 High Street…" so Google Maps opens the business listing rather than a bare address pin.
 - New 1200x630 JPEG share images, and a custom 404 page.
 - "Dinner" and "night owls" removed from all site text.
 
@@ -227,7 +228,7 @@ Automated scans can't judge everything, so a quick pass on a real iPhone and And
 1. Claim or open the profile at business.google.com.
 2. Make the name, address, phone and hours match the website exactly.
 3. Set the website to `https://olympiccafe.co.uk/` and the menu link to `https://olympiccafe.co.uk/menu.html`.
-4. Check the map pin, add the real photos, and keep special hours up to date.
+4. Check the map pin, add the real photos, and keep special hours up to date. When hours change for a day (Christmas, bank holidays), also add it to `HOURS_EXCEPTIONS` in `src/data/business.mjs`. The website then shows it and publishes it to Google as special opening hours, so the two always agree.
 5. Make other listings match too, so details are consistent everywhere.
 
 **Bing Webmaster Tools** (Bing feeds Copilot and Bing's AI answers)

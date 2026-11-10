@@ -19,8 +19,9 @@ export const BUSINESS = {
   mapsUrl: 'https://maps.google.com/?cid=8714870921426489416',
   // Walking time from Google Maps walking directions, checked 9 November 2026 (1 min, about 110 m).
   landmark: "a minute's walk from Theobalds Grove station",
-  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE',
-  mapEmbedUrl: 'https://maps.google.com/maps?q=257%20High%20Street%2C%20Waltham%20Cross%2C%20Hertfordshire%2C%20EN8%207BE&z=15&output=embed',
+  // Both start with the café's name so Google Maps opens the business listing, not just a pin on the street address.
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Olympic%20Cafe%2C%20257%20High%20Street%2C%20Waltham%20Cross%2C%20EN8%207BE',
+  mapEmbedUrl: 'https://maps.google.com/maps?q=Olympic%20Cafe%2C%20257%20High%20Street%2C%20Waltham%20Cross%2C%20Hertfordshire%2C%20EN8%207BE&z=16&output=embed',
   hours: [
     { label: 'Mon–Sat', labelLong: 'Monday to Saturday', time: '5:30am–5pm', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '05:30', closes: '17:00' },
     { label: 'Sunday', labelLong: 'Sunday', time: '6am–4pm', days: ['Sunday'], opens: '06:00', closes: '16:00' },
@@ -30,7 +31,8 @@ export const BUSINESS = {
 };
 
 // Dates when the usual hours don't apply, as 'YYYY-MM-DD': { closed: true } or { opens: '08:00', closes: '14:00' }.
-// These always win over the bank holiday list below. The homepage reads them for its open and closed status.
+// These always win over the bank holiday list below. The homepage reads them for its open and closed status, and the
+// structured data publishes them as special opening hours for Google. Set the same dates on the Google Business Profile.
 export const HOURS_EXCEPTIONS = {};
 
 // England and Wales, from gov.uk/bank-holidays.json, plus the real Christmas and Boxing Day dates in years when gov.uk

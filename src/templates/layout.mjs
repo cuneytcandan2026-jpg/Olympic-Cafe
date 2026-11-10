@@ -1,4 +1,4 @@
-import { BUSINESS as B, NOTICE, GA_ID, GSC_VERIFICATION } from '../data/business.mjs';
+import { BUSINESS as B, NOTICE, GA_ID, GSC_VERIFICATION, HOURS_EXCEPTIONS } from '../data/business.mjs';
 import { cropOf } from '../data/crops.mjs';
 import { MENU } from '../data/menu.mjs';
 
@@ -44,7 +44,17 @@ export const openingPhrase = () => {
 
 export const summary = () => `${B.name} is a neighbourhood cafe on Waltham Cross High Street, serving full English breakfasts, brunch, homemade lunches and Mediterranean-inspired dishes. Eat in or take away, seven days a week ${openingPhrase()}.`;
 
+// Dates with different hours, from HOURS_EXCEPTIONS. Google reads a day closed all day as opening and closing at 00:00.
+export const specialHours = () => Object.entries(HOURS_EXCEPTIONS).sort(([a], [b]) => a.localeCompare(b)).map(([date, e]) => ({
+  '@type': 'OpeningHoursSpecification',
+  validFrom: date,
+  validThrough: date,
+  opens: e.closed ? '00:00' : e.opens,
+  closes: e.closed ? '00:00' : e.closes,
+}));
+
 export function schema() {
+  const special = specialHours();
   return {
     '@context': 'https://schema.org',
     '@type': 'CafeOrCoffeeShop',
@@ -74,6 +84,7 @@ export function schema() {
       opens: h.opens,
       closes: h.closes,
     })),
+    ...(special.length ? { specialOpeningHoursSpecification: special } : {}),
   };
 }
 

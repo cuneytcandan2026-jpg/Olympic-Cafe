@@ -9,7 +9,7 @@ import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import worker from '../workers/contact/worker.js';
 import { MENU, dishCount, dishId } from '../src/data/menu.mjs';
-import { BUSINESS, GA_ID } from '../src/data/business.mjs';
+import { BUSINESS, GA_ID, HOURS_EXCEPTIONS } from '../src/data/business.mjs';
 import { MOMENTS } from '../src/data/moments.mjs';
 import { DISH_PHOTOS } from '../src/data/explore.mjs';
 
@@ -101,6 +101,10 @@ for (const [key, urlPath] of Object.entries(PAGES)) {
   check(group, 'schema geo has 5+ decimal places', ld.geo && decimals(ld.geo.latitude) >= 5 && decimals(ld.geo.longitude) >= 5);
   check(group, 'schema menu and map links', ld.menu === ld.hasMenu && /^https:\/\/maps\.google\.com\/\?cid=\d+$/.test(ld.hasMap));
   check(group, 'schema has no unverified email', !ld.email);
+  const special = ld.specialOpeningHoursSpecification || [];
+  const exceptions = Object.entries(HOURS_EXCEPTIONS);
+  check(group, 'schema special hours match HOURS_EXCEPTIONS', special.length === exceptions.length && exceptions.every(([date, e]) => special.some((s) =>
+    s.validFrom === date && s.validThrough === date && (e.closed ? s.opens === '00:00' && s.closes === '00:00' : s.opens === e.opens && s.closes === e.closes))));
 }
 check('SEO', 'schema description is the visible homepage intro', (() => {
   const home = read('index.html');
@@ -130,7 +134,7 @@ check('Menu HTML', 'all prices are in the initial HTML', allPrices.every((p) => 
 check('Menu HTML', 'only verified dishes get a Vegetarian label', (menuHtml.match(/>Vegetarian<\/p>/g) || []).length === MENU.flatMap((c) => c.items).filter((i) => i.veg).length);
 check('Menu HTML', 'no veg label on the sausage kids meal', !/Egg, Cumberland Sausage &amp; Chips<\/h3>[\s\S]{0,200}Vegetarian/.test(menuHtml));
 check('Links', 'telephone link is correct everywhere', read('index.html').includes('href="tel:+441992631555"') && !/tel:0/.test(read('contact.html')));
-check('Links', 'directions link targets the cafe address', read('index.html').includes('google.com/maps/dir/?api=1&destination=257%20High%20Street'));
+check('Links', 'directions link targets the cafe by name and address', read('index.html').includes('google.com/maps/dir/?api=1&destination=Olympic%20Cafe%2C%20257%20High%20Street'));
 
 // ---------- Internal links and every referenced file resolve ----------
 {
